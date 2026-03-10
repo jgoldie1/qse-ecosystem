@@ -1,2 +1,2 @@
 # qse-ecosystem
-March and lewis and scupitfy ltd
+March and lewis and Sculptify ltd
