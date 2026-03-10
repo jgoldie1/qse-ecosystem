@@ -22,8 +22,11 @@ router.post('/earn', (req, res) => {
   if (!userId || !amount) {
     return res.status(400).json({ error: 'userId and amount are required' });
   }
-  const wallet = walletEngine.earn({ userId, amount, reason });
-  res.json(wallet);
+  const result = walletEngine.earn({ userId, amount, reason });
+  if (result && result.success === false) {
+    return res.status(400).json({ error: result.error });
+  }
+  res.json(result);
 });
 
 module.exports = router;

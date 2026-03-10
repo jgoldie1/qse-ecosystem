@@ -1,1 +1,32 @@
-[]
+[
+  {
+    "id": "mml1jl2x8959injmp88",
+    "title": "Test Task",
+    "description": "",
+    "status": "pending",
+    "userId": null,
+    "app": "sculptify",
+    "createdAt": "2026-03-10T20:06:44.601Z",
+    "updatedAt": "2026-03-10T20:06:44.601Z"
+  },
+  {
+    "id": "mml1jl2ysjotym94ivp",
+    "title": "Untitled Task",
+    "description": "",
+    "status": "pending",
+    "userId": null,
+    "app": "general",
+    "createdAt": "2026-03-10T20:06:44.602Z",
+    "updatedAt": "2026-03-10T20:06:44.602Z"
+  },
+  {
+    "id": "mml1jl2zi3dvu550epf",
+    "title": "Update Me",
+    "description": "",
+    "status": "done",
+    "userId": null,
+    "app": "general",
+    "createdAt": "2026-03-10T20:06:44.603Z",
+    "updatedAt": "2026-03-10T20:06:44.603Z"
+  }
+]

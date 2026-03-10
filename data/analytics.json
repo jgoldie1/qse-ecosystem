@@ -1,8 +1,9 @@
 {
   "sculptify": {
-    "appointments": 0,
+    "appointments": 1,
     "sales": 0,
-    "trainingEnrollments": 0
+    "trainingEnrollments": 0,
+    "newEventKey": 1
   },
   "marchLewis": {
     "jobApplications": 0,
