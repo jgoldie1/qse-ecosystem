@@ -9,9 +9,25 @@ const walletRoutes = require('./routes/wallets');
 const streamingRoutes = require('./routes/streaming');
 const rewardRoutes = require('./routes/rewards');
 const membershipRoutes = require('./routes/memberships');
+const marketplaceRoutes = require('./routes/marketplace');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+
+// CORS headers
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  if (req.method === 'OPTIONS') return res.sendStatus(204);
+  next();
+});
+
+// Request logger
+app.use((req, res, next) => {
+  console.log(`${new Date().toISOString()} ${req.method} ${req.url}`);
+  next();
+});
 
 app.use(express.json());
 
@@ -30,6 +46,7 @@ app.use('/api/wallets', walletRoutes);
 app.use('/api/streaming', streamingRoutes);
 app.use('/api/rewards', rewardRoutes);
 app.use('/api/memberships', membershipRoutes);
+app.use('/api/marketplace', marketplaceRoutes);
 
 // Root landing page
 app.get('/', (req, res) => {
@@ -67,6 +84,12 @@ app.get('/', (req, res) => {
     </body>
     </html>
   `);
+});
+
+// Global error handler
+app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
+  console.error(err.stack);
+  res.status(500).json({ error: 'Internal server error' });
 });
 
 app.listen(PORT, () => {

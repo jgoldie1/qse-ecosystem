@@ -31,7 +31,9 @@ const core = {
   recordEvent(app, event) {
     const analytics = loadAnalytics();
     if (!analytics[app]) return null;
-    if (analytics[app][event] !== undefined) {
+    if (analytics[app][event] === undefined) {
+      analytics[app][event] = 1;
+    } else {
       analytics[app][event] += 1;
     }
     saveAnalytics(analytics);

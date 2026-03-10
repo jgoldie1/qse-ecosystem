@@ -23,11 +23,15 @@ const walletEngine = {
   },
 
   earn({ userId, amount, reason }) {
+    const amt = Number(amount);
+    if (!amt || amt <= 0) {
+      return { success: false, error: 'Amount must be a positive number' };
+    }
     const wallet = getOrCreate(userId);
-    wallet.balance += Number(amount);
+    wallet.balance += amt;
     wallet.transactions.push({
       type: 'earn',
-      amount: Number(amount),
+      amount: amt,
       reason: reason || 'reward',
       timestamp: new Date().toISOString()
     });
@@ -38,6 +42,14 @@ const walletEngine = {
     const from = getOrCreate(fromUserId);
     const to = getOrCreate(toUserId);
     const amt = Number(amount);
+
+    if (!amt || amt <= 0) {
+      return { success: false, error: 'Amount must be a positive number' };
+    }
+
+    if (fromUserId === toUserId) {
+      return { success: false, error: 'Cannot transfer to the same wallet' };
+    }
 
     if (from.balance < amt) {
       return { success: false, error: 'Insufficient balance' };

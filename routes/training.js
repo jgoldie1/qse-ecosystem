@@ -3,7 +3,7 @@ const router = express.Router();
 const trainingEngine = require('../core/training-engine');
 
 router.get('/courses', (req, res) => {
-  const courses = trainingEngine.getCourses();
+  const courses = trainingEngine.getCourses(req.query.app ? { app: req.query.app } : undefined);
   res.json(courses);
 });
 

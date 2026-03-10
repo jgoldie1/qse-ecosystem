@@ -1,1 +1,18 @@
-[]
+[
+  {
+    "id": "rmml1jl32smrkro70t6g",
+    "userId": "u1",
+    "type": "task_complete",
+    "label": "Task Completed",
+    "amount": 10,
+    "issuedAt": "2026-03-10T20:06:44.606Z"
+  },
+  {
+    "id": "rmml1jl33el3ihks9yt7",
+    "userId": "u1",
+    "type": "referral",
+    "label": "Referral Bonus",
+    "amount": 999,
+    "issuedAt": "2026-03-10T20:06:44.607Z"
+  }
+]

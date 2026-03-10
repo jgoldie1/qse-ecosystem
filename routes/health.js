@@ -1,12 +1,13 @@
 const express = require('express');
 const router = express.Router();
+const core = require('../core/qse-core');
 
 router.get('/', (req, res) => {
+  const status = core.getStatus();
   res.json({
     status: 'ok',
     message: 'QSE Ecosystem is healthy',
-    timestamp: new Date().toISOString(),
-    version: '1.0.0'
+    ...status
   });
 });
 
