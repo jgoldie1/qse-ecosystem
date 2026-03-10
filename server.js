@@ -13,7 +13,15 @@ const membershipRoutes = require('./routes/memberships');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+app.disable('x-powered-by');
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use((_req, res, next) => {
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('X-Frame-Options', 'SAMEORIGIN');
+  next();
+});
 
 // Serve static files for Sculptify web app
 app.use('/sculptify', express.static(path.join(__dirname, 'apps/sculptify-web/public')));
