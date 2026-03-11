@@ -15,6 +15,9 @@ const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
 
+// Serve shared utilities and UI components for both web apps
+app.use('/shared', express.static(path.join(__dirname, 'shared')));
+
 // Serve static files for Sculptify web app
 app.use('/sculptify', express.static(path.join(__dirname, 'apps/sculptify-web/public')));
 
