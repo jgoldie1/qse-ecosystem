@@ -1,0 +1,15 @@
+services:
+  app:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      - PORT=5000
+    volumes:
+      - qse-data:/app/server/data
+      - qse-uploads:/app/server/uploads
+    restart: unless-stopped
+
+volumes:
+  qse-data:
+  qse-uploads:

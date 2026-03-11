@@ -12,9 +12,16 @@ QSE Core powers:
 - memberships
 - marketplace connectors
 
-## Run
+## Run (local)
+```bash
 npm install
 npm run dev
+```
+
+## Run (Docker)
+```bash
+docker compose up --build
+```
 
 ## Open
 - http://localhost:5000
