@@ -35,6 +35,7 @@ app.post('/api/upload', upload.single('file'), (req, res) => {
 
 // Health
 app.get('/health', (_req, res) => res.json({ ok: true }));
+app.get('/api/health', (_req, res) => res.json({ ok: true }));
 
 // Error handler
 app.use((err, _req, res, _next) => {
