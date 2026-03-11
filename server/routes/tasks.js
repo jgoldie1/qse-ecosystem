@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const taskEngine = require('../core/task-engine');
+const taskEngine = require('../services/task-engine');
 
 router.get('/', (req, res) => {
   const tasks = taskEngine.getAll();

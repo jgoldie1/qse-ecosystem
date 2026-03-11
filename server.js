@@ -1,14 +1,14 @@
 const express = require('express');
 const path = require('path');
 
-const healthRoutes = require('./routes/health');
-const aiRoutes = require('./routes/ai');
-const taskRoutes = require('./routes/tasks');
-const trainingRoutes = require('./routes/training');
-const walletRoutes = require('./routes/wallets');
-const streamingRoutes = require('./routes/streaming');
-const rewardRoutes = require('./routes/rewards');
-const membershipRoutes = require('./routes/memberships');
+const healthRoutes = require('./server/routes/health');
+const aiRoutes = require('./server/routes/ai');
+const taskRoutes = require('./server/routes/tasks');
+const trainingRoutes = require('./server/routes/training');
+const walletRoutes = require('./server/routes/wallets');
+const streamingRoutes = require('./server/routes/streaming');
+const rewardRoutes = require('./server/routes/rewards');
+const membershipRoutes = require('./server/routes/memberships');
 
 const app = express();
 const PORT = process.env.PORT || 5000;

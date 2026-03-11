@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const walletEngine = require('../core/wallet-engine');
+const walletEngine = require('../services/wallet-engine');
 
 router.get('/:userId', (req, res) => {
   const wallet = walletEngine.getWallet(req.params.userId);

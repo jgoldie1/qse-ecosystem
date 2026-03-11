@@ -5,7 +5,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const DATA_PATH = path.join(__dirname, '../data/tasks.json');
+const DATA_PATH = path.join(__dirname, '../../data/tasks.json');
 
 function load() {
   try {

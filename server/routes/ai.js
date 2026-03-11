@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const aiCoach = require('../core/ai-coach');
+const aiCoach = require('../services/ai-coach');
 
 router.post('/coach', (req, res) => {
   const { userId, message, context } = req.body;
