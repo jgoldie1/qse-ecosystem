@@ -18,6 +18,9 @@ app.use(express.json());
 // Serve static files for Sculptify web app
 app.use('/sculptify', express.static(path.join(__dirname, 'apps/sculptify-web/public')));
 
+// Serve Sculptify modular src pages and assets
+app.use('/sculptify/src', express.static(path.join(__dirname, 'apps/sculptify-web/src')));
+
 // Serve static files for March and Lewis web app
 app.use('/march-lewis', express.static(path.join(__dirname, 'apps/march-lewis-web/public')));
 

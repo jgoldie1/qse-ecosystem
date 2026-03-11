@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Find Providers – Sculptify</title>
+  <meta name="description" content="Browse certified wellness professionals on Sculptify. Filter by specialty and book directly." />
+  <link rel="stylesheet" href="/sculptify/src/styles/base.css" />
+  <link rel="stylesheet" href="/sculptify/src/styles/components.css" />
+  <link rel="stylesheet" href="/sculptify/src/styles/pages.css" />
+</head>
+<body>
+
+  <!-- Header injected by JS -->
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <h2>Find a Provider</h2>
+          <p>Browse our network of certified wellness professionals and book your next session.</p>
+        </div>
+
+        <!-- Search + Filters -->
+        <div style="max-width:680px;margin:0 auto 28px;">
+          <div class="search-bar" style="margin-bottom:16px;">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="search-input" placeholder="Search by name or specialty…" />
+          </div>
+          <div class="providers-filters" id="filter-bar">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="body-sculpting">Body Sculpting</button>
+            <button class="filter-btn" data-filter="massage">Massage</button>
+            <button class="filter-btn" data-filter="nutrition">Nutrition</button>
+            <button class="filter-btn" data-filter="training">Personal Training</button>
+            <button class="filter-btn" data-filter="skincare">Skincare</button>
+            <button class="filter-btn" data-filter="yoga">Yoga</button>
+          </div>
+        </div>
+
+        <!-- Provider Grid -->
+        <div class="grid" id="providers-grid">
+          <p class="loading">Loading providers…</p>
+        </div>
+
+        <div id="no-results" class="empty-state hidden">
+          <div class="empty-icon">🔎</div>
+          <p>No providers match your search. Try a different keyword or filter.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA: Join as Therapist -->
+    <section class="section-alt">
+      <div class="container text-center">
+        <h2>Are You a Wellness Professional?</h2>
+        <p class="text-muted" style="max-width:440px;margin:0 auto 24px;">
+          Join the Sculptify network and connect with clients who need your expertise.
+        </p>
+        <a href="/sculptify/src/pages/therapist-onboarding.html" class="btn btn-primary">Apply to Join</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer injected by JS -->
+
+  <script type="module">
+    import { initHeader } from '/sculptify/src/components/header.js';
+    import { initFooter } from '/sculptify/src/components/footer.js';
+
+    initHeader('providers');
+    initFooter();
+
+    /* ---- Provider data (static dataset for prototype) ---- */
+    const PROVIDERS = [
+      {
+        id: 'p1',
+        name: 'Dr. Maya Thompson',
+        specialty: 'Body Sculpting',
+        tags: ['body-sculpting', 'contouring', 'toning'],
+        filter: 'body-sculpting',
+        rating: 4.9,
+        reviews: 128,
+        experience: '8 years',
+        location: 'Los Angeles, CA',
+        available: true,
+        bio: 'Board-certified aesthetician specialising in non-invasive body contouring and skin tightening treatments.',
+        emoji: '💆'
+      },
+      {
+        id: 'p2',
+        name: 'James Rivera',
+        specialty: 'Personal Training & Strength',
+        tags: ['training', 'strength', 'fitness'],
+        filter: 'training',
+        rating: 4.8,
+        reviews: 94,
+        experience: '6 years',
+        location: 'New York, NY',
+        available: true,
+        bio: 'NASM-certified personal trainer focused on functional strength, athletic performance, and sustainable results.',
+        emoji: '🏋️'
+      },
+      {
+        id: 'p3',
+        name: 'Sophie Lee',
+        specialty: 'Nutrition Coaching',
+        tags: ['nutrition', 'meal-planning', 'wellness'],
+        filter: 'nutrition',
+        rating: 5.0,
+        reviews: 72,
+        experience: '5 years',
+        location: 'Chicago, IL',
+        available: false,
+        bio: 'Registered Dietitian Nutritionist helping clients build sustainable eating habits and achieve their health goals.',
+        emoji: '🥗'
+      },
+      {
+        id: 'p4',
+        name: 'Marcus Johnson',
+        specialty: 'Therapeutic Massage',
+        tags: ['massage', 'recovery', 'relaxation'],
+        filter: 'massage',
+        rating: 4.7,
+        reviews: 156,
+        experience: '10 years',
+        location: 'Miami, FL',
+        available: true,
+        bio: 'Licensed massage therapist specialising in deep tissue, sports recovery, and relaxation techniques.',
+        emoji: '🧖'
+      },
+      {
+        id: 'p5',
+        name: 'Aisha Patel',
+        specialty: 'Skincare & Aesthetics',
+        tags: ['skincare', 'facials', 'aesthetics'],
+        filter: 'skincare',
+        rating: 4.9,
+        reviews: 83,
+        experience: '7 years',
+        location: 'Seattle, WA',
+        available: true,
+        bio: 'Licensed esthetician and skincare specialist offering advanced treatments including chemical peels and micro-needling.',
+        emoji: '✨'
+      },
+      {
+        id: 'p6',
+        name: 'Carlos Mendez',
+        specialty: 'Yoga & Mindfulness',
+        tags: ['yoga', 'mindfulness', 'meditation'],
+        filter: 'yoga',
+        rating: 4.6,
+        reviews: 61,
+        experience: '4 years',
+        location: 'Austin, TX',
+        available: true,
+        bio: 'RYT-500 certified yoga instructor and mindfulness coach guiding clients toward stress relief and flexibility.',
+        emoji: '🧘'
+      },
+      {
+        id: 'p7',
+        name: 'Dr. Rachel Kim',
+        specialty: 'Nutrition & Weight Management',
+        tags: ['nutrition', 'weight-management', 'dietitian'],
+        filter: 'nutrition',
+        rating: 4.8,
+        reviews: 110,
+        experience: '9 years',
+        location: 'Houston, TX',
+        available: false,
+        bio: 'Bariatric dietitian with expertise in medical nutrition therapy and long-term weight management strategies.',
+        emoji: '🥦'
+      },
+      {
+        id: 'p8',
+        name: 'Tyler Brooks',
+        specialty: 'Body Sculpting & HIIT',
+        tags: ['body-sculpting', 'hiit', 'cardio'],
+        filter: 'body-sculpting',
+        rating: 4.7,
+        reviews: 99,
+        experience: '5 years',
+        location: 'Denver, CO',
+        available: true,
+        bio: 'Fitness expert blending high-intensity interval training with targeted body-sculpting techniques for maximum results.',
+        emoji: '🔥'
+      }
+    ];
+
+    let activeFilter = 'all';
+    let searchQuery  = '';
+
+    function renderProviders() {
+      const grid = document.getElementById('providers-grid');
+      const noResults = document.getElementById('no-results');
+
+      const filtered = PROVIDERS.filter(p => {
+        const matchesFilter = activeFilter === 'all' || p.filter === activeFilter;
+        const q = searchQuery.toLowerCase();
+        const matchesSearch = !q ||
+          p.name.toLowerCase().includes(q) ||
+          p.specialty.toLowerCase().includes(q) ||
+          p.tags.some(t => t.includes(q));
+        return matchesFilter && matchesSearch;
+      });
+
+      if (!filtered.length) {
+        grid.innerHTML = '';
+        noResults.classList.remove('hidden');
+        return;
+      }
+
+      noResults.classList.add('hidden');
+      grid.innerHTML = filtered.map(p => `
+        <div class="provider-card">
+          <div class="provider-avatar">${p.emoji}</div>
+          <div class="provider-name">${p.name}</div>
+          <div class="provider-specialty">${p.specialty}</div>
+          <div class="provider-meta">
+            <span class="provider-rating">★ ${p.rating}</span>
+            <span>${p.reviews} reviews</span>
+            <span>📍 ${p.location}</span>
+            <span>
+              <span class="availability-dot ${p.available ? '' : 'busy'}"></span>
+              ${p.available ? 'Available now' : 'Fully booked'}
+            </span>
+          </div>
+          <p class="provider-bio">${p.bio}</p>
+          <div class="provider-tags">
+            ${p.tags.map(t => `<span class="provider-tag">${t}</span>`).join('')}
+          </div>
+          <a href="/sculptify/src/pages/booking.html?provider=${encodeURIComponent(p.name)}"
+             class="btn btn-primary btn-block ${p.available ? '' : 'btn-secondary'}">
+            ${p.available ? 'Book Session' : 'Join Waitlist'}
+          </a>
+        </div>`).join('');
+    }
+
+    /* Filter buttons */
+    document.getElementById('filter-bar').addEventListener('click', e => {
+      const btn = e.target.closest('.filter-btn');
+      if (!btn) return;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeFilter = btn.dataset.filter;
+      renderProviders();
+    });
+
+    /* Search input */
+    document.getElementById('search-input').addEventListener('input', e => {
+      searchQuery = e.target.value.trim();
+      renderProviders();
+    });
+
+    renderProviders();
+  </script>
+</body>
+</html>

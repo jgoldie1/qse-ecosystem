@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard – Sculptify</title>
+  <meta name="description" content="Sculptify admin dashboard – manage bookings, providers, and platform data." />
+  <link rel="stylesheet" href="/sculptify/src/styles/base.css" />
+  <link rel="stylesheet" href="/sculptify/src/styles/components.css" />
+  <link rel="stylesheet" href="/sculptify/src/styles/pages.css" />
+</head>
+<body>
+
+  <!-- Header injected by JS -->
+
+  <div class="admin-layout">
+
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+      <h3>Overview</h3>
+      <button class="sidebar-link active" data-panel="dashboard">📊 Dashboard</button>
+      <button class="sidebar-link" data-panel="bookings">📅 Bookings</button>
+      <button class="sidebar-link" data-panel="applications">🧑‍⚕️ Applications</button>
+
+      <h3>Platform</h3>
+      <button class="sidebar-link" data-panel="memberships">🎖️ Memberships</button>
+      <button class="sidebar-link" data-panel="courses">📚 Courses</button>
+
+      <h3>Account</h3>
+      <button class="sidebar-link" id="sidebar-logout">🚪 Logout</button>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="admin-content">
+
+      <!-- Dashboard Panel -->
+      <div id="panel-dashboard" class="admin-panel">
+        <h2>Dashboard</h2>
+        <p id="admin-greeting">Welcome back.</p>
+
+        <div class="admin-stats" id="admin-stats">
+          <div class="admin-stat">
+            <div class="admin-stat-label">Total Bookings</div>
+            <div class="admin-stat-value" id="stat-bookings">—</div>
+            <div class="admin-stat-sub">All time</div>
+          </div>
+          <div class="admin-stat">
+            <div class="admin-stat-label">Pending Review</div>
+            <div class="admin-stat-value" id="stat-pending">—</div>
+            <div class="admin-stat-sub">Need action</div>
+          </div>
+          <div class="admin-stat">
+            <div class="admin-stat-label">Applications</div>
+            <div class="admin-stat-value" id="stat-applications">—</div>
+            <div class="admin-stat-sub">Therapist onboarding</div>
+          </div>
+          <div class="admin-stat">
+            <div class="admin-stat-label">Total Tasks</div>
+            <div class="admin-stat-value" id="stat-tasks">—</div>
+            <div class="admin-stat-sub">All types</div>
+          </div>
+        </div>
+
+        <div class="admin-section">
+          <div class="actions-bar">
+            <h3>Recent Activity</h3>
+            <button class="btn btn-secondary btn-sm" id="refresh-tasks">↺ Refresh</button>
+          </div>
+          <div class="table-wrapper">
+            <table id="tasks-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Title</th>
+                  <th>Type</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="tasks-tbody">
+                <tr><td colspan="5" class="loading">Loading…</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bookings Panel -->
+      <div id="panel-bookings" class="admin-panel hidden">
+        <h2>Bookings</h2>
+        <p>All appointment booking requests submitted via the platform.</p>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="bookings-tbody">
+              <tr><td colspan="5" class="loading">Loading…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Applications Panel -->
+      <div id="panel-applications" class="admin-panel hidden">
+        <h2>Therapist Applications</h2>
+        <p>Provider onboarding applications submitted for review.</p>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Applicant</th>
+                <th>Details</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="applications-tbody">
+              <tr><td colspan="5" class="loading">Loading…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Memberships Panel -->
+      <div id="panel-memberships" class="admin-panel hidden">
+        <h2>Membership Tiers</h2>
+        <p>Available membership plans on the platform.</p>
+        <div class="grid" id="memberships-grid">
+          <p class="loading">Loading…</p>
+        </div>
+      </div>
+
+      <!-- Courses Panel -->
+      <div id="panel-courses" class="admin-panel hidden">
+        <h2>Training Courses</h2>
+        <p>All available training courses on the platform.</p>
+        <div class="grid" id="courses-grid">
+          <p class="loading">Loading…</p>
+        </div>
+      </div>
+
+    </div><!-- /.admin-content -->
+  </div><!-- /.admin-layout -->
+
+  <!-- Footer injected by JS -->
+
+  <script type="module">
+    import { initHeader }  from '/sculptify/src/components/header.js';
+    import { initFooter }  from '/sculptify/src/components/footer.js';
+    import { requireAuth, logout } from '/sculptify/src/forms/login-form.js';
+    import { showToast }   from '/sculptify/src/components/toast.js';
+    import { api }         from '/sculptify/src/api.js';
+
+    initHeader('admin');
+    initFooter();
+
+    /* Auth guard – redirect to login if not admin */
+    const user = requireAuth('admin');
+    if (!user) throw new Error('Not authorised');
+
+    document.getElementById('admin-greeting').textContent = `Welcome back, ${user.name}!`;
+
+    /* ---- Panel navigation ---- */
+    const panels = document.querySelectorAll('.admin-panel');
+    const sidebarLinks = document.querySelectorAll('.sidebar-link[data-panel]');
+
+    function showPanel(name) {
+      panels.forEach(p => p.classList.toggle('hidden', p.id !== `panel-${name}`));
+      sidebarLinks.forEach(l => l.classList.toggle('active', l.dataset.panel === name));
+      if (name === 'bookings')     loadBookings();
+      if (name === 'applications') loadApplications();
+      if (name === 'memberships')  loadMemberships();
+      if (name === 'courses')      loadCourses();
+    }
+
+    sidebarLinks.forEach(link =>
+      link.addEventListener('click', () => showPanel(link.dataset.panel))
+    );
+
+    document.getElementById('sidebar-logout').addEventListener('click', logout);
+
+    /* ---- Status badge helper ---- */
+    function statusBadge(status = '') {
+      const map = {
+        pending: 'badge-warning',
+        pending_review: 'badge-warning',
+        approved: 'badge-success',
+        completed: 'badge-success',
+        rejected: 'badge-error',
+        cancelled: 'badge-error'
+      };
+      const cls = map[status] || 'badge-primary';
+      return `<span class="badge ${cls}">${status || 'open'}</span>`;
+    }
+
+    /* ---- Mark task complete ---- */
+    async function markDone(id) {
+      try {
+        await api.tasks.update(id, { status: 'completed' });
+        showToast('Task marked as completed.');
+        loadDashboard();
+      } catch {
+        showToast('Could not update task.', 'error');
+      }
+    }
+
+    async function deleteTask(id) {
+      if (!confirm('Delete this task?')) return;
+      try {
+        await api.tasks.remove(id);
+        showToast('Task deleted.');
+        loadDashboard();
+      } catch {
+        showToast('Could not delete task.', 'error');
+      }
+    }
+
+    window.markDone   = markDone;
+    window.deleteTask = deleteTask;
+
+    /* ---- Load dashboard ---- */
+    async function loadDashboard() {
+      try {
+        const tasks = await api.tasks.list();
+        const bookings = tasks.filter(t => t.type === 'booking');
+        const applications = tasks.filter(t => t.type === 'therapist_onboarding');
+        const pending = tasks.filter(t => t.status === 'pending' || t.status === 'pending_review');
+
+        document.getElementById('stat-bookings').textContent     = bookings.length;
+        document.getElementById('stat-pending').textContent      = pending.length;
+        document.getElementById('stat-applications').textContent = applications.length;
+        document.getElementById('stat-tasks').textContent        = tasks.length;
+
+        const recent = tasks.slice(-10).reverse();
+        const tbody = document.getElementById('tasks-tbody');
+        if (!recent.length) {
+          tbody.innerHTML = '<tr><td colspan="5" class="loading">No tasks yet.</td></tr>';
+          return;
+        }
+        tbody.innerHTML = recent.map(t => `
+          <tr>
+            <td style="color:var(--text-muted);font-size:0.8rem;">${t.id?.slice(0, 8) || '—'}</td>
+            <td>${t.title}</td>
+            <td><span class="badge badge-primary">${t.type || 'task'}</span></td>
+            <td>${statusBadge(t.status)}</td>
+            <td style="display:flex;gap:8px;">
+              ${t.status !== 'completed' ? `<button class="btn btn-success btn-sm" onclick="markDone('${t.id}')">Done</button>` : ''}
+              <button class="btn btn-danger btn-sm" onclick="deleteTask('${t.id}')">Delete</button>
+            </td>
+          </tr>`).join('');
+      } catch {
+        document.getElementById('tasks-tbody').innerHTML =
+          '<tr><td colspan="5" class="loading">Could not load tasks.</td></tr>';
+      }
+    }
+
+    /* ---- Load bookings panel ---- */
+    async function loadBookings() {
+      const tbody = document.getElementById('bookings-tbody');
+      try {
+        const tasks = await api.tasks.list();
+        const bookings = tasks.filter(t => t.type === 'booking');
+        if (!bookings.length) {
+          tbody.innerHTML = '<tr><td colspan="5" class="loading">No bookings yet.</td></tr>';
+          return;
+        }
+        tbody.innerHTML = bookings.reverse().map(t => `
+          <tr>
+            <td style="font-size:0.8rem;color:var(--text-muted);">${t.id?.slice(0, 8) || '—'}</td>
+            <td>${t.title}</td>
+            <td style="font-size:0.8rem;color:var(--text-muted);white-space:pre-wrap;">${t.description || '—'}</td>
+            <td>${statusBadge(t.status)}</td>
+            <td style="display:flex;gap:8px;">
+              ${t.status !== 'completed' ? `<button class="btn btn-success btn-sm" onclick="markDone('${t.id}')">Confirm</button>` : ''}
+              <button class="btn btn-danger btn-sm" onclick="deleteTask('${t.id}')">Cancel</button>
+            </td>
+          </tr>`).join('');
+      } catch {
+        tbody.innerHTML = '<tr><td colspan="5" class="loading">Could not load bookings.</td></tr>';
+      }
+    }
+
+    /* ---- Load applications panel ---- */
+    async function loadApplications() {
+      const tbody = document.getElementById('applications-tbody');
+      try {
+        const tasks = await api.tasks.list();
+        const apps = tasks.filter(t => t.type === 'therapist_onboarding');
+        if (!apps.length) {
+          tbody.innerHTML = '<tr><td colspan="5" class="loading">No applications yet.</td></tr>';
+          return;
+        }
+        tbody.innerHTML = apps.reverse().map(t => `
+          <tr>
+            <td style="font-size:0.8rem;color:var(--text-muted);">${t.id?.slice(0, 8) || '—'}</td>
+            <td>${t.title.replace('Therapist Application: ', '')}</td>
+            <td style="font-size:0.8rem;color:var(--text-muted);white-space:pre-wrap;max-width:300px;">${t.description || '—'}</td>
+            <td>${statusBadge(t.status)}</td>
+            <td style="display:flex;gap:8px;">
+              <button class="btn btn-success btn-sm" onclick="markDone('${t.id}')">Approve</button>
+              <button class="btn btn-danger btn-sm" onclick="deleteTask('${t.id}')">Reject</button>
+            </td>
+          </tr>`).join('');
+      } catch {
+        tbody.innerHTML = '<tr><td colspan="5" class="loading">Could not load applications.</td></tr>';
+      }
+    }
+
+    /* ---- Load memberships panel ---- */
+    async function loadMemberships() {
+      const grid = document.getElementById('memberships-grid');
+      try {
+        const tiers = await api.memberships.tiers();
+        if (!tiers?.length) {
+          grid.innerHTML = '<p class="loading">No membership tiers found.</p>';
+          return;
+        }
+        grid.innerHTML = tiers.map(t => `
+          <div class="card">
+            <div class="card-icon">🎖️</div>
+            <h3>${t.name || t.tier}</h3>
+            <p>${t.description || 'Membership tier'}</p>
+            <p><strong style="color:var(--primary);">$${t.price ?? t.monthlyPrice ?? '—'}/mo</strong></p>
+          </div>`).join('');
+      } catch {
+        grid.innerHTML = '<p class="loading">Could not load memberships.</p>';
+      }
+    }
+
+    /* ---- Load courses panel ---- */
+    async function loadCourses() {
+      const grid = document.getElementById('courses-grid');
+      try {
+        const courses = await api.training.courses();
+        if (!courses?.length) {
+          grid.innerHTML = '<p class="loading">No courses found.</p>';
+          return;
+        }
+        grid.innerHTML = courses.map(c => `
+          <div class="card">
+            <div class="card-icon">📚</div>
+            <h3>${c.title}</h3>
+            <p>Duration: ${c.duration} | App: ${c.app}</p>
+            <span class="badge badge-primary">${c.level || 'all levels'}</span>
+          </div>`).join('');
+      } catch {
+        grid.innerHTML = '<p class="loading">Could not load courses.</p>';
+      }
+    }
+
+    document.getElementById('refresh-tasks').addEventListener('click', loadDashboard);
+
+    /* Initial load */
+    loadDashboard();
+  </script>
+</body>
+</html>
