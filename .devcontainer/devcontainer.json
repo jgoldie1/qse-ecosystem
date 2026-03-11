@@ -2,6 +2,6 @@
   "name": "QSE Codespace",
   "image": "mcr.microsoft.com/devcontainers/javascript-node:0-20",
   "forwardPorts": [3000],
-  "postCreateCommand": "npm install",
+  "postCreateCommand": "npm install; if [ -n \"${localEnv:GITHUB_USER}\" ]; then git config --global user.name \"${localEnv:GITHUB_USER}\" && git config --global user.email \"${localEnv:GITHUB_USER}@users.noreply.github.com\"; fi",
   "remoteUser": "node"
 }
