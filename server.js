@@ -9,6 +9,9 @@ const walletRoutes = require('./routes/wallets');
 const streamingRoutes = require('./routes/streaming');
 const rewardRoutes = require('./routes/rewards');
 const membershipRoutes = require('./routes/memberships');
+const sculptifyRoutes = require('./routes/sculptify');
+const marchLewisRoutes = require('./routes/marchLewis');
+const schedulingRoutes = require('./routes/scheduling');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -30,6 +33,9 @@ app.use('/api/wallets', walletRoutes);
 app.use('/api/streaming', streamingRoutes);
 app.use('/api/rewards', rewardRoutes);
 app.use('/api/memberships', membershipRoutes);
+app.use('/api/sculptify', sculptifyRoutes);
+app.use('/api/march-lewis', marchLewisRoutes);
+app.use('/api/scheduling', schedulingRoutes);
 
 // Root landing page
 app.get('/', (req, res) => {

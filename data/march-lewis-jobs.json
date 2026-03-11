@@ -1,0 +1,29 @@
+[
+  {
+    "id": "job1",
+    "title": "Senior Admin Assistant",
+    "type": "Full-Time",
+    "location": "Dallas, TX",
+    "description": "Support executive team with scheduling, correspondence, and administrative tasks.",
+    "status": "open",
+    "image_url": ""
+  },
+  {
+    "id": "job2",
+    "title": "IT Support Specialist",
+    "type": "Full-Time",
+    "location": "Remote",
+    "description": "Provide technical support and troubleshooting for internal teams.",
+    "status": "open",
+    "image_url": ""
+  },
+  {
+    "id": "job3",
+    "title": "Healthcare Coordinator",
+    "type": "Part-Time",
+    "location": "Houston, TX",
+    "description": "Coordinate patient scheduling and healthcare logistics.",
+    "status": "open",
+    "image_url": ""
+  }
+]

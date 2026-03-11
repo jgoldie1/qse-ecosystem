@@ -1,0 +1,29 @@
+[
+  {
+    "id": "sp1",
+    "name": "Aisha Williams",
+    "specialty": "Body Sculpting & Wellness",
+    "mode": "In-Person",
+    "bio": "Certified body sculpting specialist with 8 years of experience.",
+    "status": "active",
+    "image_url": ""
+  },
+  {
+    "id": "sp2",
+    "name": "Jordan Reed",
+    "specialty": "Massage Therapy",
+    "mode": "Virtual",
+    "bio": "Licensed massage therapist specializing in deep tissue and relaxation.",
+    "status": "active",
+    "image_url": ""
+  },
+  {
+    "id": "sp3",
+    "name": "Maya Chen",
+    "specialty": "Acupuncture",
+    "mode": "In-Person",
+    "bio": "Board-certified acupuncturist focused on holistic wellness.",
+    "status": "active",
+    "image_url": ""
+  }
+]

@@ -1,0 +1,12 @@
+[
+  {
+    "id": "mmm4eydlv5rragugjn9",
+    "fullName": "John Smith",
+    "email": "john@test.com",
+    "phone": "555-1234",
+    "workAuthorization": "US Citizen",
+    "availability": "Immediately",
+    "status": "active",
+    "createdAt": "2026-03-11T14:14:53.577Z"
+  }
+]
