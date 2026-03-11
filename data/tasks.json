@@ -1,1 +1,13 @@
-[]
+[
+  {
+    "id": "mmm54dmwgq08877syvn",
+    "title": "Candidate: Alice",
+    "description": "Email: alice@test.com. Phone: N/A. Experience: . Desired role: Developer",
+    "status": "pending",
+    "userId": null,
+    "app": "marchLewis",
+    "category": "candidate",
+    "createdAt": "2026-03-11T14:34:39.752Z",
+    "updatedAt": "2026-03-11T14:34:39.752Z"
+  }
+]
