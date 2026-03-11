@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { Header, DashboardPanel, Card, Button, Input, ChatBox, Footer } from '../../shared/components';
 
 const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+const BRAND_COLOR = '#3b82f6';
 
 function App() {
   const [health, setHealth] = useState(null);
@@ -63,89 +65,76 @@ function App() {
   };
 
   return (
-    <div style={{ fontFamily: 'sans-serif', background: '#0a0a0a', color: '#f5f5f5', minHeight: '100vh', padding: '20px' }}>
-      <header style={{ borderBottom: '1px solid #222', paddingBottom: '16px', marginBottom: '32px' }}>
-        <h1 style={{ color: '#3b82f6' }}>March &amp; Lewis</h1>
-        <p style={{ color: '#888' }}>Career Staffing &amp; Workforce Platform</p>
-        {health && <span style={{ fontSize: '0.8rem', color: '#4ade80' }}>● {health.status}</span>}
-      </header>
+    <div style={{ fontFamily: 'sans-serif', background: '#0a0a0a', color: '#f5f5f5', minHeight: '100vh' }}>
+      <Header
+        logo="March &amp; Lewis"
+        color={BRAND_COLOR}
+        status={health ? health.status : null}
+      />
 
-      <section style={{ marginBottom: '40px' }}>
-        <h2>Career Training Programs</h2>
-        <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', marginTop: '16px' }}>
+      <DashboardPanel title="Career Training Programs" style={{ paddingTop: '40px' }}>
+        <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
           {courses.map(c => (
-            <div key={c.id} style={{ background: '#1a1a1a', border: '1px solid #333', borderRadius: '8px', padding: '20px', minWidth: '200px' }}>
-              <h3 style={{ marginBottom: '8px' }}>{c.title}</h3>
-              <p style={{ color: '#888', fontSize: '0.9rem' }}>Duration: {c.duration}</p>
-            </div>
+            <Card
+              key={c.id}
+              title={c.title}
+              body={`Duration: ${c.duration}`}
+              color={BRAND_COLOR}
+              style={{ minWidth: '200px' }}
+            />
           ))}
         </div>
-      </section>
+      </DashboardPanel>
 
-      <section style={{ marginBottom: '40px' }}>
-        <h2>Apply for a Position</h2>
-        <form onSubmit={submitApplication} style={{ maxWidth: '400px', display: 'flex', flexDirection: 'column', gap: '12px', marginTop: '16px' }}>
-          <input
+      <DashboardPanel title="Apply for a Position" alt>
+        <form
+          onSubmit={submitApplication}
+          style={{ maxWidth: '400px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '12px' }}
+        >
+          <Input
             placeholder="Your Full Name"
             value={applyForm.name}
             onChange={e => setApplyForm(f => ({ ...f, name: e.target.value }))}
             required
-            style={{ background: '#1a1a1a', border: '1px solid #333', borderRadius: '6px', padding: '10px', color: '#f5f5f5' }}
+            color={BRAND_COLOR}
           />
-          <input
+          <Input
             type="email"
             placeholder="Your Email"
             value={applyForm.email}
             onChange={e => setApplyForm(f => ({ ...f, email: e.target.value }))}
             required
-            style={{ background: '#1a1a1a', border: '1px solid #333', borderRadius: '6px', padding: '10px', color: '#f5f5f5' }}
+            color={BRAND_COLOR}
           />
-          <input
+          <Input
             placeholder="Position You Are Applying For"
             value={applyForm.role}
             onChange={e => setApplyForm(f => ({ ...f, role: e.target.value }))}
-            style={{ background: '#1a1a1a', border: '1px solid #333', borderRadius: '6px', padding: '10px', color: '#f5f5f5' }}
+            color={BRAND_COLOR}
           />
-          <button type="submit" style={{ background: '#3b82f6', border: 'none', color: '#fff', padding: '12px', borderRadius: '6px', cursor: 'pointer', fontWeight: '600' }}>
+          <Button type="submit" variant="primary" color={BRAND_COLOR} style={{ width: '100%' }}>
             Submit Application
-          </button>
-          {applyStatus && <p style={{ color: '#4ade80', fontSize: '0.9rem' }}>{applyStatus}</p>}
+          </Button>
+          {applyStatus && <p style={{ color: '#4ade80', fontSize: '0.9rem', textAlign: 'center' }}>{applyStatus}</p>}
         </form>
-      </section>
+      </DashboardPanel>
 
-      <section>
-        <h2>AI Career Coach</h2>
-        <div style={{ maxWidth: '500px', background: '#1a1a1a', border: '1px solid #333', borderRadius: '8px', overflow: 'hidden', marginTop: '16px' }}>
-          <div style={{ height: '200px', overflowY: 'auto', padding: '16px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
-            {messages.map((m, i) => (
-              <div key={i} style={{
-                padding: '8px 12px',
-                borderRadius: '6px',
-                maxWidth: '80%',
-                alignSelf: m.type === 'user' ? 'flex-end' : 'flex-start',
-                background: m.type === 'user' ? '#3b82f6' : '#2a2a2a'
-              }}>
-                {m.text}
-              </div>
-            ))}
-          </div>
-          <div style={{ display: 'flex', borderTop: '1px solid #333' }}>
-            <input
-              value={coachInput}
-              onChange={e => setCoachInput(e.target.value)}
-              onKeyDown={e => e.key === 'Enter' && sendMessage()}
-              placeholder="Ask about your career..."
-              style={{ flex: 1, background: 'transparent', border: 'none', padding: '12px', color: '#f5f5f5', outline: 'none' }}
-            />
-            <button
-              onClick={sendMessage}
-              style={{ background: '#3b82f6', border: 'none', color: '#fff', padding: '12px 20px', cursor: 'pointer' }}
-            >
-              Send
-            </button>
-          </div>
-        </div>
-      </section>
+      <DashboardPanel title="AI Career Coach">
+        <ChatBox
+          messages={messages}
+          inputValue={coachInput}
+          onInputChange={setCoachInput}
+          onSend={sendMessage}
+          placeholder="Ask about your career..."
+          color={BRAND_COLOR}
+        />
+      </DashboardPanel>
+
+      <Footer
+        brand="March &amp; Lewis"
+        color={BRAND_COLOR}
+        links={[{ label: 'QSE Ecosystem', href: '/' }]}
+      />
     </div>
   );
 }
