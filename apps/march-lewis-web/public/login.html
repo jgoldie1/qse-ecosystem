@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign In &mdash; March &amp; Lewis</title>
+  <meta name="description" content="Sign in to your March &amp; Lewis account to access your dashboard and manage your profile." />
+  <link rel="stylesheet" href="/march-lewis/src/styles/base.css" />
+  <link rel="stylesheet" href="/march-lewis/src/styles/components.css" />
+  <link rel="stylesheet" href="/march-lewis/src/styles/pages.css" />
+</head>
+<body>
+  <div id="app-header"></div>
+
+  <main class="login-page">
+    <div class="login-card">
+      <h2>Welcome Back</h2>
+      <p class="subtitle">Sign in to access your March &amp; Lewis account.</p>
+
+      <form class="form" id="login-form">
+        <div>
+          <label class="form-label" for="login-email">Email Address</label>
+          <input type="email" id="login-email" name="email" placeholder="you@example.com" required autocomplete="email" />
+        </div>
+        <div>
+          <label class="form-label" for="login-password">Password</label>
+          <input type="password" id="login-password" name="password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;" required autocomplete="current-password" />
+        </div>
+        <div>
+          <label class="form-label" for="login-role">I am a&hellip;</label>
+          <select id="login-role" name="role">
+            <option value="candidate">Job Seeker</option>
+            <option value="employer">Employer</option>
+            <option value="recruiter">Recruiter</option>
+            <option value="admin">Administrator</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;margin-top:6px;">Sign In</button>
+      </form>
+
+      <div class="login-footer">
+        <p>Don&rsquo;t have an account? <a href="/march-lewis/candidate-onboarding.html">Create a free profile</a></p>
+        <p class="mt-sm">Are you an employer? <a href="/march-lewis/employer-intake.html">Submit a talent request</a></p>
+      </div>
+    </div>
+  </main>
+
+  <div id="app-footer"></div>
+  <div id="toast-container"></div>
+
+  <script type="module" src="/march-lewis/src/pages/login.js"></script>
+</body>
+</html>

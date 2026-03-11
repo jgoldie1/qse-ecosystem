@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create Your Profile &mdash; March &amp; Lewis</title>
+  <meta name="description" content="Create your candidate profile on March &amp; Lewis and get matched with the right job opportunities." />
+  <link rel="stylesheet" href="/march-lewis/src/styles/base.css" />
+  <link rel="stylesheet" href="/march-lewis/src/styles/components.css" />
+  <link rel="stylesheet" href="/march-lewis/src/styles/pages.css" />
+</head>
+<body>
+  <div id="app-header"></div>
+
+  <main>
+    <section class="onboarding-hero section-alt">
+      <div class="container">
+        <h1>Create Your Profile</h1>
+        <p class="text-muted">Let&rsquo;s get you set up so we can match you with the right opportunities.</p>
+      </div>
+    </section>
+
+    <section class="section container">
+      <!-- Progress indicator -->
+      <div class="step-progress">
+        <div class="step-dot" data-step="1">1</div>
+        <div class="step-connector"></div>
+        <div class="step-dot" data-step="2">2</div>
+        <div class="step-connector"></div>
+        <div class="step-dot" data-step="3">3</div>
+        <div class="step-connector"></div>
+        <div class="step-dot" data-step="4">4</div>
+      </div>
+      <p class="step-counter text-center" id="step-counter">Step 1 of 4</p>
+
+      <form class="form" id="candidate-form" style="max-width:560px;">
+        <!-- Step 1: Personal Info -->
+        <div class="step-panel" id="step-1">
+          <h3>Personal Information</h3>
+          <div class="form-row">
+            <div>
+              <label class="form-label" for="firstName">First Name *</label>
+              <input type="text" id="firstName" name="firstName" placeholder="Jane" required />
+            </div>
+            <div>
+              <label class="form-label" for="lastName">Last Name *</label>
+              <input type="text" id="lastName" name="lastName" placeholder="Smith" required />
+            </div>
+          </div>
+          <label class="form-label" for="email">Email Address *</label>
+          <input type="email" id="email" name="email" placeholder="jane@example.com" required />
+          <label class="form-label" for="phone">Phone Number</label>
+          <input type="tel" id="phone" name="phone" placeholder="(555) 000-0000" />
+          <label class="form-label" for="city">City / Location *</label>
+          <input type="text" id="city" name="city" placeholder="Dallas, TX" required />
+        </div>
+
+        <!-- Step 2: Work Experience -->
+        <div class="step-panel" id="step-2">
+          <h3>Work Experience</h3>
+          <label class="form-label" for="yearsExperience">Years of Experience *</label>
+          <select id="yearsExperience" name="yearsExperience" required>
+            <option value="">Select&hellip;</option>
+            <option value="0-1">Less than 1 year</option>
+            <option value="1-3">1–3 years</option>
+            <option value="3-5">3–5 years</option>
+            <option value="5-10">5–10 years</option>
+            <option value="10+">10+ years</option>
+          </select>
+          <label class="form-label" for="lastTitle">Most Recent Job Title</label>
+          <input type="text" id="lastTitle" name="lastTitle" placeholder="e.g. Customer Service Rep" />
+          <label class="form-label" for="lastEmployer">Most Recent Employer</label>
+          <input type="text" id="lastEmployer" name="lastEmployer" placeholder="Previous Company Name" />
+          <label class="form-label" for="experience">Experience Summary</label>
+          <textarea id="experience" name="experience" rows="4" placeholder="Briefly describe your work history and key accomplishments&hellip;"></textarea>
+        </div>
+
+        <!-- Step 3: Skills & Interests -->
+        <div class="step-panel" id="step-3">
+          <h3>Skills &amp; Interests</h3>
+          <label class="form-label" for="skills">Key Skills *</label>
+          <input type="text" id="skills" name="skills" placeholder="e.g. Microsoft Office, Data Entry, Customer Service" required />
+          <label class="form-label" for="desiredRole">Desired Role / Job Title</label>
+          <input type="text" id="desiredRole" name="desiredRole" placeholder="e.g. Administrative Assistant" />
+          <label class="form-label" for="desiredType">Preferred Employment Type</label>
+          <select id="desiredType" name="desiredType">
+            <option value="full-time">Full-time</option>
+            <option value="part-time">Part-time</option>
+            <option value="contract">Contract</option>
+            <option value="flexible">Flexible</option>
+          </select>
+          <label class="form-label" for="availability">Availability</label>
+          <select id="availability" name="availability">
+            <option value="immediate">Immediately</option>
+            <option value="2weeks">2 Weeks Notice</option>
+            <option value="1month">1 Month Notice</option>
+          </select>
+        </div>
+
+        <!-- Step 4: Training & Goals -->
+        <div class="step-panel" id="step-4">
+          <h3>Training &amp; Career Goals</h3>
+          <label class="form-label" for="trainingInterests">Training Interests</label>
+          <input type="text" id="trainingInterests" name="trainingInterests" placeholder="e.g. Microsoft Office, QuickBooks, Customer Service" />
+          <label class="form-label" for="careerGoal">Career Goal</label>
+          <input type="text" id="careerGoal" name="careerGoal" placeholder="Where do you see yourself in 2–3 years?" />
+          <label class="form-label" for="resumeSummary">Resume Summary / Cover Note</label>
+          <textarea id="resumeSummary" name="resumeSummary" rows="5" placeholder="Tell employers what makes you a great hire&hellip;"></textarea>
+        </div>
+
+        <!-- Navigation -->
+        <div class="step-nav">
+          <button type="button" class="btn btn-outline" id="prev-btn" style="display:none;">&#8592; Back</button>
+          <button type="button" class="btn btn-primary" id="next-btn">Next &#8594;</button>
+          <button type="submit"  class="btn btn-primary" id="submit-btn" style="display:none;">Complete Profile</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <div id="app-footer"></div>
+  <div id="toast-container"></div>
+
+  <script type="module" src="/march-lewis/src/pages/candidateOnboarding.js"></script>
+</body>
+</html>

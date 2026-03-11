@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hire Talent &mdash; March &amp; Lewis</title>
+  <meta name="description" content="Submit a talent request to March &amp; Lewis. Tell us what you need and we&rsquo;ll find the right people." />
+  <link rel="stylesheet" href="/march-lewis/src/styles/base.css" />
+  <link rel="stylesheet" href="/march-lewis/src/styles/components.css" />
+  <link rel="stylesheet" href="/march-lewis/src/styles/pages.css" />
+</head>
+<body>
+  <div id="app-header"></div>
+
+  <main>
+    <section class="employer-hero section-alt">
+      <div class="container">
+        <h1>Find the Right Talent</h1>
+        <p>Tell us what you need. We&rsquo;ll screen, vet, and deliver qualified candidates so you can focus on your business.</p>
+      </div>
+    </section>
+
+    <section class="section container">
+      <div class="benefits-grid">
+        <div class="benefit-card">
+          <div class="card-icon">&#9989;</div>
+          <h4>Pre-Screened Candidates</h4>
+          <p>Every candidate is vetted for skills, experience, and culture fit.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="card-icon">&#9201;</div>
+          <h4>Fast Turnaround</h4>
+          <p>Receive a shortlist of qualified candidates within 48&ndash;72 hours.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="card-icon">&#128272;</div>
+          <h4>Flexible Staffing</h4>
+          <p>Full-time, part-time, contract, or temp-to-hire &mdash; your terms.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="card-icon">&#128200;</div>
+          <h4>Workforce Analytics</h4>
+          <p>Track hiring outcomes with our built-in workforce reporting tools.</p>
+        </div>
+      </div>
+
+      <h2 style="text-align:center;margin-bottom:32px;">Submit a Talent Request</h2>
+      <form class="form form-wide" id="employer-form">
+        <p class="form-section-title">Company Information</p>
+        <div class="form-row">
+          <div>
+            <label class="form-label" for="employer-company">Company Name <span aria-hidden="true">*</span></label>
+            <input type="text" id="employer-company" name="companyName" placeholder="Acme Corp" required />
+          </div>
+          <div>
+            <label class="form-label" for="employer-industry">Industry</label>
+            <select id="employer-industry" name="industry">
+              <option value="">Select industry&hellip;</option>
+              <option value="technology">Technology</option>
+              <option value="healthcare">Healthcare</option>
+              <option value="finance">Finance &amp; Banking</option>
+              <option value="retail">Retail</option>
+              <option value="manufacturing">Manufacturing</option>
+              <option value="logistics">Logistics &amp; Supply Chain</option>
+              <option value="education">Education</option>
+              <option value="real-estate">Real Estate</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+        </div>
+
+        <p class="form-section-title">Contact Person</p>
+        <div class="form-row">
+          <div>
+            <label class="form-label" for="employer-contact">Contact Name <span aria-hidden="true">*</span></label>
+            <input type="text" id="employer-contact" name="contactName" placeholder="Jane Smith" required />
+          </div>
+          <div>
+            <label class="form-label" for="employer-email">Work Email <span aria-hidden="true">*</span></label>
+            <input type="email" id="employer-email" name="contactEmail" placeholder="jane@company.com" required />
+          </div>
+        </div>
+        <div>
+          <label class="form-label" for="employer-phone">Phone Number</label>
+          <input type="tel" id="employer-phone" name="phone" placeholder="(555) 000-0000" />
+        </div>
+
+        <p class="form-section-title">Position Details</p>
+        <div class="form-row">
+          <div>
+            <label class="form-label" for="employer-position">Position Title <span aria-hidden="true">*</span></label>
+            <input type="text" id="employer-position" name="positionTitle" placeholder="e.g. Administrative Assistant" required />
+          </div>
+          <div>
+            <label class="form-label" for="employer-type">Employment Type</label>
+            <select id="employer-type" name="positionType">
+              <option value="full-time">Full-time</option>
+              <option value="part-time">Part-time</option>
+              <option value="contract">Contract</option>
+              <option value="temp-to-hire">Temp-to-Hire</option>
+            </select>
+          </div>
+        </div>
+        <div>
+          <label class="form-label" for="employer-location">Work Location</label>
+          <input type="text" id="employer-location" name="location" placeholder="e.g. Dallas, TX or Remote" />
+        </div>
+        <div>
+          <label class="form-label" for="employer-description">Job Description <span aria-hidden="true">*</span></label>
+          <textarea id="employer-description" name="description" rows="4" placeholder="Describe the role, responsibilities, and day-to-day activities&hellip;" required></textarea>
+        </div>
+        <div>
+          <label class="form-label" for="employer-requirements">Requirements &amp; Qualifications</label>
+          <textarea id="employer-requirements" name="requirements" rows="3" placeholder="List required skills, education, experience, certifications&hellip;"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit Request</button>
+      </form>
+    </section>
+  </main>
+
+  <div id="app-footer"></div>
+  <div id="toast-container"></div>
+
+  <script type="module" src="/march-lewis/src/pages/employerIntake.js"></script>
+</body>
+</html>

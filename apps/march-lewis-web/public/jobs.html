@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Find Jobs &mdash; March &amp; Lewis</title>
+  <meta name="description" content="Browse open job positions at March &amp; Lewis. Search by role, location, and employment type." />
+  <link rel="stylesheet" href="/march-lewis/src/styles/base.css" />
+  <link rel="stylesheet" href="/march-lewis/src/styles/components.css" />
+  <link rel="stylesheet" href="/march-lewis/src/styles/pages.css" />
+</head>
+<body>
+  <div id="app-header"></div>
+
+  <main>
+    <section class="jobs-hero section-alt">
+      <div class="container">
+        <h1>Find Your Next Job</h1>
+        <p class="text-muted">Browse hundreds of vetted positions across Dallas, Houston, Austin, and beyond.</p>
+      </div>
+    </section>
+
+    <section class="section container">
+      <div class="search-bar">
+        <input type="text" id="search-input" placeholder="Search by title, company, or location&hellip;" aria-label="Search jobs" />
+        <select id="filter-category" aria-label="Filter by category"></select>
+        <select id="filter-type"     aria-label="Filter by job type"></select>
+        <button class="btn btn-primary" id="search-btn">Search</button>
+      </div>
+
+      <p class="result-meta" id="result-count">&hellip;</p>
+
+      <div class="grid" id="jobs-grid">
+        <p class="loading">Loading positions&hellip;</p>
+      </div>
+    </section>
+
+    <section id="apply" class="section section-alt">
+      <div class="container">
+        <h2>Apply for a Position</h2>
+        <p>Don&rsquo;t see the right role? Submit a general application and we&rsquo;ll match you with the best opportunities.</p>
+        <form class="form" id="apply-form">
+          <input type="text"  id="apply-name"    name="name"    placeholder="Your Full Name" required />
+          <input type="email" id="apply-email"   name="email"   placeholder="Your Email"     required />
+          <input type="text"  id="apply-role"    name="role"    placeholder="Position You Are Applying For" />
+          <textarea           id="apply-message" name="message" placeholder="Tell us about yourself&hellip;" rows="4"></textarea>
+          <button type="submit" class="btn btn-primary">Submit Application</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <div id="app-footer"></div>
+  <div id="toast-container"></div>
+
+  <script type="module" src="/march-lewis/src/pages/jobs.js"></script>
+</body>
+</html>

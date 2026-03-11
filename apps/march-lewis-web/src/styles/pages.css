@@ -1,0 +1,209 @@
+/* March & Lewis — Page-specific styles */
+
+/* ════════════════════════════════════════
+   JOBS PAGE
+════════════════════════════════════════ */
+.jobs-hero { padding: 60px 0 40px; text-align: center; }
+.jobs-hero h1 { font-size: 2.4rem; font-weight: 800; margin-bottom: 12px; }
+
+.search-bar {
+  display: flex; gap: 12px; flex-wrap: wrap;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  margin: 24px 0;
+  align-items: center;
+}
+.search-bar input,
+.search-bar select {
+  flex: 1; min-width: 180px;
+  background: var(--surface-2); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: 10px 14px;
+  color: var(--text); font-size: 0.9rem; outline: none;
+  transition: border-color var(--transition); font-family: inherit;
+}
+.search-bar input:focus,
+.search-bar select:focus { border-color: var(--primary); }
+.search-bar select option { background: var(--surface-2); }
+.search-bar .btn { white-space: nowrap; }
+
+.result-meta {
+  font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px;
+}
+
+.job-card .job-card-header {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  margin-bottom: 10px;
+}
+.job-badge {
+  font-size: 0.72rem; font-weight: 600; padding: 3px 10px;
+  border-radius: 99px; background: var(--primary-dark); color: #fff;
+  white-space: nowrap;
+}
+.job-company { font-weight: 600; color: var(--text-muted); font-size: 0.85rem; margin-bottom: 4px !important; }
+.job-meta    { font-size: 0.82rem; color: var(--text-subtle); margin-bottom: 10px !important; }
+.job-desc    { font-size: 0.88rem; margin-bottom: 18px !important; }
+
+/* ════════════════════════════════════════
+   EMPLOYER INTAKE PAGE
+════════════════════════════════════════ */
+.employer-hero { padding: 60px 0 40px; text-align: center; }
+.employer-hero h1 { font-size: 2.4rem; font-weight: 800; margin-bottom: 12px; }
+.employer-hero p  { color: var(--text-muted); max-width: 520px; margin: 0 auto 30px; }
+
+.benefits-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px; margin-bottom: 48px;
+}
+.benefit-card {
+  background: var(--surface-2); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 22px;
+  text-align: center;
+}
+.benefit-card .card-icon { font-size: 2rem; margin-bottom: 10px; }
+.benefit-card h4 { font-size: 1rem; margin-bottom: 6px; }
+.benefit-card p  { color: var(--text-muted); font-size: 0.85rem; margin: 0; text-align: center; }
+
+.form-section-title {
+  font-size: 1rem; font-weight: 600; color: var(--text-muted);
+  text-transform: uppercase; letter-spacing: 0.05em;
+  border-bottom: 1px solid var(--border); padding-bottom: 8px;
+  margin-bottom: 4px;
+}
+
+/* ════════════════════════════════════════
+   CANDIDATE ONBOARDING — MULTI-STEP
+════════════════════════════════════════ */
+.onboarding-hero { padding: 48px 0 32px; text-align: center; }
+.onboarding-hero h1 { font-size: 2.2rem; font-weight: 800; margin-bottom: 10px; }
+
+.step-progress {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  margin: 0 auto 32px; max-width: 360px;
+}
+.step-dot {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--surface-2); border: 2px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.8rem; font-weight: 600; color: var(--text-muted);
+  transition: background var(--transition), border-color var(--transition);
+  flex-shrink: 0;
+}
+.step-dot.active { background: var(--primary); border-color: var(--primary); color: #fff; }
+.step-dot.done   { background: #16a34a; border-color: #16a34a; color: #fff; }
+.step-connector  { flex: 1; height: 2px; background: var(--border); max-width: 48px; }
+.step-counter    { text-align: center; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 24px; }
+
+.step-panel { display: none; }
+.step-panel.active { display: block; }
+.step-panel h3 { font-size: 1.2rem; font-weight: 600; margin-bottom: 20px; }
+
+.step-nav {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-top: 24px; gap: 12px;
+}
+
+/* ════════════════════════════════════════
+   LOGIN PAGE
+════════════════════════════════════════ */
+.login-page {
+  min-height: calc(100vh - 120px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 40px 20px;
+}
+.login-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 40px;
+  width: 100%; max-width: 420px;
+  box-shadow: var(--shadow);
+}
+.login-card h2 { font-size: 1.6rem; font-weight: 700; margin-bottom: 8px; text-align: center; }
+.login-card .subtitle { color: var(--text-muted); font-size: 0.9rem; text-align: center; margin-bottom: 28px; }
+.login-divider {
+  display: flex; align-items: center; gap: 12px;
+  color: var(--text-muted); font-size: 0.8rem; margin: 16px 0;
+}
+.login-divider::before,
+.login-divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+.login-footer { text-align: center; margin-top: 20px; font-size: 0.85rem; color: var(--text-muted); }
+.login-footer a { color: var(--primary); }
+
+/* ════════════════════════════════════════
+   DASHBOARD SHARED
+════════════════════════════════════════ */
+.dashboard-header {
+  background: var(--surface); border-bottom: 1px solid var(--border);
+  padding: 32px 0 24px;
+}
+.dashboard-header h1 { font-size: 1.8rem; font-weight: 700; margin-bottom: 4px; }
+.dashboard-header p  { color: var(--text-muted); font-size: 0.95rem; }
+
+.dashboard-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 16px; margin: 32px 0;
+}
+.dash-stat {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 20px;
+  text-align: center;
+}
+.dash-stat-number { display: block; font-size: 1.8rem; font-weight: 700; color: var(--primary); }
+.dash-stat-label  { font-size: 0.8rem; color: var(--text-muted); margin-top: 4px; }
+.dash-stat-icon   { font-size: 1.4rem; margin-bottom: 8px; }
+
+.dashboard-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 24px; margin-bottom: 32px;
+}
+.dashboard-panel {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 24px;
+}
+.dashboard-panel h3 { font-size: 1rem; font-weight: 600; margin-bottom: 16px; }
+
+.platform-status-bar {
+  display: flex; align-items: center; gap: 12px;
+  background: var(--surface-2); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: 12px 16px;
+  margin-bottom: 24px; font-size: 0.9rem;
+}
+.status-label { color: var(--text-muted); font-size: 0.85rem; }
+
+/* ── Data table ── */
+.data-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+.data-table th {
+  text-align: left; padding: 8px 12px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-muted); font-weight: 600; font-size: 0.78rem;
+  text-transform: uppercase; letter-spacing: 0.04em;
+}
+.data-table td {
+  padding: 10px 12px; border-bottom: 1px solid var(--border);
+  max-width: 240px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.data-table tr:last-child td { border-bottom: none; }
+.data-table tr:hover td { background: var(--surface-2); }
+
+/* ── Task quick-add form ── */
+.quick-form {
+  display: flex; gap: 10px; align-items: center;
+}
+.quick-form input {
+  flex: 1; background: var(--surface-2); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: 9px 14px;
+  color: var(--text); font-size: 0.9rem; outline: none;
+  transition: border-color var(--transition); font-family: inherit;
+}
+.quick-form input:focus { border-color: var(--primary); }
+.quick-form .btn { white-space: nowrap; }
+
+/* ── Responsive dashboard ── */
+@media (max-width: 900px) {
+  .dashboard-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .dashboard-stats { grid-template-columns: repeat(2, 1fr); }
+  .login-card { padding: 28px 20px; }
+}
