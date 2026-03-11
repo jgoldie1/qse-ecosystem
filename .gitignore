@@ -1,4 +1,10 @@
 node_modules/
+/tmp/
+.env
+.DS_Store
+npm-debug.log*
+logs/
+node_modules/
 package-lock.json
 .env
 .env.local
