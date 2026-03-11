@@ -1,10 +1,12 @@
 const express = require('express');
 const path = require('path');
 const multer = require('multer');
+const cors = require('cors');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+app.use(cors({ origin: process.env.CORS_ORIGIN || '*' }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
