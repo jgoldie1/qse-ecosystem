@@ -1,5 +1,13 @@
+require('dotenv').config();
 const express = require('express');
 const path = require('path');
+const cors = require('cors');
+const helmet = require('helmet');
+const morgan = require('morgan');
+const cookieParser = require('cookie-parser');
+
+const { initDatabase } = require('./server/db/init');
+const requestMeta = require('./server/middleware/requestMeta');
 
 const healthRoutes = require('./routes/health');
 const aiRoutes = require('./routes/ai');
@@ -10,10 +18,21 @@ const streamingRoutes = require('./routes/streaming');
 const rewardRoutes = require('./routes/rewards');
 const membershipRoutes = require('./routes/memberships');
 
+const authRoutes = require('./server/routes/auth');
+const uploadRoutes = require('./server/routes/uploads');
+const sculptifyRoutes = require('./server/routes/sculptify');
+const marchLewisRoutes = require('./server/routes/march-lewis');
+const adminRoutes = require('./server/routes/admin');
+
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+app.use(helmet());
+app.use(cors());
+app.use(morgan('dev'));
+app.use(cookieParser());
 app.use(express.json());
+app.use(requestMeta);
 
 // Serve static files for Sculptify web app
 app.use('/sculptify', express.static(path.join(__dirname, 'apps/sculptify-web/public')));
@@ -21,7 +40,7 @@ app.use('/sculptify', express.static(path.join(__dirname, 'apps/sculptify-web/pu
 // Serve static files for March and Lewis web app
 app.use('/march-lewis', express.static(path.join(__dirname, 'apps/march-lewis-web/public')));
 
-// API routes
+// API routes (existing)
 app.use('/api/health', healthRoutes);
 app.use('/api/ai', aiRoutes);
 app.use('/api/tasks', taskRoutes);
@@ -30,6 +49,13 @@ app.use('/api/wallets', walletRoutes);
 app.use('/api/streaming', streamingRoutes);
 app.use('/api/rewards', rewardRoutes);
 app.use('/api/memberships', membershipRoutes);
+
+// API routes (new)
+app.use('/api/auth', authRoutes);
+app.use('/api/uploads', uploadRoutes);
+app.use('/api/sculptify', sculptifyRoutes);
+app.use('/api/march-lewis', marchLewisRoutes);
+app.use('/api/admin', adminRoutes);
 
 // Root landing page
 app.get('/', (req, res) => {
@@ -69,8 +95,25 @@ app.get('/', (req, res) => {
   `);
 });
 
-app.listen(PORT, () => {
-  console.log(`QSE Ecosystem running on http://localhost:${PORT}`);
+// Global error handler
+app.use((err, _req, res, _next) => {
+  const status = err.status || 500;
+  if (status >= 500) {
+    console.error('Server error:', err);
+    return res.status(status).json({ ok: false, message: 'Internal server error' });
+  }
+  res.status(status).json({ ok: false, message: err.message || 'Request error' });
 });
+
+initDatabase()
+  .then(() => {
+    app.listen(PORT, () => {
+      console.log(`QSE Ecosystem running on http://localhost:${PORT}`);
+    });
+  })
+  .catch((err) => {
+    console.error('Failed to initialize database:', err);
+    process.exit(1);
+  });
 
 module.exports = app;

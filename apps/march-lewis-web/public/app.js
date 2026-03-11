@@ -4,23 +4,45 @@ const API_BASE = '/api';
 
 async function fetchJSON(url, options) {
   const res = await fetch(url, options);
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  return res.json();
+  const data = await res.json();
+  if (!res.ok) throw Object.assign(new Error(data.message || `HTTP ${res.status}`), { status: res.status });
+  return data;
 }
 
-// Load analytics stats
+// Load live stats from API
 async function loadStats() {
   try {
-    const data = await fetchJSON(`${API_BASE}/health`);
-    if (data.status !== 'ok') return;
-    const analytics = await fetchJSON('/data/analytics.json').catch(() => null);
-    if (analytics && analytics.marchLewis) {
-      document.querySelector('#stat-applications .stat-number').textContent = analytics.marchLewis.jobApplications;
-      document.querySelector('#stat-employers .stat-number').textContent = analytics.marchLewis.employerRequests;
-      document.querySelector('#stat-training .stat-number').textContent = analytics.marchLewis.trainingEnrollments;
-    }
+    const [candidatesData, employersData] = await Promise.all([
+      fetchJSON(`${API_BASE}/march-lewis/candidates`).catch(() => ({ candidates: [] })),
+      fetchJSON(`${API_BASE}/march-lewis/employers`).catch(() => ({ employers: [] }))
+    ]);
+    document.querySelector('#stat-applications .stat-number').textContent = candidatesData.candidates.length;
+    document.querySelector('#stat-employers .stat-number').textContent = employersData.employers.length;
   } catch (e) {
     // silently ignore
+  }
+}
+
+// Load jobs from API
+async function loadJobs() {
+  const grid = document.getElementById('jobs-grid');
+  if (!grid) return;
+  try {
+    const data = await fetchJSON(`${API_BASE}/march-lewis/jobs`);
+    if (!data.jobs || !data.jobs.length) {
+      grid.innerHTML = '<p class="loading">No open positions at this time.</p>';
+      return;
+    }
+    grid.innerHTML = data.jobs.map(j => `
+      <div class="card">
+        <div class="card-icon">💼</div>
+        <h3>${j.title}</h3>
+        <p>${j.type || ''} &mdash; ${j.location || ''}</p>
+        <a href="#apply" class="btn btn-outline">Apply Now</a>
+      </div>
+    `).join('');
+  } catch (e) {
+    grid.innerHTML = '<p class="loading">Could not load positions.</p>';
   }
 }
 
@@ -97,32 +119,70 @@ document.getElementById('coach-input').addEventListener('keydown', e => {
   if (e.key === 'Enter') sendCoachMessage();
 });
 
-// Application form
+// Candidate application form - wired to live API
 document.getElementById('apply-form').addEventListener('submit', async (e) => {
   e.preventDefault();
   const status = document.getElementById('apply-status');
-  const name = document.getElementById('apply-name').value;
-  const role = document.getElementById('apply-role').value;
+  status.style.color = '';
+  status.textContent = 'Submitting...';
+
+  const payload = {
+    fullName: document.getElementById('apply-name').value.trim(),
+    email: document.getElementById('apply-email').value.trim(),
+    phone: document.getElementById('apply-phone').value.trim(),
+    workAuthorization: document.getElementById('apply-authorization').value,
+    availability: document.getElementById('apply-availability').value
+  };
 
   try {
-    await fetchJSON(`${API_BASE}/tasks`, {
+    await fetchJSON(`${API_BASE}/march-lewis/candidates`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        title: `Job Application: ${role || 'Open Position'}`,
-        description: `Application submitted by ${name}`,
-        app: 'marchLewis'
-      })
+      body: JSON.stringify(payload)
     });
     status.textContent = 'Your application has been received! Our team will be in touch within 2 business days.';
     e.target.reset();
+    loadStats();
   } catch (err) {
     status.style.color = '#f87171';
-    status.textContent = 'Could not submit application. Please try again.';
+    status.textContent = err.message || 'Could not submit application. Please try again.';
   }
 });
 
+// Employer intake form - wired to live API
+const employerForm = document.getElementById('employer-form');
+if (employerForm) {
+  employerForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const status = document.getElementById('employer-status');
+    status.style.color = '';
+    status.textContent = 'Submitting...';
+
+    const payload = {
+      companyName: document.getElementById('employer-company').value.trim(),
+      hiringManager: document.getElementById('employer-manager').value.trim(),
+      email: document.getElementById('employer-email').value.trim(),
+      positionType: document.getElementById('employer-position-type').value
+    };
+
+    try {
+      await fetchJSON(`${API_BASE}/march-lewis/employers`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      status.textContent = 'Your talent request has been received! A recruiter will contact you shortly.';
+      e.target.reset();
+      loadStats();
+    } catch (err) {
+      status.style.color = '#f87171';
+      status.textContent = err.message || 'Could not submit request. Please try again.';
+    }
+  });
+}
+
 // Init
 loadStats();
+loadJobs();
 loadCourses();
 appendMessage('coach', 'Welcome to March & Lewis! Ask me anything about your career journey.');
