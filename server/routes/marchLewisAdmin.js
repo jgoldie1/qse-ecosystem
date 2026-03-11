@@ -1,9 +1,18 @@
 const express = require('express');
 const router = express.Router();
+const rateLimit = require('express-rate-limit');
 const { requireAuth, requireAdmin } = require('../middleware/auth');
 const { getJobs, getEmployers, getCandidates } = require('../services/marchLewisService');
 
-router.get('/dashboard', requireAuth, requireAdmin, async (_req, res, next) => {
+const adminLimiter = rateLimit({
+  windowMs: 60 * 1000,
+  max: 60,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { ok: false, error: 'Too many requests, please try again later.' }
+});
+
+router.get('/dashboard', adminLimiter, requireAuth, requireAdmin, async (_req, res, next) => {
   try {
     const jobs = await getJobs();
     const employers = await getEmployers();
