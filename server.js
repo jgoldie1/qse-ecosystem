@@ -9,6 +9,10 @@ const walletRoutes = require('./routes/wallets');
 const streamingRoutes = require('./routes/streaming');
 const rewardRoutes = require('./routes/rewards');
 const membershipRoutes = require('./routes/memberships');
+const providerRoutes = require('./routes/providers');
+const onboardingRoutes = require('./routes/onboarding');
+const adminRoutes = require('./routes/admin');
+const statsRoutes = require('./routes/stats');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -17,6 +21,8 @@ app.use(express.json());
 
 // Serve static files for Sculptify web app
 app.use('/sculptify', express.static(path.join(__dirname, 'apps/sculptify-web/public')));
+// Serve Sculptify src modules so the browser can import them as ES modules
+app.use('/sculptify/src', express.static(path.join(__dirname, 'apps/sculptify-web/src')));
 
 // Serve static files for March and Lewis web app
 app.use('/march-lewis', express.static(path.join(__dirname, 'apps/march-lewis-web/public')));
@@ -30,6 +36,10 @@ app.use('/api/wallets', walletRoutes);
 app.use('/api/streaming', streamingRoutes);
 app.use('/api/rewards', rewardRoutes);
 app.use('/api/memberships', membershipRoutes);
+app.use('/api/providers', providerRoutes);
+app.use('/api/onboarding', onboardingRoutes);
+app.use('/api/admin', adminRoutes);
+app.use('/api/stats', statsRoutes);
 
 // Root landing page
 app.get('/', (req, res) => {

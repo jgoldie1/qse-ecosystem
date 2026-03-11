@@ -13,6 +13,7 @@
       <div class="logo">Sculptify</div>
       <nav class="nav">
         <a href="#services">Services</a>
+        <a href="#providers">Providers</a>
         <a href="#training">Training</a>
         <a href="#about">About</a>
         <a href="#contact" class="btn btn-primary">Book Now</a>
@@ -71,6 +72,16 @@
       </div>
     </section>
 
+    <section id="providers" class="section section-alt">
+      <div class="container">
+        <h2>Meet Our Providers</h2>
+        <p>Connect with certified wellness professionals ready to support your journey.</p>
+        <div class="grid" id="providers-grid">
+          <p class="loading">Loading providers…</p>
+        </div>
+      </div>
+    </section>
+
     <section id="training" class="section section-alt">
       <div class="container">
         <h2>Training Programs</h2>
@@ -78,6 +89,27 @@
           <p class="loading">Loading courses...</p>
         </div>
       </div>
+    </section>
+
+    <section id="onboarding" class="section container">
+      <h2>Become a Provider</h2>
+      <p>Join our network of certified wellness professionals and grow your client base.</p>
+      <form class="form" id="onboarding-form">
+        <input type="text" id="onboard-name" placeholder="Full Name" required />
+        <input type="email" id="onboard-email" placeholder="Email Address" required />
+        <select id="onboard-specialty">
+          <option value="">Select Your Specialty</option>
+          <option value="sculpting">Body Sculpting</option>
+          <option value="nutrition">Nutrition Coaching</option>
+          <option value="training">Personal Training</option>
+          <option value="yoga">Yoga &amp; Mindfulness</option>
+          <option value="massage">Massage Therapy</option>
+          <option value="skincare">Skincare &amp; Beauty</option>
+        </select>
+        <textarea id="onboard-experience" placeholder="Briefly describe your experience and certifications" rows="4"></textarea>
+        <button type="submit" class="btn btn-primary">Submit Application</button>
+        <p id="onboarding-status" class="form-status"></p>
+      </form>
     </section>
 
     <section id="ai-coach" class="section container">
@@ -115,6 +147,20 @@
         <p id="booking-status" class="form-status"></p>
       </form>
     </section>
+    <section id="admin" class="section container">
+      <h2>Admin</h2>
+
+      <div id="admin-login-section">
+        <p>Sign in to view the Sculptify dashboard.</p>
+        <form class="form" id="admin-login-form">
+          <input type="password" id="admin-password" placeholder="Admin Password" required />
+          <button type="submit" class="btn btn-primary">Sign In</button>
+          <p id="admin-login-status" class="form-status"></p>
+        </form>
+      </div>
+
+      <div id="dashboard-section"></div>
+    </section>
   </main>
 
   <footer class="footer">
@@ -123,6 +169,6 @@
     </div>
   </footer>
 
-  <script src="app.js"></script>
+  <script type="module" src="app.js"></script>
 </body>
 </html>
