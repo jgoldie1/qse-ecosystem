@@ -1,19 +1,13 @@
 /* Sculptify Web App */
 
-const API_BASE = '/api';
-
-async function fetchJSON(url, options) {
-  const res = await fetch(url, options);
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  return res.json();
-}
+var API_BASE = '/api';
 
 // Load analytics stats
 async function loadStats() {
   try {
-    const data = await fetchJSON(`${API_BASE}/health`);
+    var data = await QSEUtils.fetchJSON(API_BASE + '/health');
     if (data.status !== 'ok') return;
-    const analytics = await fetchJSON('/data/analytics.json').catch(() => null);
+    var analytics = await QSEUtils.fetchJSON('/data/analytics.json').catch(function () { return null; });
     if (analytics && analytics.sculptify) {
       document.querySelector('#stat-appointments .stat-number').textContent = analytics.sculptify.appointments;
       document.querySelector('#stat-sales .stat-number').textContent = analytics.sculptify.sales;
@@ -26,34 +20,29 @@ async function loadStats() {
 
 // Load training courses
 async function loadCourses() {
-  const grid = document.getElementById('courses-grid');
+  var grid = document.getElementById('courses-grid');
   try {
-    const data = await fetchJSON(`${API_BASE}/training/courses`);
-    const sculptifyCourses = data.filter(c => c.app === 'sculptify' || c.app === 'general');
+    var data = await QSEUtils.fetchJSON(API_BASE + '/training/courses');
+    var sculptifyCourses = QSEUtils.filterCoursesByApp(data, 'sculptify');
     if (!sculptifyCourses.length) {
-      grid.innerHTML = '<p class="loading">No courses available yet.</p>';
+      grid.innerHTML = QSEComponents.renderEmptyCourses();
       return;
     }
-    grid.innerHTML = sculptifyCourses.map(c => `
-      <div class="card">
-        <div class="card-icon">📚</div>
-        <h3>${c.title}</h3>
-        <p>Duration: ${c.duration}</p>
-        <button class="btn btn-outline" onclick="enrollCourse('${c.id}')">Enroll Free</button>
-      </div>
-    `).join('');
+    grid.innerHTML = sculptifyCourses.map(function (c) {
+      return QSEComponents.renderCourseCard(c, '📚');
+    }).join('');
   } catch (e) {
-    grid.innerHTML = '<p class="loading">Could not load courses.</p>';
+    grid.innerHTML = QSEComponents.renderEmptyCourses('Could not load courses.');
   }
 }
 
 async function enrollCourse(courseId) {
   try {
-    const userId = 'guest-' + Math.random().toString(36).slice(2, 8);
-    const result = await fetchJSON(`${API_BASE}/training/enroll`, {
+    var userId = QSEUtils.generateGuestId();
+    var result = await QSEUtils.fetchJSON(API_BASE + '/training/enroll', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ userId, courseId })
+      body: JSON.stringify({ userId: userId, courseId: courseId })
     });
     if (result.success) {
       alert('Enrolled successfully! Check your progress in your dashboard.');
@@ -63,54 +52,51 @@ async function enrollCourse(courseId) {
   }
 }
 
-// AI Coach chat
-function appendMessage(type, text) {
-  const container = document.getElementById('chat-messages');
-  const div = document.createElement('div');
-  div.className = `chat-msg ${type}`;
-  div.textContent = text;
-  container.appendChild(div);
-  container.scrollTop = container.scrollHeight;
-}
+// Delegate enroll-button clicks within the courses grid
+document.getElementById('courses-grid').addEventListener('click', function (e) {
+  var btn = e.target.closest('[data-course-id]');
+  if (btn) enrollCourse(btn.getAttribute('data-course-id'));
+});
 
+// AI Coach chat
 async function sendCoachMessage() {
-  const input = document.getElementById('coach-input');
-  const message = input.value.trim();
+  var input = document.getElementById('coach-input');
+  var message = input.value.trim();
   if (!message) return;
   input.value = '';
-  appendMessage('user', message);
+  QSEComponents.appendMessage('chat-messages', 'user', message);
 
   try {
-    const data = await fetchJSON(`${API_BASE}/ai/coach`, {
+    var data = await QSEUtils.fetchJSON(API_BASE + '/ai/coach', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message, context: 'sculptify' })
+      body: JSON.stringify({ message: message, context: 'sculptify' })
     });
-    appendMessage('coach', data.reply);
+    QSEComponents.appendMessage('chat-messages', 'coach', data.reply);
   } catch (e) {
-    appendMessage('coach', 'Sorry, I am unable to respond right now. Try again shortly.');
+    QSEComponents.appendMessage('chat-messages', 'coach', 'Sorry, I am unable to respond right now. Try again shortly.');
   }
 }
 
 document.getElementById('coach-send').addEventListener('click', sendCoachMessage);
-document.getElementById('coach-input').addEventListener('keydown', e => {
+document.getElementById('coach-input').addEventListener('keydown', function (e) {
   if (e.key === 'Enter') sendCoachMessage();
 });
 
 // Booking form
-document.getElementById('booking-form').addEventListener('submit', async (e) => {
+document.getElementById('booking-form').addEventListener('submit', async function (e) {
   e.preventDefault();
-  const status = document.getElementById('booking-status');
-  const name = document.getElementById('book-name').value;
-  const service = document.getElementById('book-service').value;
+  var status = document.getElementById('booking-status');
+  var name = document.getElementById('book-name').value;
+  var service = document.getElementById('book-service').value;
 
   try {
-    await fetchJSON(`${API_BASE}/tasks`, {
+    await QSEUtils.fetchJSON(API_BASE + '/tasks', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        title: `Appointment: ${service}`,
-        description: `Booking request from ${name}`,
+        title: 'Appointment: ' + service,
+        description: 'Booking request from ' + name,
         app: 'sculptify'
       })
     });
@@ -125,4 +111,4 @@ document.getElementById('booking-form').addEventListener('submit', async (e) => 
 // Init
 loadStats();
 loadCourses();
-appendMessage('coach', 'Welcome to Sculptify! Ask me anything about your wellness journey.');
+QSEComponents.appendMessage('chat-messages', 'coach', 'Welcome to Sculptify! Ask me anything about your wellness journey.');
