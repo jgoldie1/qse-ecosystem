@@ -41,6 +41,22 @@ const streamingEngine = {
     };
     content.push(item);
     return item;
+  },
+
+  updateContent(id, data) {
+    const index = content.findIndex(c => c.id === id);
+    if (index === -1) return null;
+    const duration = data.duration !== undefined ? Number(data.duration) : content[index].duration;
+    const updated = {
+      ...content[index],
+      title: data.title !== undefined ? data.title : content[index].title,
+      type: data.type !== undefined ? data.type : content[index].type,
+      url: data.url !== undefined ? data.url : content[index].url,
+      duration: (!isNaN(duration) && duration >= 0) ? duration : content[index].duration,
+      updatedAt: new Date().toISOString()
+    };
+    content[index] = updated;
+    return updated;
   }
 };
 

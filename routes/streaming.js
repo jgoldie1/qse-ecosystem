@@ -18,4 +18,10 @@ router.get('/content/:id', (req, res) => {
   res.json(item);
 });
 
+router.put('/content/:id', (req, res) => {
+  const item = streamingEngine.updateContent(req.params.id, req.body);
+  if (!item) return res.status(404).json({ error: 'Content not found' });
+  res.json(item);
+});
+
 module.exports = router;
