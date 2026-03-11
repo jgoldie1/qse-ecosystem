@@ -7,3 +7,6 @@ npm-debug.log*
 .DS_Store
 dist/
 build/
+*.db
+*.db-shm
+*.db-wal

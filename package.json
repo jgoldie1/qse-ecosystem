@@ -8,6 +8,8 @@
     "dev": "node server.js"
   },
   "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "better-sqlite3": "^12.6.2",
     "express": "^4.19.2"
   }
 }
