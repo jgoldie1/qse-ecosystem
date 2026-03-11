@@ -9,6 +9,11 @@ const walletRoutes = require('./routes/wallets');
 const streamingRoutes = require('./routes/streaming');
 const rewardRoutes = require('./routes/rewards');
 const membershipRoutes = require('./routes/memberships');
+const sculptifyRoutes = require('./server/routes/sculptify');
+const marchLewisRoutes = require('./server/routes/marchLewis');
+const uploadRoutes = require('./server/routes/uploads');
+const sculptifyAdminRoutes = require('./server/routes/sculptifyAdmin');
+const marchLewisAdminRoutes = require('./server/routes/marchLewisAdmin');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -30,6 +35,22 @@ app.use('/api/wallets', walletRoutes);
 app.use('/api/streaming', streamingRoutes);
 app.use('/api/rewards', rewardRoutes);
 app.use('/api/memberships', membershipRoutes);
+app.use('/api/sculptify', sculptifyRoutes);
+app.use('/api/march-lewis', marchLewisRoutes);
+app.use('/api/uploads', uploadRoutes);
+app.use('/api/sculptify-admin', sculptifyAdminRoutes);
+app.use('/api/march-lewis-admin', marchLewisAdminRoutes);
+
+// Error handler
+app.use((err, _req, res, _next) => {
+  console.error(err.stack);
+  const isDev = process.env.NODE_ENV !== 'production';
+  res.status(500).json({
+    ok: false,
+    message: 'Internal server error',
+    ...(isDev && { error: err.message })
+  });
+});
 
 // Root landing page
 app.get('/', (req, res) => {
