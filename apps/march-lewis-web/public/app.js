@@ -63,6 +63,16 @@ async function enrollCourse(courseId) {
   }
 }
 
+// Load scheduled interviews
+async function loadInterviews() {
+  try {
+    const data = await fetchJSON(`${API_BASE}/scheduling/march-lewis-interviews`);
+    return data.interviews || [];
+  } catch (e) {
+    return [];
+  }
+}
+
 // AI Coach chat
 function appendMessage(type, text) {
   const container = document.getElementById('chat-messages');
@@ -125,4 +135,5 @@ document.getElementById('apply-form').addEventListener('submit', async (e) => {
 // Init
 loadStats();
 loadCourses();
+loadInterviews();
 appendMessage('coach', 'Welcome to March & Lewis! Ask me anything about your career journey.');

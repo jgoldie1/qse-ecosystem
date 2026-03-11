@@ -63,6 +63,16 @@ async function enrollCourse(courseId) {
   }
 }
 
+// Load scheduling availability
+async function loadAvailability() {
+  try {
+    const data = await fetchJSON(`${API_BASE}/scheduling/sculptify-availability`);
+    return data.availability || [];
+  } catch (e) {
+    return [];
+  }
+}
+
 // AI Coach chat
 function appendMessage(type, text) {
   const container = document.getElementById('chat-messages');
@@ -125,4 +135,5 @@ document.getElementById('booking-form').addEventListener('submit', async (e) => 
 // Init
 loadStats();
 loadCourses();
+loadAvailability();
 appendMessage('coach', 'Welcome to Sculptify! Ask me anything about your wellness journey.');
