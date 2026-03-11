@@ -5,6 +5,7 @@ const crypto = require('crypto');
 const multer = require('multer');
 const session = require('express-session');
 const bcrypt = require('bcrypt');
+const rateLimit = require('express-rate-limit');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -93,23 +94,6 @@ function requireRole(roles = []) {
   };
 }
 
-// Simple in-memory rate limiter
-const _rateLimitStore = new Map();
-function rateLimit(windowMs, max) {
-  return function(req, res, next) {
-    const key = req.ip || 'unknown';
-    const now = Date.now();
-    const windowStart = now - windowMs;
-    const hits = (_rateLimitStore.get(key) || []).filter((t) => t > windowStart);
-    hits.push(now);
-    _rateLimitStore.set(key, hits);
-    if (hits.length > max) {
-      return res.status(429).json({ ok: false, message: 'Too many requests, please try again later' });
-    }
-    next();
-  };
-}
-
 // CSRF protection: generate token on session, validate on state-changing requests
 function csrfToken(req, res, next) {
   if (!req.session.csrfToken) {
@@ -192,7 +176,7 @@ app.use('/sculptify', express.static(sculptifyDir));
 app.use('/march-lewis', express.static(marchDir));
 app.use(express.static(publicDir));
 
-const spaRateLimit = rateLimit(60 * 1000, 120);
+const spaRateLimit = rateLimit({ windowMs: 60 * 1000, limit: 120 });
 
 // SPA fallbacks for public apps
 app.get('/sculptify/*', spaRateLimit, (_req, res) => res.sendFile(path.join(sculptifyDir, 'index.html')));
@@ -226,7 +210,7 @@ app.get('/api/auth/csrf-token', (req, res) => {
   res.json({ ok: true, csrfToken: req.session.csrfToken });
 });
 
-const loginRateLimit = rateLimit(15 * 60 * 1000, 20);
+const loginRateLimit = rateLimit({ windowMs: 15 * 60 * 1000, limit: 20 });
 
 /* auth */
 app.post('/api/auth/login', loginRateLimit, async (req, res) => {
