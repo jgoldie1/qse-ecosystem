@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recruiter Dashboard &mdash; March &amp; Lewis</title>
+  <link rel="stylesheet" href="/march-lewis/src/styles/base.css" />
+  <link rel="stylesheet" href="/march-lewis/src/styles/components.css" />
+  <link rel="stylesheet" href="/march-lewis/src/styles/pages.css" />
+</head>
+<body>
+  <div id="app-header"></div>
+
+  <main>
+    <section class="dashboard-header section-alt">
+      <div class="container">
+        <h1>Welcome, <span id="recruiter-name">Recruiter</span></h1>
+        <p>Manage your candidate pipeline, employer requests, and tasks from one place.</p>
+      </div>
+    </section>
+
+    <section class="section container">
+      <!-- Stats row -->
+      <div class="dashboard-stats">
+        <div class="dash-stat">
+          <span class="dash-stat-icon">&#128203;</span>
+          <span class="dash-stat-number" id="stat-total-apps">&#8230;</span>
+          <span class="dash-stat-label">Total Tasks</span>
+        </div>
+        <div class="dash-stat">
+          <span class="dash-stat-icon">&#128101;</span>
+          <span class="dash-stat-number" id="stat-new-apps">&#8230;</span>
+          <span class="dash-stat-label">Applications</span>
+        </div>
+        <div class="dash-stat">
+          <span class="dash-stat-icon">&#127970;</span>
+          <span class="dash-stat-number" id="stat-employer-req">&#8230;</span>
+          <span class="dash-stat-label">Employer Requests</span>
+        </div>
+        <div class="dash-stat">
+          <span class="dash-stat-icon">&#127942;</span>
+          <span class="dash-stat-number" id="stat-rewards">&#8230;</span>
+          <span class="dash-stat-label">Rewards Earned</span>
+        </div>
+      </div>
+
+      <!-- Main two-column layout -->
+      <div class="dashboard-grid">
+        <!-- Recent Applications -->
+        <div class="dashboard-panel">
+          <h3>&#128101; Recent Applications</h3>
+          <div id="applications-list">
+            <p class="loading">Loading applications&hellip;</p>
+          </div>
+        </div>
+
+        <!-- Employer Requests -->
+        <div class="dashboard-panel">
+          <h3>&#127970; Employer Requests</h3>
+          <div id="employer-requests-list">
+            <p class="loading">Loading requests&hellip;</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick task creation -->
+      <div class="dashboard-panel" style="margin-bottom:24px;">
+        <h3>&#10133; Add a Task</h3>
+        <form class="quick-form" id="task-form">
+          <input type="text" id="task-title" placeholder="Task title&hellip;" required />
+          <button type="submit" class="btn btn-primary">Add</button>
+        </form>
+      </div>
+
+      <!-- Quick links -->
+      <div class="grid">
+        <a href="/march-lewis/jobs.html" class="card" style="text-decoration:none;">
+          <div class="card-icon">&#128269;</div>
+          <h3>Browse Jobs</h3>
+          <p>View all open positions and manage listings.</p>
+        </a>
+        <a href="/march-lewis/employer-intake.html" class="card" style="text-decoration:none;">
+          <div class="card-icon">&#127970;</div>
+          <h3>New Employer Request</h3>
+          <p>Add a new staffing request from an employer.</p>
+        </a>
+        <a href="/march-lewis/candidate-onboarding.html" class="card" style="text-decoration:none;">
+          <div class="card-icon">&#128101;</div>
+          <h3>Onboard Candidate</h3>
+          <p>Register a new job seeker in the system.</p>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <div id="app-footer"></div>
+  <div id="toast-container"></div>
+
+  <script type="module" src="/march-lewis/src/pages/recruiterDashboard.js"></script>
+</body>
+</html>

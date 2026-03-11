@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard &mdash; March &amp; Lewis</title>
+  <link rel="stylesheet" href="/march-lewis/src/styles/base.css" />
+  <link rel="stylesheet" href="/march-lewis/src/styles/components.css" />
+  <link rel="stylesheet" href="/march-lewis/src/styles/pages.css" />
+</head>
+<body>
+  <div id="app-header"></div>
+
+  <main>
+    <section class="dashboard-header section-alt">
+      <div class="container">
+        <h1>Admin Dashboard</h1>
+        <p>Welcome, <span id="admin-name">Admin</span>. Here&rsquo;s an overview of the March &amp; Lewis platform.</p>
+        <div class="platform-status-bar">
+          <span class="status-label">Platform Status:</span>
+          <strong id="platform-status">Checking&hellip;</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="section container">
+      <!-- Platform stats -->
+      <div class="dashboard-stats">
+        <div class="dash-stat">
+          <span class="dash-stat-icon">&#128203;</span>
+          <span class="dash-stat-number" id="admin-stat-tasks">&#8230;</span>
+          <span class="dash-stat-label">Total Tasks</span>
+        </div>
+        <div class="dash-stat">
+          <span class="dash-stat-icon">&#127891;</span>
+          <span class="dash-stat-number" id="admin-stat-courses">&#8230;</span>
+          <span class="dash-stat-label">Courses</span>
+        </div>
+        <div class="dash-stat">
+          <span class="dash-stat-icon">&#127942;</span>
+          <span class="dash-stat-number" id="admin-stat-rewards">&#8230;</span>
+          <span class="dash-stat-label">Rewards Issued</span>
+        </div>
+        <div class="dash-stat">
+          <span class="dash-stat-icon">&#128081;</span>
+          <span class="dash-stat-number" id="admin-stat-tiers">&#8230;</span>
+          <span class="dash-stat-label">Membership Tiers</span>
+        </div>
+        <div class="dash-stat">
+          <span class="dash-stat-icon">&#128101;</span>
+          <span class="dash-stat-number" id="admin-stat-apps">&#8230;</span>
+          <span class="dash-stat-label">Applications</span>
+        </div>
+        <div class="dash-stat">
+          <span class="dash-stat-icon">&#127970;</span>
+          <span class="dash-stat-number" id="admin-stat-employers">&#8230;</span>
+          <span class="dash-stat-label">Employer Requests</span>
+        </div>
+      </div>
+
+      <!-- Two-column layout -->
+      <div class="dashboard-grid">
+        <!-- Recent Tasks -->
+        <div class="dashboard-panel">
+          <h3>&#128203; Recent Tasks</h3>
+          <div style="overflow-x:auto;">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Title</th>
+                  <th>Type</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="tasks-table-body">
+                <tr><td colspan="4" class="loading">Loading&hellip;</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Training Courses -->
+        <div class="dashboard-panel">
+          <h3>&#127891; Training Courses</h3>
+          <div id="courses-list">
+            <p class="loading">Loading courses&hellip;</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Issue Reward -->
+      <div class="dashboard-panel" style="max-width:560px;margin-bottom:24px;">
+        <h3>&#127942; Issue a Reward</h3>
+        <form class="form" id="reward-form">
+          <div class="form-row">
+            <div>
+              <label class="form-label" for="reward-user">User ID</label>
+              <input type="text" id="reward-user" name="userId" placeholder="user-abc123" required />
+            </div>
+            <div>
+              <label class="form-label" for="reward-type">Reward Type</label>
+              <select id="reward-type" name="type">
+                <option value="cash">Cash Bonus</option>
+                <option value="points">Points</option>
+                <option value="badge">Badge</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <label class="form-label" for="reward-amount">Amount</label>
+            <input type="number" id="reward-amount" name="amount" placeholder="50" min="1" required />
+          </div>
+          <button type="submit" class="btn btn-primary">Issue Reward</button>
+        </form>
+      </div>
+
+      <!-- Quick actions -->
+      <div class="grid">
+        <a href="/march-lewis/recruiter-dashboard.html" class="card" style="text-decoration:none;">
+          <div class="card-icon">&#128101;</div>
+          <h3>Recruiter View</h3>
+          <p>Switch to the recruiter dashboard view.</p>
+        </a>
+        <a href="/march-lewis/jobs.html" class="card" style="text-decoration:none;">
+          <div class="card-icon">&#128269;</div>
+          <h3>Job Listings</h3>
+          <p>View and manage all open positions.</p>
+        </a>
+        <a href="/march-lewis/employer-intake.html" class="card" style="text-decoration:none;">
+          <div class="card-icon">&#127970;</div>
+          <h3>Add Employer</h3>
+          <p>Process a new employer talent request.</p>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <div id="app-footer"></div>
+  <div id="toast-container"></div>
+
+  <script type="module" src="/march-lewis/src/pages/adminDashboard.js"></script>
+</body>
+</html>
