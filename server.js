@@ -1,6 +1,8 @@
 const express = require('express');
 const path = require('path');
 
+const { initDatabase } = require('./server/db/init');
+
 const healthRoutes = require('./routes/health');
 const aiRoutes = require('./routes/ai');
 const taskRoutes = require('./routes/tasks');
@@ -9,6 +11,8 @@ const walletRoutes = require('./routes/wallets');
 const streamingRoutes = require('./routes/streaming');
 const rewardRoutes = require('./routes/rewards');
 const membershipRoutes = require('./routes/memberships');
+const sculptifyRoutes = require('./routes/sculptify');
+const marchLewisRoutes = require('./routes/marchLewis');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -30,6 +34,8 @@ app.use('/api/wallets', walletRoutes);
 app.use('/api/streaming', streamingRoutes);
 app.use('/api/rewards', rewardRoutes);
 app.use('/api/memberships', membershipRoutes);
+app.use('/api/sculptify', sculptifyRoutes);
+app.use('/api/march-lewis', marchLewisRoutes);
 
 // Root landing page
 app.get('/', (req, res) => {
@@ -72,5 +78,8 @@ app.get('/', (req, res) => {
 app.listen(PORT, () => {
   console.log(`QSE Ecosystem running on http://localhost:${PORT}`);
 });
+
+// Initialize database on startup
+initDatabase().catch(err => console.error('DB init failed:', err));
 
 module.exports = app;
