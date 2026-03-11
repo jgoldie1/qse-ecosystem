@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recruiter Dashboard — March &amp; Lewis</title>
+  <meta name="description" content="Manage job applications, candidate profiles, and employer requests." />
+  <link rel="stylesheet" href="/march-lewis/src/styles/main.css" />
+</head>
+<body>
+  <div id="header-placeholder"></div>
+
+  <main>
+    <div class="container">
+      <div class="dashboard-header">
+        <div class="dashboard-title-row">
+          <h1 id="dashboard-welcome">Recruiter Dashboard</h1>
+          <button class="btn btn-outline btn-sm" id="logout-btn">Sign Out</button>
+        </div>
+      </div>
+
+      <!-- Stats row -->
+      <div class="stats" id="recruiter-stats" style="padding: 0 0 32px; justify-content: flex-start;">
+        <p class="loading">Loading stats…</p>
+      </div>
+
+      <div class="dashboard-grid">
+        <!-- Main: Applications table -->
+        <div class="dashboard-main">
+          <div class="dashboard-card">
+            <div class="dashboard-card-header">
+              <h2>All Submissions</h2>
+            </div>
+            <div class="table-wrapper">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Title</th>
+                    <th>Type</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="applications-tbody">
+                  <tr><td colspan="4" class="table-empty">Loading…</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Aside: Courses -->
+        <div class="dashboard-aside">
+          <div class="dashboard-card">
+            <div class="dashboard-card-header">
+              <h2>Training Courses</h2>
+            </div>
+            <div id="recruiter-courses" class="dashboard-card-body">
+              <p class="loading">Loading courses…</p>
+            </div>
+          </div>
+
+          <div class="dashboard-card">
+            <div class="dashboard-card-header">
+              <h2>Quick Actions</h2>
+            </div>
+            <div class="dashboard-card-body" style="display:flex; flex-direction:column; gap:10px;">
+              <a href="/march-lewis/jobs.html" class="btn btn-outline">View Job Listings</a>
+              <a href="/march-lewis/employer-intake.html" class="btn btn-outline">New Employer Request</a>
+              <a href="/march-lewis/candidate-onboarding.html" class="btn btn-outline">New Candidate</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div id="footer-placeholder"></div>
+  <div id="toast" class="toast"></div>
+
+  <script type="module" src="/march-lewis/src/pages/recruiter-dashboard.js"></script>
+</body>
+</html>
