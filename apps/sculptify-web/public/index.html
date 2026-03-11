@@ -14,6 +14,7 @@
       <nav class="nav">
         <a href="#services">Services</a>
         <a href="#training">Training</a>
+        <a href="#payments">Payments</a>
         <a href="#about">About</a>
         <a href="#contact" class="btn btn-primary">Book Now</a>
       </nav>
@@ -97,6 +98,42 @@
         <h2>About Sculptify</h2>
         <p>Sculptify is part of the QSE Ecosystem - a family of platforms dedicated to helping people thrive. We combine cutting-edge wellness science with personalized coaching to deliver results that last.</p>
         <a href="/" class="btn btn-outline">Back to QSE Home</a>
+      </div>
+    </section>
+
+    <section id="payments" class="section section-alt">
+      <div class="container">
+        <h2>Payments &amp; Wallets</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>Card Checkout</h3>
+            <form class="form" id="sculptifyCardPaymentForm">
+              <input name="amount" type="number" placeholder="Amount" value="150" />
+              <input name="currency" placeholder="Currency" value="USD" />
+              <input name="platform" placeholder="Platform" value="sculptify" />
+              <input name="itemType" placeholder="Item type" value="service" />
+              <button type="submit" class="btn btn-primary">Create Card Checkout</button>
+            </form>
+            <div id="sculptifyCardPaymentResult" class="form-status"></div>
+          </div>
+          <div class="card">
+            <h3>Crypto Checkout</h3>
+            <form class="form" id="sculptifyCryptoPaymentForm">
+              <input name="amount" type="number" placeholder="Amount" value="150" />
+              <input name="token" placeholder="Token" value="USDC" />
+              <input name="chain" placeholder="Chain" value="Polygon" />
+              <input name="wallet" placeholder="Wallet" value="All American Marketplace Wallet" />
+              <button type="submit" class="btn btn-outline">Create Crypto Payment</button>
+            </form>
+            <div id="sculptifyCryptoPaymentResult" class="form-status"></div>
+          </div>
+        </div>
+        <div style="margin-top:30px;">
+          <h3>Wallet Configuration</h3>
+          <div class="grid" id="sculptifyWalletConfig">
+            <p class="loading">Loading wallets...</p>
+          </div>
+        </div>
       </div>
     </section>
 

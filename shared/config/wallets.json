@@ -1,0 +1,22 @@
+{
+  "wallets": [
+    {
+      "id": "all-american-marketplace-wallet",
+      "name": "All American Marketplace Wallet",
+      "status": "planned",
+      "chains": ["Polygon", "Solana"]
+    },
+    {
+      "id": "stubbs-wallet",
+      "name": "Stubbs Wallet",
+      "status": "planned",
+      "chains": ["Polygon", "Solana"]
+    },
+    {
+      "id": "ash-wallet",
+      "name": "Ash Wallet",
+      "status": "planned",
+      "chains": ["Polygon", "Solana"]
+    }
+  ]
+}
