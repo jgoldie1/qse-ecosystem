@@ -63,6 +63,64 @@ async function enrollCourse(courseId) {
   }
 }
 
+// Load providers with inline editing
+async function loadProviders() {
+  const grid = document.getElementById('providers-grid');
+  if (!grid) return;
+  try {
+    const providers = await fetchJSON(`${API_BASE}/sculptify/providers`);
+    if (!providers.length) {
+      grid.innerHTML = '<p class="loading">No providers available yet.</p>';
+      return;
+    }
+    grid.innerHTML = providers.map(p => `
+      <div class="card provider-card" data-id="${p.id}">
+        <div class="card-icon">🌿</div>
+        <h3 class="provider-name" contenteditable="true" data-field="name">${p.name || ''}</h3>
+        <p class="provider-specialty" contenteditable="true" data-field="specialty">${p.specialty || ''}</p>
+        <p class="provider-mode" contenteditable="true" data-field="mode">${p.mode || ''}</p>
+        <p class="provider-bio" contenteditable="true" data-field="bio">${p.bio || ''}</p>
+        <button class="btn btn-outline save-provider" onclick="saveProvider(${p.id})">Save</button>
+        <span class="save-status" id="save-status-${p.id}"></span>
+      </div>
+    `).join('');
+  } catch (e) {
+    grid.innerHTML = '<p class="loading">Could not load providers.</p>';
+  }
+}
+
+async function saveProvider(id) {
+  const card = document.querySelector(`.provider-card[data-id="${id}"]`);
+  const statusEl = document.getElementById(`save-status-${id}`);
+  if (!card) return;
+
+  const data = {
+    name: card.querySelector('[data-field="name"]').textContent.trim(),
+    specialty: card.querySelector('[data-field="specialty"]').textContent.trim(),
+    mode: card.querySelector('[data-field="mode"]').textContent.trim(),
+    bio: card.querySelector('[data-field="bio"]').textContent.trim(),
+    status: 'active'
+  };
+
+  try {
+    await fetchJSON(`${API_BASE}/sculptify/providers/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    if (statusEl) {
+      statusEl.textContent = 'Saved!';
+      statusEl.style.color = '#4ade80';
+      setTimeout(() => { statusEl.textContent = ''; }, 2000);
+    }
+  } catch (e) {
+    if (statusEl) {
+      statusEl.textContent = 'Save failed.';
+      statusEl.style.color = '#f87171';
+    }
+  }
+}
+
 // AI Coach chat
 function appendMessage(type, text) {
   const container = document.getElementById('chat-messages');
@@ -102,17 +160,14 @@ document.getElementById('booking-form').addEventListener('submit', async (e) => 
   e.preventDefault();
   const status = document.getElementById('booking-status');
   const name = document.getElementById('book-name').value;
+  const email = document.getElementById('book-email').value;
   const service = document.getElementById('book-service').value;
 
   try {
-    await fetchJSON(`${API_BASE}/tasks`, {
+    await fetchJSON(`${API_BASE}/sculptify/bookings`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        title: `Appointment: ${service}`,
-        description: `Booking request from ${name}`,
-        app: 'sculptify'
-      })
+      body: JSON.stringify({ fullName: name, email, service, sessionType: 'in-person', date: '' })
     });
     status.textContent = 'Your appointment request has been received! We will be in touch shortly.';
     e.target.reset();
@@ -125,4 +180,6 @@ document.getElementById('booking-form').addEventListener('submit', async (e) => 
 // Init
 loadStats();
 loadCourses();
+loadProviders();
 appendMessage('coach', 'Welcome to Sculptify! Ask me anything about your wellness journey.');
+
