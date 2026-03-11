@@ -1,149 +1,89 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>March &amp; Lewis - Career Staffing &amp; Workforce</title>
-  <meta name="description" content="Connect employers with top talent. March &amp; Lewis helps job seekers and businesses thrive through smart staffing solutions." />
-  <link rel="stylesheet" href="styles.css" />
+  <title>March &amp; Lewis Staffing</title>
+  <link rel="stylesheet" href="/march-lewis/assets/css/theme.css" />
 </head>
-<body>
-  <header class="header">
-    <div class="container">
-      <div class="logo">March &amp; Lewis</div>
-      <nav class="nav">
-        <a href="#jobs">Find Jobs</a>
-        <a href="#employers">For Employers</a>
-        <a href="#training">Training</a>
-        <a href="#apply" class="btn btn-primary">Apply Now</a>
-      </nav>
+<body class="staffing-theme">
+  <header class="hero container">
+    <span class="pill">QSE Workforce Platform</span>
+    <h1>March &amp; Lewis Staffing</h1>
+    <p>Staffing, recruiting, onboarding, workforce management, and training.</p>
+    <div class="row">
+      <a class="btn primary" href="#jobs">Jobs</a>
+      <a class="btn secondary" href="#employer">Employer Intake</a>
+      <a class="btn secondary" href="#candidate">Candidate Intake</a>
+      <a class="btn secondary" href="#dashboard">Dashboard</a>
     </div>
   </header>
 
-  <main>
-    <section class="hero">
-      <div class="container">
-        <h1>Your Career, Your Future</h1>
-        <p>Connecting top talent with great employers. Start your career journey or find your next hire today.</p>
-        <div class="hero-actions">
-          <a href="#apply" class="btn btn-primary">Find a Job</a>
-          <a href="#employers" class="btn btn-outline">Hire Talent</a>
-        </div>
+  <main class="container">
+    <section class="panel" id="jobs">
+      <h2>Featured Jobs</h2>
+      <div id="jobList" class="cards"></div>
+    </section>
+
+    <section class="grid two" id="employer">
+      <div class="panel">
+        <h2>Employer Intake</h2>
+        <form id="employerForm" class="form">
+          <input name="companyName" placeholder="Company name" />
+          <input name="hiringManager" placeholder="Hiring manager" />
+          <input name="email" type="email" placeholder="Business email" />
+          <select name="positionType">
+            <option value="">Open position type</option>
+            <option>Full-Time</option>
+            <option>Part-Time</option>
+            <option>Contract</option>
+            <option>Temporary</option>
+          </select>
+          <button type="submit" class="btn primary">Submit Intake</button>
+        </form>
+        <div id="employerResult" class="result"></div>
+      </div>
+
+      <div class="panel" id="candidate">
+        <h2>Candidate Onboarding</h2>
+        <form id="candidateForm" class="form">
+          <input name="fullName" placeholder="Full name" />
+          <input name="email" type="email" placeholder="Email" />
+          <input name="phone" placeholder="Phone" />
+          <input name="workAuthorization" placeholder="Work authorization" />
+          <input name="availability" placeholder="Availability" />
+          <button type="submit" class="btn primary">Submit Candidate</button>
+        </form>
+        <div id="candidateResult" class="result"></div>
       </div>
     </section>
 
-    <section class="stats container">
-      <div class="stat-card" id="stat-applications">
-        <span class="stat-number">0</span>
-        <span class="stat-label">Job Applications</span>
+    <section class="grid two">
+      <div class="panel">
+        <h2>Candidate Document Upload</h2>
+        <form id="candidateUploadForm" class="form" enctype="multipart/form-data">
+          <input name="file" type="file" />
+          <button type="submit" class="btn secondary">Upload Candidate Document</button>
+        </form>
+        <div id="candidateUploadResult" class="result"></div>
       </div>
-      <div class="stat-card" id="stat-employers">
-        <span class="stat-number">0</span>
-        <span class="stat-label">Employer Requests</span>
-      </div>
-      <div class="stat-card" id="stat-training">
-        <span class="stat-number">0</span>
-        <span class="stat-label">Training Enrollments</span>
+
+      <div class="panel">
+        <h2>Employer Document Upload</h2>
+        <form id="employerUploadForm" class="form" enctype="multipart/form-data">
+          <input name="file" type="file" />
+          <button type="submit" class="btn secondary">Upload Employer Document</button>
+        </form>
+        <div id="employerUploadResult" class="result"></div>
       </div>
     </section>
 
-    <section id="jobs" class="section container">
-      <h2>Open Positions</h2>
-      <div class="grid" id="jobs-grid">
-        <div class="card">
-          <div class="card-icon">👔</div>
-          <h3>Administrative Assistant</h3>
-          <p>Full-time &mdash; Dallas, TX</p>
-          <a href="#apply" class="btn btn-outline">Apply Now</a>
-        </div>
-        <div class="card">
-          <div class="card-icon">💻</div>
-          <h3>IT Support Specialist</h3>
-          <p>Full-time &mdash; Remote</p>
-          <a href="#apply" class="btn btn-outline">Apply Now</a>
-        </div>
-        <div class="card">
-          <div class="card-icon">🏥</div>
-          <h3>Healthcare Coordinator</h3>
-          <p>Part-time &mdash; Houston, TX</p>
-          <a href="#apply" class="btn btn-outline">Apply Now</a>
-        </div>
-      </div>
-    </section>
-
-    <section id="employers" class="section section-alt">
-      <div class="container">
-        <h2>For Employers</h2>
-        <p>Access a vetted pool of qualified candidates. Let us handle the staffing so you can focus on your business.</p>
-        <div class="grid">
-          <div class="card">
-            <div class="card-icon">🔍</div>
-            <h3>Talent Search</h3>
-            <p>Search and filter pre-screened candidates across roles and industries.</p>
-          </div>
-          <div class="card">
-            <div class="card-icon">📋</div>
-            <h3>Managed Staffing</h3>
-            <p>Full-service staffing management from posting to placement.</p>
-          </div>
-          <div class="card">
-            <div class="card-icon">📈</div>
-            <h3>Workforce Analytics</h3>
-            <p>Track hiring trends, retention rates, and workforce performance.</p>
-          </div>
-        </div>
-        <a href="#contact" class="btn btn-primary" style="margin-top:20px;">Request Talent</a>
-      </div>
-    </section>
-
-    <section id="training" class="section container">
-      <h2>Career Training Programs</h2>
-      <div class="grid" id="courses-grid">
-        <p class="loading">Loading courses...</p>
-      </div>
-    </section>
-
-    <section id="ai-coach" class="section section-alt">
-      <div class="container">
-        <h2>AI Career Coach</h2>
-        <p>Get personalized career advice and job search tips from your AI coach.</p>
-        <div class="chat-box">
-          <div class="chat-messages" id="chat-messages"></div>
-          <div class="chat-input">
-            <input type="text" id="coach-input" placeholder="Ask about your career..." />
-            <button class="btn btn-primary" id="coach-send">Send</button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="apply" class="section container">
-      <h2>Apply for a Position</h2>
-      <form class="form" id="apply-form">
-        <input type="text" id="apply-name" placeholder="Your Full Name" required />
-        <input type="email" id="apply-email" placeholder="Your Email" required />
-        <input type="text" id="apply-role" placeholder="Position You Are Applying For" />
-        <textarea id="apply-message" placeholder="Tell us about yourself..." rows="4"></textarea>
-        <button type="submit" class="btn btn-primary">Submit Application</button>
-        <p id="apply-status" class="form-status"></p>
-      </form>
-    </section>
-
-    <section id="contact" class="section section-alt">
-      <div class="container">
-        <h2>About March &amp; Lewis</h2>
-        <p>March &amp; Lewis is part of the QSE Ecosystem &mdash; a family of platforms dedicated to empowering people. We believe every person deserves access to meaningful work and every business deserves the right team.</p>
-        <a href="/" class="btn btn-outline">Back to QSE Home</a>
-      </div>
+    <section class="panel" id="dashboard">
+      <h2>March &amp; Lewis Dashboard</h2>
+      <div id="marchLewisStats" class="grid three"></div>
     </section>
   </main>
 
-  <footer class="footer">
-    <div class="container">
-      <p>&copy; 2025 March &amp; Lewis &mdash; Part of the <a href="/">QSE Ecosystem</a></p>
-    </div>
-  </footer>
-
-  <script src="app.js"></script>
+  <script src="/march-lewis/assets/js/app.js"></script>
 </body>
 </html>
