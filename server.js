@@ -20,6 +20,8 @@ app.use('/sculptify', express.static(path.join(__dirname, 'apps/sculptify-web/pu
 
 // Serve static files for March and Lewis web app
 app.use('/march-lewis', express.static(path.join(__dirname, 'apps/march-lewis-web/public')));
+// Serve March & Lewis src/ modules and pages (ES module source files)
+app.use('/march-lewis', express.static(path.join(__dirname, 'apps/march-lewis-web/src')));
 
 // API routes
 app.use('/api/health', healthRoutes);
