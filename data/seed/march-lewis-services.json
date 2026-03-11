@@ -1,0 +1,7 @@
+[
+  { "name": "Recruitment", "category": "Staffing" },
+  { "name": "Staffing", "category": "Workforce" },
+  { "name": "Employer Intake", "category": "Operations" },
+  { "name": "Candidate Intake", "category": "Operations" },
+  { "name": "Onboarding", "category": "Training" }
+]
