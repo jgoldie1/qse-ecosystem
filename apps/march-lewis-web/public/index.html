@@ -16,6 +16,7 @@
         <a href="#employers">For Employers</a>
         <a href="#training">Training</a>
         <a href="#apply" class="btn btn-primary">Apply Now</a>
+        <a href="#admin">Admin</a>
       </nav>
     </div>
   </header>
@@ -92,8 +93,21 @@
             <p>Track hiring trends, retention rates, and workforce performance.</p>
           </div>
         </div>
-        <a href="#contact" class="btn btn-primary" style="margin-top:20px;">Request Talent</a>
       </div>
+    </section>
+
+    <section id="employer-intake" class="section container">
+      <h2>Request Talent</h2>
+      <p>Tell us about your staffing needs and we will match you with the right candidates.</p>
+      <form class="form" id="employer-form">
+        <input type="text"  id="employer-company"   placeholder="Company Name"         required />
+        <input type="text"  id="employer-contact"   placeholder="Contact Person"       required />
+        <input type="email" id="employer-email"     placeholder="Business Email"       required />
+        <input type="text"  id="employer-positions" placeholder="Positions Needed"              />
+        <textarea           id="employer-notes"     placeholder="Additional notes..." rows="3"></textarea>
+        <button type="submit" class="btn btn-primary">Submit Request</button>
+        <p id="employer-status" class="form-status"></p>
+      </form>
     </section>
 
     <section id="training" class="section container">
@@ -120,10 +134,11 @@
     <section id="apply" class="section container">
       <h2>Apply for a Position</h2>
       <form class="form" id="apply-form">
-        <input type="text" id="apply-name" placeholder="Your Full Name" required />
-        <input type="email" id="apply-email" placeholder="Your Email" required />
-        <input type="text" id="apply-role" placeholder="Position You Are Applying For" />
-        <textarea id="apply-message" placeholder="Tell us about yourself..." rows="4"></textarea>
+        <input type="text"  id="apply-name"    placeholder="Your Full Name"              required />
+        <input type="email" id="apply-email"   placeholder="Your Email"                  required />
+        <input type="tel"   id="apply-phone"   placeholder="Phone Number (optional)"              />
+        <input type="text"  id="apply-role"    placeholder="Position You Are Applying For"        />
+        <textarea           id="apply-message" placeholder="Tell us about yourself..." rows="4"></textarea>
         <button type="submit" class="btn btn-primary">Submit Application</button>
         <p id="apply-status" class="form-status"></p>
       </form>
@@ -136,6 +151,23 @@
         <a href="/" class="btn btn-outline">Back to QSE Home</a>
       </div>
     </section>
+
+    <section id="admin" class="section container">
+      <h2>Admin Portal</h2>
+
+      <div id="admin-login-section">
+        <p>Staff only. Enter your admin password to access the dashboard.</p>
+        <form class="form" id="admin-login-form" style="max-width:320px;">
+          <input type="password" id="admin-password" placeholder="Admin Password" required />
+          <button type="submit" class="btn btn-primary">Log In</button>
+          <p id="admin-login-status" class="form-status"></p>
+        </form>
+      </div>
+
+      <div id="admin-dashboard-section" style="display:none;">
+        <div id="admin-dashboard-content"></div>
+      </div>
+    </section>
   </main>
 
   <footer class="footer">
@@ -144,6 +176,6 @@
     </div>
   </footer>
 
-  <script src="app.js"></script>
+  <script type="module" src="app.js"></script>
 </body>
 </html>

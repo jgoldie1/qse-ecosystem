@@ -37,6 +37,7 @@ const taskEngine = {
       status: 'pending',
       userId: data.userId || null,
       app: data.app || 'general',
+      category: data.category || null,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString()
     };

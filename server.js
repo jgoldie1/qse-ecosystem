@@ -9,6 +9,7 @@ const walletRoutes = require('./routes/wallets');
 const streamingRoutes = require('./routes/streaming');
 const rewardRoutes = require('./routes/rewards');
 const membershipRoutes = require('./routes/memberships');
+const marchLewisRoutes = require('./routes/march-lewis');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -20,6 +21,8 @@ app.use('/sculptify', express.static(path.join(__dirname, 'apps/sculptify-web/pu
 
 // Serve static files for March and Lewis web app
 app.use('/march-lewis', express.static(path.join(__dirname, 'apps/march-lewis-web/public')));
+// Serve March & Lewis ES module sources
+app.use('/march-lewis/src', express.static(path.join(__dirname, 'apps/march-lewis-web/src')));
 
 // API routes
 app.use('/api/health', healthRoutes);
@@ -30,6 +33,7 @@ app.use('/api/wallets', walletRoutes);
 app.use('/api/streaming', streamingRoutes);
 app.use('/api/rewards', rewardRoutes);
 app.use('/api/memberships', membershipRoutes);
+app.use('/api/march-lewis', marchLewisRoutes);
 
 // Root landing page
 app.get('/', (req, res) => {
