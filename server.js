@@ -9,17 +9,31 @@ const walletRoutes = require('./routes/wallets');
 const streamingRoutes = require('./routes/streaming');
 const rewardRoutes = require('./routes/rewards');
 const membershipRoutes = require('./routes/memberships');
+const authRoutes = require('./routes/auth');
+const sculptifyAdminRoutes = require('./routes/sculptify-admin');
+const marchLewisAdminRoutes = require('./routes/march-lewis-admin');
+const rateLimit = require('express-rate-limit');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+const sculptifyPublic = path.join(__dirname, 'apps/sculptify-web/public');
+const marchPublic = path.join(__dirname, 'apps/march-lewis-web/public');
+
+const pageLimiter = rateLimit({
+  windowMs: 60 * 1000, // 1 minute
+  max: 120,
+  standardHeaders: true,
+  legacyHeaders: false
+});
+
 app.use(express.json());
 
 // Serve static files for Sculptify web app
-app.use('/sculptify', express.static(path.join(__dirname, 'apps/sculptify-web/public')));
+app.use('/sculptify', express.static(sculptifyPublic));
 
 // Serve static files for March and Lewis web app
-app.use('/march-lewis', express.static(path.join(__dirname, 'apps/march-lewis-web/public')));
+app.use('/march-lewis', express.static(marchPublic));
 
 // API routes
 app.use('/api/health', healthRoutes);
@@ -30,8 +44,27 @@ app.use('/api/wallets', walletRoutes);
 app.use('/api/streaming', streamingRoutes);
 app.use('/api/rewards', rewardRoutes);
 app.use('/api/memberships', membershipRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api/sculptify-admin', sculptifyAdminRoutes);
+app.use('/api/march-lewis-admin', marchLewisAdminRoutes);
 
 // Root landing page
+app.get('/sculptify', pageLimiter, (_req, res) => {
+  res.sendFile(path.join(sculptifyPublic, 'index.html'));
+});
+
+app.get('/sculptify/admin', pageLimiter, (_req, res) => {
+  res.sendFile(path.join(sculptifyPublic, 'admin.html'));
+});
+
+app.get('/march-lewis', pageLimiter, (_req, res) => {
+  res.sendFile(path.join(marchPublic, 'index.html'));
+});
+
+app.get('/march-lewis/admin', pageLimiter, (_req, res) => {
+  res.sendFile(path.join(marchPublic, 'admin.html'));
+});
+
 app.get('/', (req, res) => {
   res.send(`
     <!DOCTYPE html>
