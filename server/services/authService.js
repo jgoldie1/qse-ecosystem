@@ -1,64 +1,45 @@
-const path = require('path');
-const fs = require('fs');
-const bcrypt = require('bcryptjs');
-const sqlite3 = require('sqlite3');
-
-const DB_PATH = path.join(__dirname, '..', 'data', 'qse.db');
-
-function openDb() {
-  const dir = path.dirname(DB_PATH);
-  if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
-  return new sqlite3.Database(DB_PATH);
-}
-
-function run(db, sql, params = []) {
-  return new Promise((resolve, reject) => {
-    db.run(sql, params, function (err) {
-      if (err) return reject(err);
-      resolve({ lastID: this.lastID, changes: this.changes });
-    });
-  });
-}
-
-function get(db, sql, params = []) {
-  return new Promise((resolve, reject) => {
-    db.get(sql, params, (err, row) => {
-      if (err) return reject(err);
-      resolve(row);
-    });
-  });
-}
+const bcrypt = require('bcrypt');
+const { run, get } = require('../db/sqlite');
 
 async function init() {
-  const db = openDb();
-  await run(db, `CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, fullName TEXT, email TEXT UNIQUE, passwordHash TEXT, createdAt TEXT)`);
-  db.close();
+  // Schema is managed by migrate.js; nothing to do here
 }
 
-async function registerUser({ fullName, email, password }) {
-  const db = openDb();
-  const passwordHash = await bcrypt.hash(password, 10);
-  const createdAt = new Date().toISOString();
-  const res = await run(db, 'INSERT INTO users (fullName,email,passwordHash,createdAt) VALUES (?,?,?,?)', [fullName, email, passwordHash, createdAt]);
-  db.close();
-  return { id: res.lastID, fullName, email, createdAt };
+function sanitizeUser(row) {
+  if (!row) return null;
+  return {
+    id: row.id,
+    name: row.name,
+    email: row.email,
+    role: row.role,
+    createdAt: row.created_at,
+    updatedAt: row.updated_at || null
+  };
+}
+
+async function registerUser({ name, email, password, role = 'viewer' }) {
+  const normalizedEmail = String(email).trim().toLowerCase();
+  const passwordHash = await bcrypt.hash(String(password), 10);
+  const result = await run(
+    'INSERT INTO users (name, email, password_hash, role, created_at) VALUES (?, ?, ?, ?, ?)',
+    [String(name).trim(), normalizedEmail, passwordHash, role, new Date().toISOString()]
+  );
+  const created = await get('SELECT * FROM users WHERE id = ?', [result.lastID]);
+  return sanitizeUser(created);
 }
 
 async function authenticateUser({ email, password }) {
-  const db = openDb();
-  const user = await get(db, 'SELECT * FROM users WHERE email = ?', [email]);
-  db.close();
+  const normalizedEmail = String(email).trim().toLowerCase();
+  const user = await get('SELECT * FROM users WHERE lower(email) = ?', [normalizedEmail]);
   if (!user) return null;
-  const ok = await bcrypt.compare(password, user.passwordHash);
+  const ok = await bcrypt.compare(String(password), user.password_hash);
   if (!ok) return null;
-  return { id: user.id, fullName: user.fullName, email: user.email };
+  return sanitizeUser(user);
 }
 
 async function getUserById(id) {
-  const db = openDb();
-  const user = await get(db, 'SELECT id, fullName, email, createdAt FROM users WHERE id = ?', [id]);
-  db.close();
-  return user;
+  const user = await get('SELECT * FROM users WHERE id = ?', [id]);
+  return sanitizeUser(user);
 }
 
-module.exports = { init, registerUser, authenticateUser, getUserById };
+module.exports = { init, registerUser, authenticateUser, getUserById, sanitizeUser };
