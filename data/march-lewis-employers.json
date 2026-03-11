@@ -1,0 +1,11 @@
+[
+  {
+    "id": "mmm4eycz70w3q40zu8b",
+    "companyName": "Acme Corp",
+    "hiringManager": "Jane Doe",
+    "email": "hr@acme.com",
+    "positionType": "Full-Time",
+    "status": "active",
+    "createdAt": "2026-03-11T14:14:53.555Z"
+  }
+]
