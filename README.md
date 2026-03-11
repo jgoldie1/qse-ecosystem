@@ -14,6 +14,8 @@ QSE Core powers:
 
 ## Run
 npm install
+cp .env.example .env
+npm run migrate
 npm run dev
 
 ## Open
