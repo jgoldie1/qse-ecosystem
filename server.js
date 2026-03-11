@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 
 const healthRoutes = require('./routes/health');
+const authRoutes = require('./routes/auth');
 const aiRoutes = require('./routes/ai');
 const taskRoutes = require('./routes/tasks');
 const trainingRoutes = require('./routes/training');
@@ -23,6 +24,7 @@ app.use('/march-lewis', express.static(path.join(__dirname, 'apps/march-lewis-we
 
 // API routes
 app.use('/api/health', healthRoutes);
+app.use('/api/auth', authRoutes);
 app.use('/api/ai', aiRoutes);
 app.use('/api/tasks', taskRoutes);
 app.use('/api/training', trainingRoutes);

@@ -1,0 +1,11 @@
+[
+  {
+    "id": "user-admin-001",
+    "email": "admin@qse.local",
+    "role": "admin",
+    "name": "QSE Admin",
+    "passwordHash": "790ade76de07c0faea3576958d9dd912065c964daf6b185151da620db8dfbd02a7bffae7efbe0358e7ee807150943d66d262224e7c08e25912cd7e1043a69a15",
+    "passwordSalt": "e019799c6498eee132d71364c827f99b",
+    "createdAt": "2025-01-01T00:00:00.000Z"
+  }
+]
