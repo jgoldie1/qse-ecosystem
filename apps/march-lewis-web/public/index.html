@@ -15,6 +15,7 @@
         <a href="#jobs">Find Jobs</a>
         <a href="#employers">For Employers</a>
         <a href="#training">Training</a>
+        <a href="#payments">Payments</a>
         <a href="#apply" class="btn btn-primary">Apply Now</a>
       </nav>
     </div>
@@ -112,6 +113,42 @@
           <div class="chat-input">
             <input type="text" id="coach-input" placeholder="Ask about your career..." />
             <button class="btn btn-primary" id="coach-send">Send</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="payments" class="section section-alt">
+      <div class="container">
+        <h2>Payments &amp; Wallets</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>Card Checkout</h3>
+            <form class="form" id="marchCardPaymentForm">
+              <input name="amount" type="number" placeholder="Amount" value="250" />
+              <input name="currency" placeholder="Currency" value="USD" />
+              <input name="platform" placeholder="Platform" value="march-lewis" />
+              <input name="itemType" placeholder="Item type" value="staffing" />
+              <button type="submit" class="btn btn-primary">Create Card Checkout</button>
+            </form>
+            <div id="marchCardPaymentResult" class="form-status"></div>
+          </div>
+          <div class="card">
+            <h3>Crypto Checkout</h3>
+            <form class="form" id="marchCryptoPaymentForm">
+              <input name="amount" type="number" placeholder="Amount" value="250" />
+              <input name="token" placeholder="Token" value="USDC" />
+              <input name="chain" placeholder="Chain" value="Solana" />
+              <input name="wallet" placeholder="Wallet" value="Stubbs Wallet" />
+              <button type="submit" class="btn btn-outline">Create Crypto Payment</button>
+            </form>
+            <div id="marchCryptoPaymentResult" class="form-status"></div>
+          </div>
+        </div>
+        <div style="margin-top:30px;">
+          <h3>Wallet Configuration</h3>
+          <div class="grid" id="marchWalletConfig">
+            <p class="loading">Loading wallets...</p>
           </div>
         </div>
       </div>

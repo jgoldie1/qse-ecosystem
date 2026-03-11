@@ -126,3 +126,75 @@ document.getElementById('apply-form').addEventListener('submit', async (e) => {
 loadStats();
 loadCourses();
 appendMessage('coach', 'Welcome to March & Lewis! Ask me anything about your career journey.');
+
+// Payments & Wallets
+async function loadMarchWallets() {
+  const container = document.getElementById('marchWalletConfig');
+  try {
+    const data = await fetchJSON(`${API_BASE}/payments/config`);
+    if (!data.wallets || !data.wallets.length) {
+      container.innerHTML = '<p class="loading">No wallets configured yet.</p>';
+      return;
+    }
+    container.innerHTML = data.wallets.map(w => `
+      <div class="card">
+        <div class="card-icon">💳</div>
+        <h3>${w.name}</h3>
+        <p>Status: ${w.status}</p>
+        <p>Chains: ${w.chains.join(', ')}</p>
+      </div>
+    `).join('');
+  } catch (e) {
+    container.innerHTML = '<p class="loading">Could not load wallet configuration.</p>';
+  }
+}
+
+document.getElementById('marchCardPaymentForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const result = document.getElementById('marchCardPaymentResult');
+  const form = e.target;
+  const data = {
+    amount: Number(form.amount.value),
+    currency: form.currency.value,
+    platform: form.platform.value,
+    itemType: form.itemType.value
+  };
+  try {
+    const res = await fetchJSON(`${API_BASE}/payments/checkout-session`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    result.style.color = '';
+    result.textContent = `Session created: ${res.session.id} (${res.session.status})`;
+  } catch (err) {
+    result.style.color = '#f87171';
+    result.textContent = 'Could not create checkout session. Please try again.';
+  }
+});
+
+document.getElementById('marchCryptoPaymentForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const result = document.getElementById('marchCryptoPaymentResult');
+  const form = e.target;
+  const data = {
+    amount: Number(form.amount.value),
+    token: form.token.value,
+    chain: form.chain.value,
+    wallet: form.wallet.value
+  };
+  try {
+    const res = await fetchJSON(`${API_BASE}/payments/crypto-payment`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    result.style.color = '';
+    result.textContent = `Payment created: ${res.payment.id} (${res.payment.status})`;
+  } catch (err) {
+    result.style.color = '#f87171';
+    result.textContent = 'Could not create crypto payment. Please try again.';
+  }
+});
+
+loadMarchWallets();
