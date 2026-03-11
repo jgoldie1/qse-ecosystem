@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
+const crypto = require('crypto');
 const multer = require('multer');
 const session = require('express-session');
 const bcrypt = require('bcrypt');
@@ -92,6 +93,40 @@ function requireRole(roles = []) {
   };
 }
 
+// Simple in-memory rate limiter
+const _rateLimitStore = new Map();
+function rateLimit(windowMs, max) {
+  return function(req, res, next) {
+    const key = req.ip || 'unknown';
+    const now = Date.now();
+    const windowStart = now - windowMs;
+    const hits = (_rateLimitStore.get(key) || []).filter((t) => t > windowStart);
+    hits.push(now);
+    _rateLimitStore.set(key, hits);
+    if (hits.length > max) {
+      return res.status(429).json({ ok: false, message: 'Too many requests, please try again later' });
+    }
+    next();
+  };
+}
+
+// CSRF protection: generate token on session, validate on state-changing requests
+function csrfToken(req, res, next) {
+  if (!req.session.csrfToken) {
+    req.session.csrfToken = crypto.randomBytes(32).toString('hex');
+  }
+  next();
+}
+
+function csrfProtection(req, res, next) {
+  if (['GET', 'HEAD', 'OPTIONS'].includes(req.method)) return next();
+  const token = req.headers['x-csrf-token'];
+  if (!token || !req.session || token !== req.session.csrfToken) {
+    return res.status(403).json({ ok: false, message: 'CSRF token validation failed' });
+  }
+  next();
+}
+
 async function ensureAdminUser() {
   ensureDir(dataDir);
   const users = readJson(usersFile, []);
@@ -142,6 +177,12 @@ app.use(session({
   }
 }));
 
+// Attach CSRF token to session for all requests
+app.use(csrfToken);
+
+// Apply CSRF protection to all API state-changing requests
+app.use('/api/', csrfProtection);
+
 app.use('/sculptify/assets', express.static(path.join(sculptifyDir, 'assets')));
 app.use('/march-lewis/assets', express.static(path.join(marchDir, 'assets')));
 app.use('/uploads', express.static(uploadRoot));
@@ -151,9 +192,11 @@ app.use('/sculptify', express.static(sculptifyDir));
 app.use('/march-lewis', express.static(marchDir));
 app.use(express.static(publicDir));
 
+const spaRateLimit = rateLimit(60 * 1000, 120);
+
 // SPA fallbacks for public apps
-app.get('/sculptify/*', (_req, res) => res.sendFile(path.join(sculptifyDir, 'index.html')));
-app.get('/march-lewis/*', (_req, res) => res.sendFile(path.join(marchDir, 'index.html')));
+app.get('/sculptify/*', spaRateLimit, (_req, res) => res.sendFile(path.join(sculptifyDir, 'index.html')));
+app.get('/march-lewis/*', spaRateLimit, (_req, res) => res.sendFile(path.join(marchDir, 'index.html')));
 
 const storage = multer.diskStorage({
   destination: (req, _file, cb) => {
@@ -179,8 +222,14 @@ app.get('/api/health', (_req, res) => {
   });
 });
 
+app.get('/api/auth/csrf-token', (req, res) => {
+  res.json({ ok: true, csrfToken: req.session.csrfToken });
+});
+
+const loginRateLimit = rateLimit(15 * 60 * 1000, 20);
+
 /* auth */
-app.post('/api/auth/login', async (req, res) => {
+app.post('/api/auth/login', loginRateLimit, async (req, res) => {
   const email = String(req.body?.email || '').trim().toLowerCase();
   const password = String(req.body?.password || '').trim();
   const users = readJson(usersFile, []);
