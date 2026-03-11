@@ -4,23 +4,46 @@ const API_BASE = '/api';
 
 async function fetchJSON(url, options) {
   const res = await fetch(url, options);
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  return res.json();
+  const data = await res.json();
+  if (!res.ok) throw Object.assign(new Error(data.message || `HTTP ${res.status}`), { status: res.status });
+  return data;
 }
 
-// Load analytics stats
+// Load live stats from API
 async function loadStats() {
   try {
-    const data = await fetchJSON(`${API_BASE}/health`);
-    if (data.status !== 'ok') return;
-    const analytics = await fetchJSON('/data/analytics.json').catch(() => null);
-    if (analytics && analytics.sculptify) {
-      document.querySelector('#stat-appointments .stat-number').textContent = analytics.sculptify.appointments;
-      document.querySelector('#stat-sales .stat-number').textContent = analytics.sculptify.sales;
-      document.querySelector('#stat-training .stat-number').textContent = analytics.sculptify.trainingEnrollments;
-    }
+    const [bookingsData, onboardingData] = await Promise.all([
+      fetchJSON(`${API_BASE}/sculptify/bookings`).catch(() => ({ bookings: [] })),
+      fetchJSON(`${API_BASE}/sculptify/onboarding`).catch(() => ({ onboarding: [] }))
+    ]);
+    document.querySelector('#stat-appointments .stat-number').textContent = bookingsData.bookings.length;
+    document.querySelector('#stat-training .stat-number').textContent = onboardingData.onboarding.length;
   } catch (e) {
     // silently ignore
+  }
+}
+
+// Load providers from API
+async function loadProviders() {
+  const grid = document.getElementById('providers-grid');
+  if (!grid) return;
+  try {
+    const data = await fetchJSON(`${API_BASE}/sculptify/providers`);
+    if (!data.providers || !data.providers.length) {
+      grid.innerHTML = '<p class="loading">No providers listed yet.</p>';
+      return;
+    }
+    grid.innerHTML = data.providers.map(p => `
+      <div class="card">
+        <div class="card-icon">🌿</div>
+        <h3>${p.name}</h3>
+        <p>${p.specialty || ''}</p>
+        <p><em>${p.mode || ''}</em></p>
+        <a href="#contact" class="btn btn-outline">Book Session</a>
+      </div>
+    `).join('');
+  } catch (e) {
+    grid.innerHTML = '<p class="loading">Could not load providers.</p>';
   }
 }
 
@@ -97,32 +120,71 @@ document.getElementById('coach-input').addEventListener('keydown', e => {
   if (e.key === 'Enter') sendCoachMessage();
 });
 
-// Booking form
+// Booking form - wired to live API
 document.getElementById('booking-form').addEventListener('submit', async (e) => {
   e.preventDefault();
   const status = document.getElementById('booking-status');
-  const name = document.getElementById('book-name').value;
-  const service = document.getElementById('book-service').value;
+  status.style.color = '';
+  status.textContent = 'Submitting...';
+
+  const payload = {
+    fullName: document.getElementById('book-name').value.trim(),
+    email: document.getElementById('book-email').value.trim(),
+    service: document.getElementById('book-service').value,
+    sessionType: document.getElementById('book-session-type').value,
+    date: document.getElementById('book-date').value
+  };
 
   try {
-    await fetchJSON(`${API_BASE}/tasks`, {
+    await fetchJSON(`${API_BASE}/sculptify/bookings`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        title: `Appointment: ${service}`,
-        description: `Booking request from ${name}`,
-        app: 'sculptify'
-      })
+      body: JSON.stringify(payload)
     });
     status.textContent = 'Your appointment request has been received! We will be in touch shortly.';
     e.target.reset();
+    loadStats();
   } catch (err) {
     status.style.color = '#f87171';
-    status.textContent = 'Could not submit request. Please try again.';
+    status.textContent = err.message || 'Could not submit request. Please try again.';
   }
 });
 
+// Therapist onboarding form - wired to live API
+const onboardingForm = document.getElementById('onboarding-form');
+if (onboardingForm) {
+  onboardingForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const status = document.getElementById('onboarding-status');
+    status.style.color = '';
+    status.textContent = 'Submitting...';
+
+    const payload = {
+      fullName: document.getElementById('onboard-name').value.trim(),
+      email: document.getElementById('onboard-email').value.trim(),
+      phone: document.getElementById('onboard-phone').value.trim(),
+      serviceSpecialty: document.getElementById('onboard-specialty').value.trim(),
+      licenseNumber: document.getElementById('onboard-license').value.trim(),
+      insuranceProvider: document.getElementById('onboard-insurance').value.trim()
+    };
+
+    try {
+      await fetchJSON(`${API_BASE}/sculptify/onboarding`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      status.textContent = 'Thank you! Your provider application has been submitted. We will review and contact you soon.';
+      e.target.reset();
+    } catch (err) {
+      status.style.color = '#f87171';
+      status.textContent = err.message || 'Could not submit application. Please try again.';
+    }
+  });
+}
+
 // Init
 loadStats();
+loadProviders();
 loadCourses();
 appendMessage('coach', 'Welcome to Sculptify! Ask me anything about your wellness journey.');

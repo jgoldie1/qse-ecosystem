@@ -50,24 +50,7 @@
     <section id="jobs" class="section container">
       <h2>Open Positions</h2>
       <div class="grid" id="jobs-grid">
-        <div class="card">
-          <div class="card-icon">👔</div>
-          <h3>Administrative Assistant</h3>
-          <p>Full-time &mdash; Dallas, TX</p>
-          <a href="#apply" class="btn btn-outline">Apply Now</a>
-        </div>
-        <div class="card">
-          <div class="card-icon">💻</div>
-          <h3>IT Support Specialist</h3>
-          <p>Full-time &mdash; Remote</p>
-          <a href="#apply" class="btn btn-outline">Apply Now</a>
-        </div>
-        <div class="card">
-          <div class="card-icon">🏥</div>
-          <h3>Healthcare Coordinator</h3>
-          <p>Part-time &mdash; Houston, TX</p>
-          <a href="#apply" class="btn btn-outline">Apply Now</a>
-        </div>
+        <p class="loading">Loading positions...</p>
       </div>
     </section>
 
@@ -122,11 +105,44 @@
       <form class="form" id="apply-form">
         <input type="text" id="apply-name" placeholder="Your Full Name" required />
         <input type="email" id="apply-email" placeholder="Your Email" required />
-        <input type="text" id="apply-role" placeholder="Position You Are Applying For" />
-        <textarea id="apply-message" placeholder="Tell us about yourself..." rows="4"></textarea>
+        <input type="tel" id="apply-phone" placeholder="Phone Number" required />
+        <select id="apply-authorization">
+          <option value="">Work Authorization</option>
+          <option value="US Citizen">US Citizen</option>
+          <option value="Permanent Resident">Permanent Resident</option>
+          <option value="Work Visa">Work Visa</option>
+          <option value="Other">Other</option>
+        </select>
+        <select id="apply-availability">
+          <option value="">Availability</option>
+          <option value="Immediate">Immediate</option>
+          <option value="2 Weeks Notice">2 Weeks Notice</option>
+          <option value="1 Month+">1 Month+</option>
+        </select>
         <button type="submit" class="btn btn-primary">Submit Application</button>
         <p id="apply-status" class="form-status"></p>
       </form>
+    </section>
+
+    <section id="employer-intake" class="section section-alt">
+      <div class="container">
+        <h2>Employer Intake</h2>
+        <p>Tell us about your hiring needs and we will match you with qualified candidates.</p>
+        <form class="form" id="employer-form">
+          <input type="text" id="employer-company" placeholder="Company Name" required />
+          <input type="text" id="employer-manager" placeholder="Hiring Manager Name" />
+          <input type="email" id="employer-email" placeholder="Contact Email" required />
+          <select id="employer-position-type">
+            <option value="">Position Type</option>
+            <option value="Full-Time">Full-Time</option>
+            <option value="Part-Time">Part-Time</option>
+            <option value="Contract">Contract</option>
+            <option value="Temporary">Temporary</option>
+          </select>
+          <button type="submit" class="btn btn-primary">Submit Request</button>
+          <p id="employer-status" class="form-status"></p>
+        </form>
+      </div>
     </section>
 
     <section id="contact" class="section section-alt">

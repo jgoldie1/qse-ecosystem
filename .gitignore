@@ -7,3 +7,8 @@ npm-debug.log*
 .DS_Store
 dist/
 build/
+uploads/therapists/*
+uploads/candidates/*
+uploads/employers/*
+uploads/general/*
+data/*.sqlite
