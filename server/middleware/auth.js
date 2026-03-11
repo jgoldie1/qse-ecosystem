@@ -1,22 +1,18 @@
-const jwt = require('jsonwebtoken');
-const SECRET = process.env.JWT_SECRET || 'dev-secret';
-
-function generateToken(payload) {
-  return jwt.sign(payload, SECRET, { expiresIn: '7d' });
-}
-
 function requireAuth(req, res, next) {
-  const auth = req.headers.authorization;
-  if (!auth) return res.status(401).json({ ok: false, message: 'Missing authorization' });
-  const parts = auth.split(' ');
-  if (parts.length !== 2 || parts[0] !== 'Bearer') return res.status(401).json({ ok: false, message: 'Invalid authorization format' });
-  try {
-    const payload = jwt.verify(parts[1], SECRET);
-    req.user = payload;
-    next();
-  } catch (err) {
-    return res.status(401).json({ ok: false, message: 'Invalid token' });
-  }
+  if (req.session && req.session.user) return next();
+  return res.status(401).json({ ok: false, message: 'Authentication required' });
 }
 
-module.exports = { generateToken, requireAuth };
+function requireRole(roles = []) {
+  return function (req, res, next) {
+    if (!req.session || !req.session.user) {
+      return res.status(401).json({ ok: false, message: 'Authentication required' });
+    }
+    if (!roles.includes(req.session.user.role)) {
+      return res.status(403).json({ ok: false, message: 'Insufficient permissions' });
+    }
+    next();
+  };
+}
+
+module.exports = { requireAuth, requireRole };
