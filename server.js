@@ -10,6 +10,12 @@ const streamingRoutes = require('./routes/streaming');
 const rewardRoutes = require('./routes/rewards');
 const membershipRoutes = require('./routes/memberships');
 
+const sculptifyRoutes = require('./server/routes/sculptify');
+const marchLewisRoutes = require('./server/routes/marchLewis');
+const sculptifyAdminRoutes = require('./server/routes/sculptifyAdmin');
+const marchLewisAdminRoutes = require('./server/routes/marchLewisAdmin');
+const uploadRoutes = require('./server/routes/uploads');
+
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -30,6 +36,13 @@ app.use('/api/wallets', walletRoutes);
 app.use('/api/streaming', streamingRoutes);
 app.use('/api/rewards', rewardRoutes);
 app.use('/api/memberships', membershipRoutes);
+
+// Sculptify & March Lewis routes
+app.use('/api/sculptify', sculptifyRoutes);
+app.use('/api/march-lewis', marchLewisRoutes);
+app.use('/api/sculptify-admin', sculptifyAdminRoutes);
+app.use('/api/march-lewis-admin', marchLewisAdminRoutes);
+app.use('/api/uploads', uploadRoutes);
 
 // Root landing page
 app.get('/', (req, res) => {

@@ -1,128 +1,98 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sculptify - Beauty, Wellness &amp; Training</title>
-  <meta name="description" content="Transform your body and mind with Sculptify. Book appointments, access training programs, and connect with wellness professionals." />
-  <link rel="stylesheet" href="styles.css" />
+  <title>Sculptify Ltd</title>
+  <link rel="stylesheet" href="/sculptify/assets/css/theme.css" />
 </head>
-<body>
-  <header class="header">
-    <div class="container">
-      <div class="logo">Sculptify</div>
-      <nav class="nav">
-        <a href="#services">Services</a>
-        <a href="#training">Training</a>
-        <a href="#about">About</a>
-        <a href="#contact" class="btn btn-primary">Book Now</a>
-      </nav>
+<body class="sculptify-theme">
+  <header class="hero container">
+    <span class="pill">QSE Core Powered</span>
+    <h1>Sculptify Ltd</h1>
+    <p>Wellness, body sculpting, massage, Reiki, acupuncture, acupressure, virtual and in-person care.</p>
+    <div class="row">
+      <a class="btn primary" href="#booking">Book Session</a>
+      <a class="btn secondary" href="#providers">Providers</a>
+      <a class="btn secondary" href="#onboarding">Onboarding</a>
+      <a class="btn secondary" href="#dashboard">Dashboard</a>
     </div>
   </header>
 
-  <main>
-    <section class="hero">
-      <div class="container">
-        <h1>Sculpt Your Best Self</h1>
-        <p>Premium beauty, wellness &amp; training programs designed to help you reach your peak.</p>
-        <div class="hero-actions">
-          <a href="#training" class="btn btn-primary">Explore Training</a>
-          <a href="#services" class="btn btn-outline">Our Services</a>
+  <main class="container">
+    <section class="grid two">
+      <div class="panel">
+        <h2>Services</h2>
+        <div class="cards">
+          <div class="card"><h3>Body Sculpting</h3><p>Wellness contour planning and sessions.</p></div>
+          <div class="card"><h3>Massage Therapy</h3><p>Therapeutic recovery and care.</p></div>
+          <div class="card"><h3>Reiki</h3><p>Energy balancing support.</p></div>
+          <div class="card"><h3>Acupuncture</h3><p>Holistic treatment options.</p></div>
+          <div class="card"><h3>Acupressure</h3><p>Virtual and in-person techniques.</p></div>
         </div>
+      </div>
+
+      <div class="panel" id="booking">
+        <h2>Booking Form</h2>
+        <form id="bookingForm" class="form">
+          <input name="fullName" placeholder="Full name" />
+          <input name="email" type="email" placeholder="Email" />
+          <select name="service">
+            <option value="">Choose service</option>
+            <option>Body Sculpting</option>
+            <option>Massage Therapy</option>
+            <option>Reiki</option>
+            <option>Acupuncture</option>
+            <option>Acupressure</option>
+          </select>
+          <select name="sessionType">
+            <option value="">Session type</option>
+            <option>Virtual</option>
+            <option>In-Person</option>
+          </select>
+          <input name="date" type="date" />
+          <button type="submit" class="btn primary">Submit Booking</button>
+        </form>
+        <div id="bookingResult" class="result"></div>
       </div>
     </section>
 
-    <section class="stats container">
-      <div class="stat-card" id="stat-appointments">
-        <span class="stat-number">0</span>
-        <span class="stat-label">Appointments</span>
+    <section class="panel" id="providers">
+      <h2>Provider Listings</h2>
+      <div id="providerList" class="scroll"></div>
+    </section>
+
+    <section class="grid two" id="onboarding">
+      <div class="panel">
+        <h2>Therapist Onboarding</h2>
+        <form id="therapistForm" class="form">
+          <input name="fullName" placeholder="Full name" />
+          <input name="email" type="email" placeholder="Email" />
+          <input name="phone" placeholder="Phone" />
+          <input name="serviceSpecialty" placeholder="Service specialty" />
+          <input name="licenseNumber" placeholder="License number" />
+          <input name="insuranceProvider" placeholder="Insurance provider" />
+          <button type="submit" class="btn primary">Submit Onboarding</button>
+        </form>
+        <div id="therapistResult" class="result"></div>
       </div>
-      <div class="stat-card" id="stat-sales">
-        <span class="stat-number">0</span>
-        <span class="stat-label">Products Sold</span>
-      </div>
-      <div class="stat-card" id="stat-training">
-        <span class="stat-number">0</span>
-        <span class="stat-label">Students Enrolled</span>
+
+      <div class="panel">
+        <h2>Document Upload</h2>
+        <form id="therapistUploadForm" class="form" enctype="multipart/form-data">
+          <input name="file" type="file" />
+          <button type="submit" class="btn secondary">Upload Therapist Document</button>
+        </form>
+        <div id="therapistUploadResult" class="result"></div>
       </div>
     </section>
 
-    <section id="services" class="section container">
-      <h2>Our Services</h2>
-      <div class="grid" id="services-grid">
-        <div class="card">
-          <div class="card-icon">💆</div>
-          <h3>Body Sculpting</h3>
-          <p>Professional contouring and toning sessions tailored to your goals.</p>
-          <a href="#contact" class="btn btn-outline">Book Session</a>
-        </div>
-        <div class="card">
-          <div class="card-icon">🥗</div>
-          <h3>Nutrition Coaching</h3>
-          <p>Personalized meal planning and nutritional guidance from experts.</p>
-          <a href="#contact" class="btn btn-outline">Get Started</a>
-        </div>
-        <div class="card">
-          <div class="card-icon">🏋️</div>
-          <h3>Personal Training</h3>
-          <p>One-on-one fitness training programs built around your lifestyle.</p>
-          <a href="#contact" class="btn btn-outline">Learn More</a>
-        </div>
-      </div>
-    </section>
-
-    <section id="training" class="section section-alt">
-      <div class="container">
-        <h2>Training Programs</h2>
-        <div class="grid" id="courses-grid">
-          <p class="loading">Loading courses...</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="ai-coach" class="section container">
-      <h2>AI Wellness Coach</h2>
-      <p>Get personalized advice and motivation from your AI coach.</p>
-      <div class="chat-box">
-        <div class="chat-messages" id="chat-messages"></div>
-        <div class="chat-input">
-          <input type="text" id="coach-input" placeholder="Ask your coach anything..." />
-          <button class="btn btn-primary" id="coach-send">Send</button>
-        </div>
-      </div>
-    </section>
-
-    <section id="about" class="section section-alt">
-      <div class="container">
-        <h2>About Sculptify</h2>
-        <p>Sculptify is part of the QSE Ecosystem - a family of platforms dedicated to helping people thrive. We combine cutting-edge wellness science with personalized coaching to deliver results that last.</p>
-        <a href="/" class="btn btn-outline">Back to QSE Home</a>
-      </div>
-    </section>
-
-    <section id="contact" class="section container">
-      <h2>Book an Appointment</h2>
-      <form class="form" id="booking-form">
-        <input type="text" id="book-name" placeholder="Your Name" required />
-        <input type="email" id="book-email" placeholder="Your Email" required />
-        <select id="book-service">
-          <option value="">Select a Service</option>
-          <option value="sculpting">Body Sculpting</option>
-          <option value="nutrition">Nutrition Coaching</option>
-          <option value="training">Personal Training</option>
-        </select>
-        <button type="submit" class="btn btn-primary">Request Appointment</button>
-        <p id="booking-status" class="form-status"></p>
-      </form>
+    <section class="panel" id="dashboard">
+      <h2>Sculptify Dashboard</h2>
+      <div id="sculptifyStats" class="grid three"></div>
     </section>
   </main>
 
-  <footer class="footer">
-    <div class="container">
-      <p>&copy; 2025 Sculptify &mdash; Part of the <a href="/">QSE Ecosystem</a></p>
-    </div>
-  </footer>
-
-  <script src="app.js"></script>
+  <script src="/sculptify/assets/js/app.js"></script>
 </body>
 </html>
