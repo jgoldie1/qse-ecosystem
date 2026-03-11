@@ -13,3 +13,7 @@ npm-debug.log*
 .DS_Store
 dist/
 build/
+server/data/*.db
+server/uploads/*
+!server/data/.gitkeep
+!server/uploads/.gitkeep
