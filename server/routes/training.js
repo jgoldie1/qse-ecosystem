@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const trainingEngine = require('../core/training-engine');
+const trainingEngine = require('../services/training-engine');
 
 router.get('/courses', (req, res) => {
   const courses = trainingEngine.getCourses();
@@ -13,6 +13,7 @@ router.post('/enroll', (req, res) => {
     return res.status(400).json({ error: 'userId and courseId are required' });
   }
   const result = trainingEngine.enroll(userId, courseId);
+  if (!result.success) return res.status(400).json({ error: result.error });
   res.status(201).json(result);
 });
 

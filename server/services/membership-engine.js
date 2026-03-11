@@ -5,7 +5,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const DATA_PATH = path.join(__dirname, '../data/memberships.json');
+const DATA_PATH = path.join(__dirname, '../../data/memberships.json');
 
 const TIERS = {
   free: { name: 'Free', price: 0, features: ['Basic access', 'Community forum', '2 courses/month'] },

@@ -5,7 +5,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const DATA_PATH = path.join(__dirname, '../data/rewards.json');
+const DATA_PATH = path.join(__dirname, '../../data/rewards.json');
 
 const REWARD_TYPES = {
   task_complete: { label: 'Task Completed', amount: 10 },

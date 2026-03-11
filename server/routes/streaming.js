@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const streamingEngine = require('../core/streaming-engine');
+const streamingEngine = require('../services/streaming-engine');
 
 router.get('/content', (req, res) => {
   const content = streamingEngine.getContent(req.query);

@@ -5,7 +5,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const ANALYTICS_PATH = path.join(__dirname, '../data/analytics.json');
+const ANALYTICS_PATH = path.join(__dirname, '../../data/analytics.json');
 
 function loadAnalytics() {
   try {

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const rewardsEngine = require('../core/rewards-engine');
+const rewardsEngine = require('../services/rewards-engine');
 
 router.get('/', (req, res) => {
   const rewards = rewardsEngine.getAll();

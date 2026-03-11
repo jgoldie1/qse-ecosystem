@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const membershipEngine = require('../core/membership-engine');
+const membershipEngine = require('../services/membership-engine');
 
 router.get('/tiers', (req, res) => {
   const tiers = membershipEngine.getTiers();
