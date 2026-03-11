@@ -1,0 +1,12 @@
+services:
+  qse-app:
+    build: .
+    container_name: qse-app
+    ports:
+      - "5000:5000"
+    env_file:
+      - .env
+    volumes:
+      - ./data:/app/data
+      - ./uploads:/app/uploads
+    restart: unless-stopped

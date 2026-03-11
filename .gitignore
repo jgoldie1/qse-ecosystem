@@ -13,3 +13,7 @@ npm-debug.log*
 .DS_Store
 dist/
 build/
+data/*.sqlite
+data/*.sqlite-shm
+data/*.sqlite-wal
+uploads/
