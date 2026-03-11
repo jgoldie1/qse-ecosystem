@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const multer = require('multer');
+const { version } = require('../package.json');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -34,7 +35,7 @@ app.post('/api/upload', upload.single('file'), (req, res) => {
 });
 
 // Health
-app.get('/health', (_req, res) => res.json({ ok: true }));
+app.get('/api/health', (_req, res) => res.json({ status: 'ok', message: 'QSE Ecosystem is healthy', timestamp: new Date().toISOString(), version }));
 
 // Error handler
 app.use((err, _req, res, _next) => {
