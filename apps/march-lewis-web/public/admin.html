@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>March &amp; Lewis Admin</title>
+  <link rel="stylesheet" href="/march-lewis/assets/css/theme.css" />
+</head>
+<body class="staffing-theme">
+  <main class="container">
+    <section class="panel">
+      <h1>March &amp; Lewis Admin</h1>
+      <p>Login with the seeded admin account to load protected dashboard metrics.</p>
+    </section>
+
+    <section class="grid two">
+      <div class="panel">
+        <h2>Admin Login</h2>
+        <form id="adminLoginForm" class="form">
+          <input name="email" type="email" placeholder="Email" value="admin@qse.local" />
+          <input name="password" type="password" placeholder="Password" />
+          <button type="submit" class="btn primary">Login</button>
+        </form>
+        <div id="adminLoginResult" class="result"></div>
+        <div class="row">
+          <button id="logoutBtn" class="btn secondary" type="button">Logout</button>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2>Session</h2>
+        <div id="sessionStatus" class="card"></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Protected Dashboard</h2>
+      <div id="adminStats" class="grid three"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Latest Activity</h2>
+      <div id="adminLatest" class="cards"></div>
+    </section>
+  </main>
+
+  <script src="/march-lewis/assets/js/admin.js"></script>
+</body>
+</html>
