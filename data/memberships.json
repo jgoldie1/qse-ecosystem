@@ -1,1 +1,18 @@
-[]
+[
+  {
+    "userId": "user1",
+    "tier": "pro",
+    "tierDetails": {
+      "name": "Pro",
+      "price": 19,
+      "features": [
+        "Everything in Free",
+        "Unlimited courses",
+        "AI coaching",
+        "Priority support"
+      ]
+    },
+    "subscribedAt": "2026-03-11T13:31:54.629Z",
+    "active": true
+  }
+]

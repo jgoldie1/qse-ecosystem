@@ -1,1 +1,18 @@
-[]
+[
+  {
+    "id": "rmmm2vc3b4kujkvffwcm",
+    "userId": "user1",
+    "type": "milestone",
+    "label": "Milestone Reached",
+    "amount": 100,
+    "issuedAt": "2026-03-11T13:31:38.615Z"
+  },
+  {
+    "id": "rmmm2vofg2tvf07p26lx",
+    "userId": "user1",
+    "type": "milestone",
+    "label": "Milestone Reached",
+    "amount": 100,
+    "issuedAt": "2026-03-11T13:31:54.604Z"
+  }
+]
