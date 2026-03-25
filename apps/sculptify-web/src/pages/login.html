@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login – Sculptify</title>
+  <meta name="description" content="Sign in to your Sculptify account." />
+  <link rel="stylesheet" href="/sculptify/src/styles/base.css" />
+  <link rel="stylesheet" href="/sculptify/src/styles/components.css" />
+  <link rel="stylesheet" href="/sculptify/src/styles/pages.css" />
+</head>
+<body class="login-page">
+
+  <!-- Header injected by JS -->
+
+  <main class="login-main">
+    <div style="width:100%;max-width:440px;">
+
+      <div class="text-center" style="margin-bottom:32px;">
+        <a href="/sculptify/src/pages/home.html" class="logo" style="font-size:2rem;display:inline-block;margin-bottom:8px;">Sculptify</a>
+        <p class="text-muted">Sign in to your account</p>
+      </div>
+
+      <div class="form-card">
+        <form class="form" id="login-form" novalidate>
+          <div class="form-group">
+            <label for="login-email">Email Address</label>
+            <input type="email" name="email" id="login-email" placeholder="you@example.com" required autocomplete="email" />
+          </div>
+          <div class="form-group">
+            <label for="login-password">Password</label>
+            <input type="password" name="password" id="login-password" placeholder="••••••••" required autocomplete="current-password" />
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block btn-lg" style="margin-top:8px;">Sign In</button>
+        </form>
+
+        <div class="login-divider">or</div>
+
+        <div class="text-center" style="font-size:0.9rem;color:var(--text-muted);">
+          Want to join as a provider?
+          <a href="/sculptify/src/pages/therapist-onboarding.html">Apply here</a>
+        </div>
+      </div>
+
+      <!-- Demo Credentials -->
+      <div class="demo-credentials" style="margin-top:20px;">
+        <h4>Demo Credentials</h4>
+        <p><strong>Admin:</strong> admin@sculptify.com / admin123</p>
+        <p><strong>User:</strong> &nbsp;user@sculptify.com &nbsp;/ user123</p>
+      </div>
+
+      <p class="text-center text-muted" style="margin-top:20px;font-size:0.85rem;">
+        <a href="/sculptify/src/pages/home.html">← Back to Home</a>
+      </p>
+    </div>
+  </main>
+
+  <!-- Footer injected by JS -->
+
+  <script type="module">
+    import { initHeader }   from '/sculptify/src/components/header.js';
+    import { initFooter }   from '/sculptify/src/components/footer.js';
+    import { initLoginForm } from '/sculptify/src/forms/login-form.js';
+
+    initHeader('login');
+    initFooter();
+
+    /* Redirect already-authenticated users */
+    if (localStorage.getItem('sculptify_user')) {
+      const role = localStorage.getItem('sculptify_role');
+      window.location.href = role === 'admin'
+        ? '/sculptify/src/pages/admin.html'
+        : '/sculptify/src/pages/home.html';
+    }
+
+    initLoginForm(document.getElementById('login-form'));
+  </script>
+</body>
+</html>

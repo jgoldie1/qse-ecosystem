@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book an Appointment – Sculptify</title>
+  <meta name="description" content="Book your wellness appointment with a Sculptify certified professional." />
+  <link rel="stylesheet" href="/sculptify/src/styles/base.css" />
+  <link rel="stylesheet" href="/sculptify/src/styles/components.css" />
+  <link rel="stylesheet" href="/sculptify/src/styles/pages.css" />
+</head>
+<body>
+
+  <!-- Header injected by JS -->
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <h2>Book an Appointment</h2>
+          <p>Fill in the form below and we will confirm your booking within 24 hours.</p>
+        </div>
+
+        <div class="booking-layout">
+          <!-- Booking Form -->
+          <div>
+            <div class="form-card" style="max-width:100%;">
+              <form class="form" id="booking-form" novalidate>
+
+                <!-- Personal Details -->
+                <h3 style="margin-bottom:4px;">Your Details</h3>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="book-name">Full Name <span style="color:var(--error)">*</span></label>
+                    <input type="text" name="name" id="book-name" placeholder="Jane Smith" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="book-email">Email Address <span style="color:var(--error)">*</span></label>
+                    <input type="email" name="email" id="book-email" placeholder="jane@example.com" required />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="book-phone">Phone Number</label>
+                  <input type="tel" name="phone" id="book-phone" placeholder="+1 (555) 000-0000" />
+                </div>
+
+                <hr style="border:none;border-top:1px solid var(--border);margin:8px 0;" />
+
+                <!-- Service Selection -->
+                <h3 style="margin-bottom:4px;">Service</h3>
+
+                <div class="form-group">
+                  <label for="book-service">Service Type <span style="color:var(--error)">*</span></label>
+                  <select name="service" id="book-service" required>
+                    <option value="">Select a service…</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="book-provider">Preferred Provider</label>
+                  <select name="provider" id="book-provider">
+                    <option value="">No preference</option>
+                    <option value="Dr. Maya Thompson">Dr. Maya Thompson – Body Sculpting</option>
+                    <option value="James Rivera">James Rivera – Personal Training</option>
+                    <option value="Sophie Lee">Sophie Lee – Nutrition Coaching</option>
+                    <option value="Marcus Johnson">Marcus Johnson – Massage Therapy</option>
+                    <option value="Aisha Patel">Aisha Patel – Skincare</option>
+                    <option value="Carlos Mendez">Carlos Mendez – Yoga</option>
+                  </select>
+                </div>
+
+                <hr style="border:none;border-top:1px solid var(--border);margin:8px 0;" />
+
+                <!-- Schedule -->
+                <h3 style="margin-bottom:4px;">Schedule</h3>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="book-date">Preferred Date</label>
+                    <input type="date" name="date" id="book-date" />
+                  </div>
+                  <div class="form-group">
+                    <label for="book-time">Preferred Time</label>
+                    <select name="time" id="book-time">
+                      <option value="">Any time</option>
+                      <option value="09:00">9:00 AM</option>
+                      <option value="10:00">10:00 AM</option>
+                      <option value="11:00">11:00 AM</option>
+                      <option value="12:00">12:00 PM</option>
+                      <option value="13:00">1:00 PM</option>
+                      <option value="14:00">2:00 PM</option>
+                      <option value="15:00">3:00 PM</option>
+                      <option value="16:00">4:00 PM</option>
+                      <option value="17:00">5:00 PM</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="book-notes">Additional Notes</label>
+                  <textarea name="notes" id="book-notes" placeholder="Anything we should know before your appointment…"></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-lg btn-block">Request Appointment</button>
+              </form>
+            </div>
+          </div>
+
+          <!-- Booking Summary Sidebar -->
+          <aside class="booking-summary" id="booking-summary">
+            <h3>Booking Summary</h3>
+            <div class="summary-item">
+              <span>Service</span>
+              <span class="summary-value" id="sum-service">—</span>
+            </div>
+            <div class="summary-item">
+              <span>Provider</span>
+              <span class="summary-value" id="sum-provider">No preference</span>
+            </div>
+            <div class="summary-item">
+              <span>Date</span>
+              <span class="summary-value" id="sum-date">—</span>
+            </div>
+            <div class="summary-item">
+              <span>Time</span>
+              <span class="summary-value" id="sum-time">—</span>
+            </div>
+            <hr style="border:none;border-top:1px solid var(--border);margin:16px 0;" />
+            <div class="alert alert-info" style="margin-top:0;">
+              ℹ️ You will receive a confirmation email within 24 hours of submitting your request.
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer injected by JS -->
+
+  <script type="module">
+    import { initHeader }      from '/sculptify/src/components/header.js';
+    import { initFooter }      from '/sculptify/src/components/footer.js';
+    import { initBookingForm, populateServiceSelect } from '/sculptify/src/forms/booking-form.js';
+
+    initHeader('booking');
+    initFooter();
+
+    /* Populate service select */
+    populateServiceSelect(document.getElementById('book-service'));
+
+    /* Pre-fill from URL params (e.g. ?service=massage&provider=...) */
+    const params = new URLSearchParams(location.search);
+    if (params.get('service')) {
+      document.getElementById('book-service').value = params.get('service');
+    }
+    if (params.get('provider')) {
+      const provEl = document.getElementById('book-provider');
+      const match = Array.from(provEl.options).find(o => o.value.startsWith(params.get('provider')));
+      if (match) provEl.value = match.value;
+    }
+
+    /* Set minimum date to today */
+    const dateInput = document.getElementById('book-date');
+    dateInput.min = new Date().toISOString().split('T')[0];
+
+    /* Live summary update */
+    function updateSummary() {
+      const serviceEl  = document.getElementById('book-service');
+      const serviceText = serviceEl.options[serviceEl.selectedIndex]?.text || '—';
+      const provider   = document.getElementById('book-provider').value || 'No preference';
+      const date       = document.getElementById('book-date').value;
+      const timeEl     = document.getElementById('book-time');
+      const timeText   = timeEl.options[timeEl.selectedIndex]?.text || '—';
+
+      document.getElementById('sum-service').textContent  = serviceText === 'Select a service…' ? '—' : serviceText;
+      document.getElementById('sum-provider').textContent = provider;
+      document.getElementById('sum-date').textContent     = date ? new Date(date + 'T00:00:00').toLocaleDateString('en-US', { weekday: 'short', month: 'long', day: 'numeric' }) : '—';
+      document.getElementById('sum-time').textContent     = timeText === 'Any time' ? '—' : timeText;
+    }
+
+    ['book-service', 'book-provider', 'book-date', 'book-time'].forEach(id =>
+      document.getElementById(id).addEventListener('change', updateSummary)
+    );
+    updateSummary();
+
+    /* Wire up form submission */
+    initBookingForm(document.getElementById('booking-form'));
+  </script>
+</body>
+</html>

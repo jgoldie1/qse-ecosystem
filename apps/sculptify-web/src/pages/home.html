@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sculptify – Beauty, Wellness &amp; Training</title>
+  <meta name="description" content="Transform your body and mind with Sculptify. Book appointments, access training programs, and connect with wellness professionals." />
+  <link rel="stylesheet" href="/sculptify/src/styles/base.css" />
+  <link rel="stylesheet" href="/sculptify/src/styles/components.css" />
+  <link rel="stylesheet" href="/sculptify/src/styles/pages.css" />
+</head>
+<body>
+
+  <!-- Header injected by header.js -->
+
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container">
+        <h1>Sculpt Your Best Self</h1>
+        <p>Premium beauty, wellness &amp; training programs designed to help you reach your peak performance.</p>
+        <div class="hero-actions">
+          <a href="/sculptify/src/pages/booking.html" class="btn btn-primary btn-lg">Book Appointment</a>
+          <a href="/sculptify/src/pages/providers.html" class="btn btn-outline btn-lg">Find Providers</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Live Stats -->
+    <div class="stats container" id="stats-row">
+      <div class="stat-card">
+        <span class="stat-number" id="stat-appointments">—</span>
+        <span class="stat-label">Appointments</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number" id="stat-providers">50+</span>
+        <span class="stat-label">Providers</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number" id="stat-courses">—</span>
+        <span class="stat-label">Courses</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number" id="stat-members">—</span>
+        <span class="stat-label">Members</span>
+      </div>
+    </div>
+
+    <!-- Services -->
+    <section id="services" class="section home-services">
+      <div class="container">
+        <div class="section-header">
+          <h2>Our Services</h2>
+          <p>Comprehensive wellness solutions tailored to your goals.</p>
+        </div>
+        <div class="grid">
+          <div class="card card-clickable" onclick="location.href='/sculptify/src/pages/booking.html?service=body-sculpting'">
+            <div class="card-icon">💆</div>
+            <h3>Body Sculpting</h3>
+            <p>Professional contouring and toning sessions tailored to your body goals.</p>
+            <a href="/sculptify/src/pages/booking.html?service=body-sculpting" class="btn btn-outline">Book Session</a>
+          </div>
+          <div class="card card-clickable" onclick="location.href='/sculptify/src/pages/booking.html?service=nutrition'">
+            <div class="card-icon">🥗</div>
+            <h3>Nutrition Coaching</h3>
+            <p>Personalized meal planning and nutritional guidance from certified experts.</p>
+            <a href="/sculptify/src/pages/booking.html?service=nutrition" class="btn btn-outline">Get Started</a>
+          </div>
+          <div class="card card-clickable" onclick="location.href='/sculptify/src/pages/booking.html?service=personal-training'">
+            <div class="card-icon">🏋️</div>
+            <h3>Personal Training</h3>
+            <p>One-on-one fitness programs built around your lifestyle and schedule.</p>
+            <a href="/sculptify/src/pages/booking.html?service=personal-training" class="btn btn-outline">Learn More</a>
+          </div>
+          <div class="card card-clickable" onclick="location.href='/sculptify/src/pages/booking.html?service=massage'">
+            <div class="card-icon">🧖</div>
+            <h3>Therapeutic Massage</h3>
+            <p>Relaxation and recovery massage therapies for body and mind.</p>
+            <a href="/sculptify/src/pages/booking.html?service=massage" class="btn btn-outline">Book Now</a>
+          </div>
+          <div class="card card-clickable" onclick="location.href='/sculptify/src/pages/booking.html?service=skincare'">
+            <div class="card-icon">✨</div>
+            <h3>Skincare Treatments</h3>
+            <p>Advanced skincare and aesthetic treatments by licensed professionals.</p>
+            <a href="/sculptify/src/pages/booking.html?service=skincare" class="btn btn-outline">Explore</a>
+          </div>
+          <div class="card card-clickable" onclick="location.href='/sculptify/src/pages/booking.html?service=wellness-consult'">
+            <div class="card-icon">🧘</div>
+            <h3>Wellness Consulting</h3>
+            <p>Holistic wellness assessments and personalised roadmaps to better health.</p>
+            <a href="/sculptify/src/pages/booking.html?service=wellness-consult" class="btn btn-outline">Consult Now</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Training Courses (live from API) -->
+    <section id="training" class="section-alt">
+      <div class="container">
+        <div class="section-header">
+          <h2>Training Programs</h2>
+          <p>Self-paced courses delivered by industry experts.</p>
+        </div>
+        <div class="grid" id="courses-grid">
+          <p class="loading">Loading courses…</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Find a Provider CTA -->
+    <section class="section">
+      <div class="container text-center">
+        <h2>Find Your Perfect Provider</h2>
+        <p class="text-muted" style="max-width:480px;margin:0 auto 28px;">
+          Browse our network of certified wellness professionals and book directly.
+        </p>
+        <a href="/sculptify/src/pages/providers.html" class="btn btn-primary btn-lg">Browse Providers</a>
+      </div>
+    </section>
+
+    <!-- AI Coach -->
+    <section class="section-alt">
+      <div class="container">
+        <div class="section-header">
+          <h2>AI Wellness Coach</h2>
+          <p>Get personalised advice and motivation instantly.</p>
+        </div>
+        <div class="chat-box">
+          <div class="chat-messages" id="chat-messages"></div>
+          <div class="chat-input">
+            <input type="text" id="coach-input" placeholder="Ask your coach anything…" />
+            <button class="btn btn-primary" id="coach-send">Send</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Therapist CTA -->
+    <section class="section">
+      <div class="container text-center">
+        <h2>Are You a Wellness Professional?</h2>
+        <p class="text-muted" style="max-width:480px;margin:0 auto 28px;">
+          Join the Sculptify provider network and grow your client base.
+        </p>
+        <a href="/sculptify/src/pages/therapist-onboarding.html" class="btn btn-outline btn-lg">Join as a Therapist</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer injected by footer.js -->
+
+  <script type="module">
+    import { initHeader } from '/sculptify/src/components/header.js';
+    import { initFooter } from '/sculptify/src/components/footer.js';
+    import { showToast }  from '/sculptify/src/components/toast.js';
+    import { api }        from '/sculptify/src/api.js';
+
+    initHeader('home');
+    initFooter();
+
+    /* ---- Stats ---- */
+    async function loadStats() {
+      try {
+        const [tasks, courses] = await Promise.allSettled([
+          api.tasks.list(),
+          api.training.courses()
+        ]);
+        if (tasks.status === 'fulfilled') {
+          document.getElementById('stat-appointments').textContent =
+            tasks.value.filter(t => t.type === 'booking').length || tasks.value.length;
+        }
+        if (courses.status === 'fulfilled') {
+          document.getElementById('stat-courses').textContent = courses.value.length;
+        }
+      } catch { /* silently ignore */ }
+    }
+
+    /* ---- Courses ---- */
+    async function loadCourses() {
+      const grid = document.getElementById('courses-grid');
+      try {
+        const data = await api.training.courses();
+        const list = data.filter(c => c.app === 'sculptify' || c.app === 'general').slice(0, 6);
+        if (!list.length) {
+          grid.innerHTML = '<p class="loading">No courses available yet.</p>';
+          return;
+        }
+        grid.innerHTML = list.map(c => `
+          <div class="card">
+            <div class="card-icon">📚</div>
+            <h3>${c.title}</h3>
+            <p>Duration: ${c.duration}</p>
+            <button class="btn btn-outline" onclick="enrollCourse('${c.id}')">Enroll Free</button>
+          </div>`).join('');
+      } catch {
+        grid.innerHTML = '<p class="loading">Could not load courses.</p>';
+      }
+    }
+
+    window.enrollCourse = async function(courseId) {
+      const userId = 'guest-' + Math.random().toString(36).slice(2, 8);
+      try {
+        const result = await api.training.enroll(userId, courseId);
+        if (result.success) showToast('Enrolled! Check your dashboard for progress.');
+      } catch {
+        showToast('Could not enroll right now. Please try again.', 'error');
+      }
+    };
+
+    /* ---- AI Coach ---- */
+    function appendMsg(role, text) {
+      const c = document.getElementById('chat-messages');
+      const d = document.createElement('div');
+      d.className = `chat-msg ${role}`;
+      d.textContent = text;
+      c.appendChild(d);
+      c.scrollTop = c.scrollHeight;
+    }
+
+    async function sendMsg() {
+      const input = document.getElementById('coach-input');
+      const msg = input.value.trim();
+      if (!msg) return;
+      input.value = '';
+      appendMsg('user', msg);
+      try {
+        const data = await api.ai.coach(msg);
+        appendMsg('coach', data.reply);
+      } catch {
+        appendMsg('coach', 'Sorry, I am unavailable right now. Please try again shortly.');
+      }
+    }
+
+    document.getElementById('coach-send').addEventListener('click', sendMsg);
+    document.getElementById('coach-input').addEventListener('keydown', e => {
+      if (e.key === 'Enter') sendMsg();
+    });
+    appendMsg('coach', 'Welcome to Sculptify! Ask me anything about your wellness journey.');
+
+    loadStats();
+    loadCourses();
+  </script>
+</body>
+</html>

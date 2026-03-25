@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Join as a Therapist – Sculptify</title>
+  <meta name="description" content="Apply to join the Sculptify provider network. Grow your client base and manage bookings in one place." />
+  <link rel="stylesheet" href="/sculptify/src/styles/base.css" />
+  <link rel="stylesheet" href="/sculptify/src/styles/components.css" />
+  <link rel="stylesheet" href="/sculptify/src/styles/pages.css" />
+</head>
+<body>
+
+  <!-- Header injected by JS -->
+
+  <main>
+    <!-- Hero Banner -->
+    <section class="section-alt">
+      <div class="container">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;">
+          <div>
+            <h1 style="font-size:2.2rem;font-weight:800;margin-bottom:16px;line-height:1.2;">
+              Grow Your Wellness Practice with Sculptify
+            </h1>
+            <p style="color:var(--text-muted);font-size:1.05rem;margin-bottom:24px;">
+              Join our network of 50+ certified professionals. Get new clients, manage bookings, and build your brand — all in one platform.
+            </p>
+            <div class="benefit-list">
+              <div class="benefit-item">
+                <span class="icon">✅</span>
+                <span>Access to thousands of clients actively seeking your services</span>
+              </div>
+              <div class="benefit-item">
+                <span class="icon">📅</span>
+                <span>Integrated booking and scheduling management</span>
+              </div>
+              <div class="benefit-item">
+                <span class="icon">💰</span>
+                <span>Earn rewards and bonuses through the QSE platform</span>
+              </div>
+              <div class="benefit-item">
+                <span class="icon">🎓</span>
+                <span>Free access to Sculptify training and certification courses</span>
+              </div>
+            </div>
+          </div>
+          <div style="text-align:center;font-size:6rem;">🧑‍⚕️</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Multi-Step Application Form -->
+    <section class="section">
+      <div class="container">
+        <div class="onboarding-steps-container">
+          <div class="section-header">
+            <h2>Provider Application</h2>
+            <p>Complete the three-step application. Our team reviews every submission within 2 business days.</p>
+          </div>
+
+          <!-- Step Indicator -->
+          <div class="steps" id="step-indicator">
+            <div class="step-item active" style="width:33%;">
+              <div class="step-circle">1</div>
+              <span class="step-label">Personal Info</span>
+            </div>
+            <div class="step-item" style="width:33%;">
+              <div class="step-circle">2</div>
+              <span class="step-label">Credentials</span>
+            </div>
+            <div class="step-item" style="width:33%;">
+              <div class="step-circle">3</div>
+              <span class="step-label">Services</span>
+            </div>
+          </div>
+
+          <div class="form-card" style="max-width:100%;">
+            <form class="form" id="onboarding-form" novalidate>
+
+              <!-- Step 1: Personal Info -->
+              <div class="form-step active">
+                <h3 style="margin-bottom:20px;">Step 1 – Personal Information</h3>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="ob-name">Full Name <span style="color:var(--error)">*</span></label>
+                    <input type="text" name="name" id="ob-name" placeholder="Jane Smith" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="ob-email">Email Address <span style="color:var(--error)">*</span></label>
+                    <input type="email" name="email" id="ob-email" placeholder="jane@example.com" required />
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="ob-phone">Phone Number</label>
+                    <input type="tel" name="phone" id="ob-phone" placeholder="+1 (555) 000-0000" />
+                  </div>
+                  <div class="form-group">
+                    <label for="ob-location">City / State</label>
+                    <input type="text" name="location" id="ob-location" placeholder="Los Angeles, CA" />
+                  </div>
+                </div>
+
+                <div class="step-nav">
+                  <span></span>
+                  <button type="button" class="btn btn-primary" data-action="next">Next: Credentials →</button>
+                </div>
+              </div>
+
+              <!-- Step 2: Credentials -->
+              <div class="form-step">
+                <h3 style="margin-bottom:20px;">Step 2 – Professional Credentials</h3>
+
+                <div class="form-group">
+                  <label for="ob-specialty">Primary Specialty <span style="color:var(--error)">*</span></label>
+                  <select name="specialty" id="ob-specialty" required>
+                    <option value="">Select your primary specialty…</option>
+                  </select>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="ob-license">License / Certification #</label>
+                    <input type="text" name="license" id="ob-license" placeholder="e.g. LMT-123456" />
+                  </div>
+                  <div class="form-group">
+                    <label for="ob-experience">Years of Experience</label>
+                    <select name="experience" id="ob-experience">
+                      <option value="">Select…</option>
+                      <option value="1">Less than 1 year</option>
+                      <option value="2">1–3 years</option>
+                      <option value="5">3–5 years</option>
+                      <option value="8">5–10 years</option>
+                      <option value="11">10+ years</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="ob-bio">Professional Bio</label>
+                  <textarea name="bio" id="ob-bio" placeholder="Tell clients about your background, approach, and what makes you unique…"></textarea>
+                  <span class="form-hint">This will appear on your public provider profile.</span>
+                </div>
+
+                <div class="step-nav">
+                  <button type="button" class="btn btn-secondary" data-action="prev">← Back</button>
+                  <button type="button" class="btn btn-primary" data-action="next">Next: Services →</button>
+                </div>
+              </div>
+
+              <!-- Step 3: Services & Availability -->
+              <div class="form-step">
+                <h3 style="margin-bottom:20px;">Step 3 – Services &amp; Availability</h3>
+
+                <div class="form-group">
+                  <label for="ob-services">Services You Offer</label>
+                  <textarea name="services" id="ob-services" placeholder="List the specific services you offer, e.g. Deep tissue massage, Swedish massage, Hot stone therapy…"></textarea>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="ob-rate">Hourly Rate (USD)</label>
+                    <input type="text" name="rate" id="ob-rate" placeholder="e.g. $80–120/hr" />
+                  </div>
+                  <div class="form-group">
+                    <label for="ob-availability">General Availability</label>
+                    <select name="availability" id="ob-availability">
+                      <option value="">Select…</option>
+                      <option value="weekdays">Weekdays</option>
+                      <option value="evenings">Evenings</option>
+                      <option value="weekends">Weekends</option>
+                      <option value="flexible">Flexible</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="alert alert-info" style="margin:8px 0;">
+                  ✅ By submitting this application you agree to our Provider Terms of Service and Community Guidelines.
+                </div>
+
+                <div class="step-nav">
+                  <button type="button" class="btn btn-secondary" data-action="prev">← Back</button>
+                  <button type="submit" class="btn btn-primary">Submit Application</button>
+                </div>
+              </div>
+
+            </form>
+
+            <!-- Success Message (hidden initially) -->
+            <div id="success-message" class="hidden" style="text-align:center;padding:40px 20px;">
+              <div style="font-size:3.5rem;margin-bottom:16px;">🎉</div>
+              <h3 style="margin-bottom:8px;">Application Submitted!</h3>
+              <p style="color:var(--text-muted);margin-bottom:24px;">
+                Thank you for applying to join Sculptify. Our team will review your application and reach out within 2 business days.
+              </p>
+              <a href="/sculptify/src/pages/home.html" class="btn btn-primary">Back to Home</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer injected by JS -->
+
+  <script type="module">
+    import { initHeader }      from '/sculptify/src/components/header.js';
+    import { initFooter }      from '/sculptify/src/components/footer.js';
+    import { initOnboardingForm, populateSpecialtySelect } from '/sculptify/src/forms/onboarding-form.js';
+
+    initHeader('onboarding');
+    initFooter();
+
+    populateSpecialtySelect(document.getElementById('ob-specialty'));
+
+    initOnboardingForm(document.getElementById('onboarding-form'), () => {
+      document.getElementById('onboarding-form').classList.add('hidden');
+      document.getElementById('success-message').classList.remove('hidden');
+    });
+  </script>
+</body>
+</html>
