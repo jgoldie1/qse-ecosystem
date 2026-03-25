@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard — March &amp; Lewis</title>
+  <meta name="description" content="System-wide admin overview for March &amp; Lewis platform." />
+  <link rel="stylesheet" href="/march-lewis/src/styles/main.css" />
+</head>
+<body>
+  <div id="header-placeholder"></div>
+
+  <main>
+    <div class="container">
+      <div class="dashboard-header">
+        <div class="dashboard-title-row">
+          <h1 id="admin-welcome">Admin Dashboard</h1>
+          <button class="btn btn-outline btn-sm" id="logout-btn">Sign Out</button>
+        </div>
+      </div>
+
+      <div class="dashboard-grid">
+        <!-- Main column -->
+        <div class="dashboard-main">
+          <!-- System Health -->
+          <div class="dashboard-card">
+            <div class="dashboard-card-header">
+              <h2>System Health</h2>
+            </div>
+            <div class="dashboard-card-body" id="system-health">
+              <p class="loading">Checking…</p>
+            </div>
+          </div>
+
+          <!-- Stats -->
+          <div class="dashboard-card">
+            <div class="dashboard-card-header">
+              <h2>Task Overview</h2>
+            </div>
+            <div class="dashboard-card-body">
+              <div class="stats" id="admin-stats" style="padding: 0; justify-content: flex-start; flex-wrap: wrap; gap: 12px;">
+                <p class="loading">Loading…</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- All tasks table -->
+          <div class="dashboard-card">
+            <div class="dashboard-card-header">
+              <h2>All Tasks</h2>
+            </div>
+            <div class="table-wrapper">
+              <table>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>App</th>
+                    <th>Type</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-tasks-tbody">
+                  <tr><td colspan="5" class="table-empty">Loading…</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Aside column -->
+        <div class="dashboard-aside">
+          <!-- Training overview -->
+          <div class="dashboard-card">
+            <div class="dashboard-card-header">
+              <h2>Training Courses</h2>
+            </div>
+            <div class="dashboard-card-body" id="training-overview">
+              <p class="loading">Loading…</p>
+            </div>
+          </div>
+
+          <!-- Memberships overview -->
+          <div class="dashboard-card">
+            <div class="dashboard-card-header">
+              <h2>Memberships</h2>
+            </div>
+            <div class="dashboard-card-body" id="memberships-overview">
+              <p class="loading">Loading…</p>
+            </div>
+          </div>
+
+          <!-- Quick links -->
+          <div class="dashboard-card">
+            <div class="dashboard-card-header">
+              <h2>Admin Links</h2>
+            </div>
+            <div class="dashboard-card-body" style="display:flex; flex-direction:column; gap:10px;">
+              <a href="/march-lewis/recruiter-dashboard.html" class="btn btn-outline">Recruiter Dashboard</a>
+              <a href="/march-lewis/jobs.html" class="btn btn-outline">Job Listings</a>
+              <a href="/march-lewis/employer-intake.html" class="btn btn-outline">Employer Requests</a>
+              <a href="/march-lewis/candidate-onboarding.html" class="btn btn-outline">Candidate Profiles</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <script type="module" src="/march-lewis/src/pages/admin-dashboard.js"></script>
+</body>
+</html>
