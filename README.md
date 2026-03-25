@@ -21,4 +21,4 @@ npm run dev
 - http://localhost:5000/sculptify
 - http://localhost:5000/march-lewis
 # qse-ecosystem
-March and lewis and scupitfy ltd
+March and lewis and Sculptify ltd
