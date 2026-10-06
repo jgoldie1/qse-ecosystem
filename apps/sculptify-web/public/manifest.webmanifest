@@ -1,10 +1,11 @@
 {
   "name": "SculptifyLTD — HoloGPT Powered by Stubbs AI",
   "short_name": "Sculptify",
-  "start_url": "/sculptify/",
-  "scope": "/sculptify/",
+  "start_url": "./",
+  "scope": "./",
   "display": "standalone",
-  "background_color": "#0a0a0a",
-  "theme_color": "#0a0a0a",
-  "description": "Wellness, academy, staffing and store — HoloGPT powered by Stubbs AI."
+  "background_color": "#09070a",
+  "theme_color": "#120912",
+  "description": "San Diego wellness, body sculpting, academy, staffing and store.",
+  "icons": []
 }
