@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 180" role="img" aria-label="SculptifyLTD">
+<defs>
+<linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff1b7"/><stop offset=".38" stop-color="#e3b34d"/><stop offset=".72" stop-color="#a75b20"/><stop offset="1" stop-color="#ffe09a"/></linearGradient>
+<linearGradient id="p" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ff7fca"/><stop offset=".45" stop-color="#a42bd4"/><stop offset="1" stop-color="#5a176f"/></linearGradient>
+<filter id="s"><feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#000" flood-opacity=".55"/></filter>
+</defs>
+<g filter="url(#s)">
+<g transform="translate(75 83)">
+<ellipse rx="28" ry="50" transform="rotate(-50)" fill="url(#p)" stroke="url(#g)" stroke-width="3"/>
+<ellipse rx="26" ry="48" transform="rotate(0)" fill="url(#p)" stroke="url(#g)" stroke-width="3"/>
+<ellipse rx="28" ry="50" transform="rotate(52)" fill="url(#p)" stroke="url(#g)" stroke-width="3"/>
+<circle r="14" fill="#140817" stroke="url(#g)" stroke-width="3"/>
+<path d="M8 25 C38 42 46 65 35 90 C20 65 10 54 0 48 C-10 72 -25 83 -42 94 C-40 62 -27 42 -8 27" fill="url(#g)"/>
+<g fill="#e9bb59"><circle cx="48" cy="-25" r="4"/><circle cx="58" cy="-10" r="5"/><circle cx="62" cy="8" r="3"/><circle cx="47" cy="16" r="4"/><circle cx="38" cy="-6" r="3"/></g>
+</g>
+<text x="145" y="92" font-family="Georgia,serif" font-size="72" font-weight="700" fill="url(#g)">SculptifyLTD</text>
+<text x="150" y="132" font-family="Arial,sans-serif" font-size="18" letter-spacing="4" fill="#f3d999">HOLISTIC HEALING • BODY SCULPTING</text>
+<text x="150" y="159" font-family="Arial,sans-serif" font-size="13" letter-spacing="3" fill="#c87be8">POWERED BY STUBBS AI</text>
+</g></svg>
