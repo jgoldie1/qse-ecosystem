@@ -17,10 +17,10 @@ async function loadSettings(){
   if(error||!data)return;
   siteSettings=data;
   $('#brand-title').textContent=data.business_name||'SculptifyLTD';
-  $('#business-email').textContent=data.business_email||OWNER_EMAIL;
+  $('#business-email').textContent=data.business_email||'Add in Owner Studio';
   $('#business-phone').textContent=data.business_phone||'Add in Owner Studio';
   $('#business-location').textContent=data.location||'San Diego, California';
-  $('#footer-contact').textContent=[data.business_phone,data.business_email].filter(Boolean).join(' • ')||OWNER_EMAIL;
+  $('#footer-contact').textContent=[data.business_phone,data.business_email].filter(Boolean).join(' • ')||'Business contact can be added in Owner Studio';
   if(data.hero_title)$('#hero-title').innerHTML=safe(data.hero_title).replace(/\. /g,'.<br>');
   if(data.hero_subtitle)$('#hero-subtitle').textContent=data.hero_subtitle;
 }
@@ -114,7 +114,7 @@ async function refreshOwner(){
   if(!admin){$('#owner-login').hidden=false;$('#owner-tools').hidden=true;setStatus('#owner-login-status','Signed in, but this account is not the Sculptify owner.',true);return;}
   $('#owner-login').hidden=true;$('#owner-tools').hidden=false;
   $('#setting-name').value=siteSettings.business_name||'SculptifyLTD';
-  $('#setting-email').value=siteSettings.business_email||OWNER_EMAIL;
+  $('#setting-email').value=siteSettings.business_email||'';
   $('#setting-phone').value=siteSettings.business_phone||'';
   $('#setting-location').value=siteSettings.location||'San Diego, California';
   $('#setting-url').value=siteSettings.site_url||'';
