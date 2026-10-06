@@ -1,122 +1,183 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#0a0a0a" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="SculptifyLTD" />
-  <link rel="manifest" href="/sculptify/manifest.webmanifest" />
-  <title>SculptifyLTD - Holistic Wellness & Body Sculpting</title>
-  <meta name="description" content="SculptifyLTD holistic wellness, Reiki, massage therapy, body sculpting, acupuncture and acupressure. Powered by Stubbs AI." />
-  <link rel="stylesheet" href="/sculptify/styles.css" />
-  <style>
-    .powered{color:#ec4899;font-weight:700}.notice{max-width:760px;margin:0 auto 28px;text-align:center;color:#aaa}
-    .split{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}.install-note{font-size:.9rem;color:#aaa;margin-top:12px}
-    @media(max-width:760px){.split{grid-template-columns:1fr}.hero{padding-top:52px}.hero h1{font-size:2.25rem}}
-  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#120912">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="SculptifyLTD">
+  <meta name="description" content="SculptifyLTD — holistic healing, body sculpting, academy, staffing and store in San Diego. HoloGPT powered by Stubbs AI.">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./brand-mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./styles.css">
+  <title>SculptifyLTD — Wellness • Academy • Staffing • Store</title>
 </head>
 <body>
-  <header class="header">
-    <div class="container">
-      <div class="logo">SculptifyLTD <span class="powered">• Powered by Stubbs AI</span></div>
-      <nav class="nav">
-        <a href="#services">Services</a>
-        <a href="#training">Training</a>
-        <a href="#providers">Providers</a>
-        <a href="#ai-coach">HoloGPT</a>
-        <a href="#contact" class="btn btn-primary">Book Now</a>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <div class="top-strip"><div class="wrap"><span>San Diego, California</span><span>HoloGPT — Powered by Stubbs AI</span></div></div>
+
+  <header class="site-header">
+    <div class="wrap nav-wrap">
+      <a class="brand" href="#home">
+        <img src="./brand-mark.svg" alt="SculptifyLTD logo">
+        <span><strong id="brand-title">SculptifyLTD</strong><small>HOLISTIC HEALING • BODY SCULPTING</small></span>
+      </a>
+      <nav>
+        <a href="#services">Services</a><a href="#academy">Academy</a><a href="#staffing">Staffing</a>
+        <a href="#store">Store</a><a href="#hologpt">HoloGPT</a>
+        <a class="button gold" href="#booking">Book Online</a>
       </nav>
     </div>
   </header>
 
-  <main>
+  <main id="home">
     <section class="hero">
-      <div class="container">
-        <p class="powered">HOLISTIC WELLNESS • BODY CONFIDENCE • RESTORATIVE CARE</p>
-        <h1>Sculpt Your Best Self</h1>
-        <p>Body sculpting, massage therapy, Reiki, acupuncture, acupressure and holistic wellness in one mobile-friendly hub.</p>
-        <div class="hero-actions">
-          <a href="#contact" class="btn btn-primary">Book a Session</a>
-          <button id="install-app" class="btn btn-outline" type="button">Install on Phone</button>
-        </div>
-        <p id="install-help" class="install-note"></p>
-      </div>
-    </section>
-
-    <section id="services" class="section container">
-      <h2>Holistic Wellness Services</h2>
-      <p class="notice">Sculptify wellness services support general wellbeing and do not replace diagnosis or treatment from licensed medical professionals.</p>
-      <div class="grid" id="services-grid">
-        <div class="card"><div class="card-icon">✨</div><h3>Body Sculpting</h3><p>Non-surgical contouring and body-confidence sessions tailored to your goals and provider qualifications.</p><a href="#contact" class="btn btn-outline" data-service="Body Sculpting">Book Session</a></div>
-        <div class="card"><div class="card-icon">💆🏾</div><h3>Massage Therapy</h3><p>Restorative massage for relaxation, comfort, mobility support and general wellness.</p><a href="#contact" class="btn btn-outline" data-service="Massage Therapy">Book Massage</a></div>
-        <div class="card"><div class="card-icon">🫶🏾</div><h3>Reiki & Energy Wellness</h3><p>Reiki-focused relaxation and mindfulness sessions, including virtual sessions where appropriate.</p><a href="#contact" class="btn btn-outline" data-service="Reiki">Book Reiki</a></div>
-        <div class="card"><div class="card-icon">🌿</div><h3>Holistic Wellness</h3><p>Self-care planning, goal setting and general wellness education.</p><a href="#contact" class="btn btn-outline" data-service="Holistic Wellness">Get Started</a></div>
-        <div class="card"><div class="card-icon">📍</div><h3>Acupuncture</h3><p>Provider-led acupuncture services through appropriately qualified practitioners where required by law.</p><a href="#contact" class="btn btn-outline" data-service="Acupuncture">Find Provider</a></div>
-        <div class="card"><div class="card-icon">🤲🏾</div><h3>Acupressure</h3><p>Pressure-point wellness sessions designed around relaxation and comfort.</p><a href="#contact" class="btn btn-outline" data-service="Acupressure">Book Session</a></div>
-      </div>
-    </section>
-
-    <section id="providers" class="section section-alt">
-      <div class="container">
-        <h2>Sculptify Provider Network</h2>
-        <div class="grid" id="providers-grid"><p class="loading">Loading providers...</p></div>
-      </div>
-    </section>
-
-    <section id="training" class="section container">
-      <h2>Training & Certification Pathways</h2>
-      <div class="grid" id="courses-grid"><p class="loading">Loading courses...</p></div>
-    </section>
-
-    <section id="ai-coach" class="section section-alt">
-      <div class="container">
-        <h2>HoloGPT Wellness Concierge</h2>
-        <p>Ask HoloGPT about Sculptify services, booking, training and general wellness routines. <strong>Powered by Stubbs AI.</strong></p>
-        <div class="chat-box">
-          <div class="chat-messages" id="chat-messages"></div>
-          <div class="chat-input">
-            <input type="text" id="coach-input" placeholder="Ask HoloGPT..." />
-            <button class="btn btn-primary" id="coach-send">Send</button>
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <span class="pill">SCULPTIFYLTD • SAN DIEGO</span>
+          <h1 id="hero-title">Sculpt Your Body.<br><em>Heal Your Mind.</em><br>Build Your Future.</h1>
+          <p id="hero-subtitle">Wellness • Beauty • Certification • Jobs • Products • Opportunity</p>
+          <div class="hero-actions">
+            <a class="button gold" href="#booking">Book a Session</a>
+            <a class="button purple" href="#academy">Get Certified</a>
+            <button class="button outline" id="install-app" type="button">Install App</button>
+          </div>
+          <p id="install-help" class="install-help"></p>
+          <div class="feature-pills">
+            <span>Body Sculpting</span><span>Massage</span><span>Holistic Wellness</span>
+            <span>Academy</span><span>Staffing</span><span>Store</span>
           </div>
         </div>
+
+        <div class="hero-card">
+          <div class="hero-logo"><img src="./brand-mark.svg" alt=""><div><b>SculptifyLTD</b><span>Powered by Stubbs AI</span></div></div>
+          <div class="spa-art"><div class="flower flower-a">✿</div><div class="flower flower-b">✿</div><div class="stone stone-1"></div><div class="stone stone-2"></div><div class="stone stone-3"></div><div class="glow"></div></div>
+          <div class="contact-card">
+            <div><span>☎</span><p><small>Business Phone</small><b id="business-phone">Add in Owner Studio</b></p></div>
+            <div><span>✉</span><p><small>Business Email</small><b id="business-email">tashaashe0@gmail.com</b></p></div>
+            <div><span>⌖</span><p><small>Location</small><b id="business-location">San Diego, California</b></p></div>
+          </div>
+          <div class="hero-badges"><span>📱 PWA Install</span><span>💳 Stripe Ready</span><span>✨ HoloGPT</span></div>
+        </div>
       </div>
     </section>
 
-    <section id="contact" class="section container">
-      <h2>Book an Appointment</h2>
-      <form class="form" id="booking-form">
-        <input type="text" id="book-name" placeholder="Full name" required />
-        <input type="email" id="book-email" placeholder="Email" required />
-        <select id="book-service" required>
-          <option value="">Select a service</option><option>Body Sculpting</option><option>Massage Therapy</option><option>Reiki</option><option>Holistic Wellness</option><option>Acupuncture</option><option>Acupressure</option>
-        </select>
-        <select id="book-session" required><option value="">Session type</option><option value="in-person">In person</option><option value="virtual">Virtual where appropriate</option></select>
-        <input type="date" id="book-date" required />
-        <button type="submit" class="btn btn-primary">Request Appointment</button>
-        <p id="booking-status" class="form-status"></p>
-      </form>
+    <section class="section" id="services">
+      <div class="wrap">
+        <div class="section-head"><div><span class="eyebrow">SERVICES</span><h2>Swipe. Learn. Book.</h2></div><p>Browse the luxury service rail for treatment information, provider details and booking.</p></div>
+        <div class="rail" id="services-rail"><div class="loading-card">Loading Sculptify services…</div></div>
+      </div>
     </section>
 
-    <section id="provider-apply" class="section section-alt">
-      <div class="container split">
-        <div><h2>Join Sculptify as a Provider</h2><p>Massage therapists, body-sculpting professionals, Reiki practitioners and other qualified wellness providers can submit an onboarding profile.</p></div>
-        <form class="form" id="provider-form">
-          <input id="provider-name" placeholder="Full name" required />
-          <input type="email" id="provider-email" placeholder="Email" required />
-          <input id="provider-phone" placeholder="Phone" required />
-          <select id="provider-specialty" required><option value="">Specialty</option><option>Body Sculpting</option><option>Massage Therapy</option><option>Reiki</option><option>Holistic Wellness</option><option>Acupuncture</option><option>Acupressure</option></select>
-          <input id="provider-license" placeholder="License / credential number (if applicable)" />
-          <input id="provider-insurance" placeholder="Insurance provider (if applicable)" />
-          <button class="btn btn-outline" type="submit">Submit Provider Profile</button>
-          <p id="provider-status" class="form-status"></p>
+    <section class="section dark-band" id="academy">
+      <div class="wrap">
+        <div class="section-head"><div><span class="eyebrow">SCULPTIFY ACADEMY</span><h2>Learn → Certify → Earn</h2></div><p>Education and business-readiness pathways designed to connect qualified graduates with opportunity.</p></div>
+        <div class="card-grid" id="courses-grid"><div class="loading-card">Loading academy…</div></div>
+      </div>
+    </section>
+
+    <section class="section" id="staffing">
+      <div class="wrap">
+        <div class="section-head"><div><span class="eyebrow">SCULPTIFY STAFFING</span><h2>From classroom to clientele.</h2></div><p>Graduate profiles, provider onboarding and employer hiring tools belong in the same ecosystem.</p></div>
+        <div class="card-grid">
+          <article class="lux-card"><div class="big-icon">🎓</div><span class="mini-tag">Graduate</span><h3>Build a Talent Profile</h3><p>Show certification, specialties, portfolio, availability and service area.</p><a class="button purple" href="#provider-apply">Create Profile</a></article>
+          <article class="lux-card"><div class="big-icon">💆🏾‍♀️</div><span class="mini-tag">Provider</span><h3>Join the Provider Network</h3><p>Apply to offer qualified wellness services and accept booking opportunities.</p><a class="button purple" href="#provider-apply">Apply</a></article>
+          <article class="lux-card"><div class="big-icon">🏢</div><span class="mini-tag">Employer</span><h3>Hire Sculptify Talent</h3><p>Future employer portal for roles, candidate review and placement management.</p><button class="button outline demo-action" data-message="Employer hiring workflow is ready for the next production integration.">Employer Portal</button></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section dark-band" id="store">
+      <div class="wrap">
+        <div class="section-head"><div><span class="eyebrow">SCULPTIFY STORE</span><h2>Products, packages and dropshipping.</h2></div><p>Sell owned products, student kits, gift cards and approved supplier-fulfilled products.</p></div>
+        <div class="product-grid" id="products-grid"><div class="loading-card">Loading store…</div></div>
+      </div>
+    </section>
+
+    <section class="section" id="hologpt">
+      <div class="wrap ai-layout">
+        <div>
+          <span class="eyebrow">INTELLIGENT CONCIERGE</span>
+          <h2>HoloGPT runs the front door.</h2>
+          <p>Customers always see <strong>HoloGPT — Powered by Stubbs AI</strong>. The underlying AI provider can change without changing the Sculptify brand.</p>
+          <div class="ai-use-grid"><span>Booking</span><span>Services</span><span>Certification</span><span>Staffing</span><span>Store</span><span>FAQs</span></div>
+        </div>
+        <div class="chat-shell">
+          <div class="chat-head"><div><b>HoloGPT</b><small>Powered by Stubbs AI</small></div><span>● Online</span></div>
+          <div class="chat-messages" id="chat-messages"></div>
+          <div class="quick-chips">
+            <button data-q="I want to book body sculpting">Book</button>
+            <button data-q="Tell me about certification">Certification</button>
+            <button data-q="I need work">Find Work</button>
+            <button data-q="Show me the store">Store</button>
+          </div>
+          <div class="chat-input"><input id="coach-input" placeholder="Ask HoloGPT…"><button class="button gold" id="coach-send">Send</button></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section dark-band" id="faq">
+      <div class="wrap">
+        <div class="section-head"><div><span class="eyebrow">FAQ</span><h2>Answers before the appointment.</h2></div><p>HoloGPT can use these same approved answers so the owner changes information once and it updates everywhere.</p></div>
+        <div class="faq-list" id="faq-list"><div class="loading-card">Loading FAQs…</div></div>
+      </div>
+    </section>
+
+    <section class="section" id="booking">
+      <div class="wrap two-col">
+        <div><span class="eyebrow">BOOK ONLINE</span><h2>Request your Sculptify session.</h2><p>Choose a service, preferred date and session type. Bookings are stored in Supabase so they survive host or domain changes.</p><div class="safe-note">Sculptify wellness services are complementary and do not replace diagnosis, emergency care or treatment from licensed medical professionals.</div></div>
+        <form class="form-card" id="booking-form">
+          <div class="form-row"><input id="book-name" required placeholder="Full name"><input id="book-email" required type="email" placeholder="Email"></div>
+          <div class="form-row"><input id="book-phone" type="tel" placeholder="Phone"><select id="book-service" required><option value="">Choose service</option></select></div>
+          <div class="form-row"><select id="book-session" required><option value="">Session type</option><option>In person</option><option>Virtual where appropriate</option></select><input id="book-date" required type="date"></div>
+          <textarea id="book-notes" rows="4" placeholder="Goals, questions or booking notes"></textarea>
+          <button class="button gold" type="submit">Request Appointment</button><p id="booking-status" class="status"></p>
+        </form>
+      </div>
+    </section>
+
+    <section class="section dark-band" id="provider-apply">
+      <div class="wrap two-col">
+        <div><span class="eyebrow">PROVIDER NETWORK</span><h2>Join Sculptify.</h2><p>Submit your provider or graduate profile. Credentials can be verified before a profile is published.</p></div>
+        <form class="form-card" id="provider-form">
+          <div class="form-row"><input id="provider-name" required placeholder="Full name"><input id="provider-email" required type="email" placeholder="Email"></div>
+          <div class="form-row"><input id="provider-phone" placeholder="Phone"><input id="provider-specialty" required placeholder="Specialty"></div>
+          <div class="form-row"><input id="provider-license" placeholder="License / credential if applicable"><input id="provider-insurance" placeholder="Insurance if applicable"></div>
+          <button class="button purple" type="submit">Submit Profile</button><p id="provider-status" class="status"></p>
         </form>
       </div>
     </section>
   </main>
 
-  <footer class="footer"><div class="container"><p>&copy; 2026 SculptifyLTD — <strong>Powered by Stubbs AI</strong></p></div></footer>
-  <script src="/sculptify/app.js"></script>
+  <footer><div class="wrap footer-grid"><div class="brand footer-brand"><img src="./brand-mark.svg" alt=""><span><strong>SculptifyLTD</strong><small>HoloGPT — Powered by Stubbs AI</small></span></div><div><b>San Diego</b><p id="footer-contact">Owner email: tashaashe0@gmail.com</p></div><div><button class="text-button" id="owner-open">Owner Studio</button></div></div></footer>
+
+  <button class="owner-fab" id="owner-fab">⚙ Owner Studio</button>
+  <aside class="owner-drawer" id="owner-drawer">
+    <div class="owner-head"><div><span class="eyebrow">SCULPTIFY OWNER</span><h3>Owner Studio</h3></div><button id="owner-close">×</button></div>
+    <div id="owner-login">
+      <p>Sign in with the approved owner email. Supabase sends a secure magic link—no extra password to remember.</p>
+      <input id="owner-email" type="email" value="tashaashe0@gmail.com" readonly>
+      <button class="button gold full" id="owner-login-btn">Email My Sign-In Link</button>
+      <p class="status" id="owner-login-status"></p>
+    </div>
+    <div id="owner-tools" hidden>
+      <div class="owner-verified">✓ Owner verified through Supabase</div>
+      <form id="settings-form" class="owner-form">
+        <label>Business name<input id="setting-name"></label>
+        <label>Business email<input id="setting-email" type="email"></label>
+        <label>Business phone<input id="setting-phone"></label>
+        <label>Location<input id="setting-location"></label>
+        <label>Website URL<input id="setting-url" type="url" placeholder="https://yourdomain.com"></label>
+        <label>Hero headline<textarea id="setting-hero" rows="3"></textarea></label>
+        <button class="button purple full" type="submit">Save Live Site Settings</button>
+        <p class="status" id="settings-status"></p>
+      </form>
+      <button class="button outline full" id="owner-signout">Sign Out</button>
+    </div>
+  </aside>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="./app.js"></script>
 </body>
 </html>
