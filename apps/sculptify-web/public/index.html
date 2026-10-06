@@ -3,18 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sculptify - Beauty, Wellness &amp; Training</title>
-  <meta name="description" content="Transform your body and mind with Sculptify. Book appointments, access training programs, and connect with wellness professionals." />
-  <link rel="stylesheet" href="styles.css" />
+  <meta name="theme-color" content="#0a0a0a" />
+  <title>SculptifyLTD - Holistic Wellness & Body Sculpting</title>
+  <meta name="description" content="SculptifyLTD holistic wellness, Reiki, massage therapy, body sculpting, acupuncture and acupressure. Powered by Stubbs AI." />
+  <link rel="stylesheet" href="/sculptify/styles.css" />
+  <style>
+    .powered{color:#ec4899;font-weight:700}.notice{max-width:760px;margin:0 auto 28px;text-align:center;color:#aaa}
+    .split{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}.install-note{font-size:.9rem;color:#aaa;margin-top:12px}
+    @media(max-width:760px){.split{grid-template-columns:1fr}.hero{padding-top:52px}.hero h1{font-size:2.25rem}}
+  </style>
 </head>
 <body>
   <header class="header">
     <div class="container">
-      <div class="logo">Sculptify</div>
+      <div class="logo">SculptifyLTD <span class="powered">• Powered by Stubbs AI</span></div>
       <nav class="nav">
         <a href="#services">Services</a>
         <a href="#training">Training</a>
-        <a href="#about">About</a>
+        <a href="#providers">Providers</a>
+        <a href="#ai-coach">Stubbs AI</a>
         <a href="#contact" class="btn btn-primary">Book Now</a>
       </nav>
     </div>
@@ -23,106 +30,89 @@
   <main>
     <section class="hero">
       <div class="container">
+        <p class="powered">HOLISTIC WELLNESS • BODY CONFIDENCE • RESTORATIVE CARE</p>
         <h1>Sculpt Your Best Self</h1>
-        <p>Premium beauty, wellness &amp; training programs designed to help you reach your peak.</p>
+        <p>Body sculpting, massage therapy, Reiki, acupuncture, acupressure and holistic wellness in one mobile-friendly hub.</p>
         <div class="hero-actions">
-          <a href="#training" class="btn btn-primary">Explore Training</a>
-          <a href="#services" class="btn btn-outline">Our Services</a>
+          <a href="#contact" class="btn btn-primary">Book a Session</a>
+          <button id="install-app" class="btn btn-outline" type="button">Install on Phone</button>
         </div>
-      </div>
-    </section>
-
-    <section class="stats container">
-      <div class="stat-card" id="stat-appointments">
-        <span class="stat-number">0</span>
-        <span class="stat-label">Appointments</span>
-      </div>
-      <div class="stat-card" id="stat-sales">
-        <span class="stat-number">0</span>
-        <span class="stat-label">Products Sold</span>
-      </div>
-      <div class="stat-card" id="stat-training">
-        <span class="stat-number">0</span>
-        <span class="stat-label">Students Enrolled</span>
+        <p id="install-help" class="install-note"></p>
       </div>
     </section>
 
     <section id="services" class="section container">
-      <h2>Our Services</h2>
+      <h2>Holistic Wellness Services</h2>
+      <p class="notice">Sculptify wellness services support general wellbeing and do not replace diagnosis or treatment from licensed medical professionals.</p>
       <div class="grid" id="services-grid">
-        <div class="card">
-          <div class="card-icon">💆</div>
-          <h3>Body Sculpting</h3>
-          <p>Professional contouring and toning sessions tailored to your goals.</p>
-          <a href="#contact" class="btn btn-outline">Book Session</a>
-        </div>
-        <div class="card">
-          <div class="card-icon">🥗</div>
-          <h3>Nutrition Coaching</h3>
-          <p>Personalized meal planning and nutritional guidance from experts.</p>
-          <a href="#contact" class="btn btn-outline">Get Started</a>
-        </div>
-        <div class="card">
-          <div class="card-icon">🏋️</div>
-          <h3>Personal Training</h3>
-          <p>One-on-one fitness training programs built around your lifestyle.</p>
-          <a href="#contact" class="btn btn-outline">Learn More</a>
-        </div>
+        <div class="card"><div class="card-icon">✨</div><h3>Body Sculpting</h3><p>Non-surgical contouring and body-confidence sessions tailored to your goals and provider qualifications.</p><a href="#contact" class="btn btn-outline" data-service="Body Sculpting">Book Session</a></div>
+        <div class="card"><div class="card-icon">💆🏾</div><h3>Massage Therapy</h3><p>Restorative massage for relaxation, comfort, mobility support and general wellness.</p><a href="#contact" class="btn btn-outline" data-service="Massage Therapy">Book Massage</a></div>
+        <div class="card"><div class="card-icon">🫶🏾</div><h3>Reiki & Energy Wellness</h3><p>Reiki-focused relaxation and mindfulness sessions, including virtual sessions where appropriate.</p><a href="#contact" class="btn btn-outline" data-service="Reiki">Book Reiki</a></div>
+        <div class="card"><div class="card-icon">🌿</div><h3>Holistic Wellness</h3><p>Self-care planning, goal setting and general wellness education.</p><a href="#contact" class="btn btn-outline" data-service="Holistic Wellness">Get Started</a></div>
+        <div class="card"><div class="card-icon">📍</div><h3>Acupuncture</h3><p>Provider-led acupuncture services through appropriately qualified practitioners where required by law.</p><a href="#contact" class="btn btn-outline" data-service="Acupuncture">Find Provider</a></div>
+        <div class="card"><div class="card-icon">🤲🏾</div><h3>Acupressure</h3><p>Pressure-point wellness sessions designed around relaxation and comfort.</p><a href="#contact" class="btn btn-outline" data-service="Acupressure">Book Session</a></div>
       </div>
     </section>
 
-    <section id="training" class="section section-alt">
+    <section id="providers" class="section section-alt">
       <div class="container">
-        <h2>Training Programs</h2>
-        <div class="grid" id="courses-grid">
-          <p class="loading">Loading courses...</p>
-        </div>
+        <h2>Sculptify Provider Network</h2>
+        <div class="grid" id="providers-grid"><p class="loading">Loading providers...</p></div>
       </div>
     </section>
 
-    <section id="ai-coach" class="section container">
-      <h2>AI Wellness Coach</h2>
-      <p>Get personalized advice and motivation from your AI coach.</p>
-      <div class="chat-box">
-        <div class="chat-messages" id="chat-messages"></div>
-        <div class="chat-input">
-          <input type="text" id="coach-input" placeholder="Ask your coach anything..." />
-          <button class="btn btn-primary" id="coach-send">Send</button>
-        </div>
-      </div>
+    <section id="training" class="section container">
+      <h2>Training & Certification Pathways</h2>
+      <div class="grid" id="courses-grid"><p class="loading">Loading courses...</p></div>
     </section>
 
-    <section id="about" class="section section-alt">
+    <section id="ai-coach" class="section section-alt">
       <div class="container">
-        <h2>About Sculptify</h2>
-        <p>Sculptify is part of the QSE Ecosystem - a family of platforms dedicated to helping people thrive. We combine cutting-edge wellness science with personalized coaching to deliver results that last.</p>
-        <a href="/" class="btn btn-outline">Back to QSE Home</a>
+        <h2>Stubbs AI Wellness Guide</h2>
+        <p>Ask about Sculptify services, booking, training and general wellness routines.</p>
+        <div class="chat-box">
+          <div class="chat-messages" id="chat-messages"></div>
+          <div class="chat-input">
+            <input type="text" id="coach-input" placeholder="Ask Stubbs AI..." />
+            <button class="btn btn-primary" id="coach-send">Send</button>
+          </div>
+        </div>
       </div>
     </section>
 
     <section id="contact" class="section container">
       <h2>Book an Appointment</h2>
       <form class="form" id="booking-form">
-        <input type="text" id="book-name" placeholder="Your Name" required />
-        <input type="email" id="book-email" placeholder="Your Email" required />
-        <select id="book-service">
-          <option value="">Select a Service</option>
-          <option value="sculpting">Body Sculpting</option>
-          <option value="nutrition">Nutrition Coaching</option>
-          <option value="training">Personal Training</option>
+        <input type="text" id="book-name" placeholder="Full name" required />
+        <input type="email" id="book-email" placeholder="Email" required />
+        <select id="book-service" required>
+          <option value="">Select a service</option><option>Body Sculpting</option><option>Massage Therapy</option><option>Reiki</option><option>Holistic Wellness</option><option>Acupuncture</option><option>Acupressure</option>
         </select>
+        <select id="book-session" required><option value="">Session type</option><option value="in-person">In person</option><option value="virtual">Virtual where appropriate</option></select>
+        <input type="date" id="book-date" required />
         <button type="submit" class="btn btn-primary">Request Appointment</button>
         <p id="booking-status" class="form-status"></p>
       </form>
     </section>
+
+    <section id="provider-apply" class="section section-alt">
+      <div class="container split">
+        <div><h2>Join Sculptify as a Provider</h2><p>Massage therapists, body-sculpting professionals, Reiki practitioners and other qualified wellness providers can submit an onboarding profile.</p></div>
+        <form class="form" id="provider-form">
+          <input id="provider-name" placeholder="Full name" required />
+          <input type="email" id="provider-email" placeholder="Email" required />
+          <input id="provider-phone" placeholder="Phone" required />
+          <select id="provider-specialty" required><option value="">Specialty</option><option>Body Sculpting</option><option>Massage Therapy</option><option>Reiki</option><option>Holistic Wellness</option><option>Acupuncture</option><option>Acupressure</option></select>
+          <input id="provider-license" placeholder="License / credential number (if applicable)" />
+          <input id="provider-insurance" placeholder="Insurance provider (if applicable)" />
+          <button class="btn btn-outline" type="submit">Submit Provider Profile</button>
+          <p id="provider-status" class="form-status"></p>
+        </form>
+      </div>
+    </section>
   </main>
 
-  <footer class="footer">
-    <div class="container">
-      <p>&copy; 2025 Sculptify &mdash; Part of the <a href="/">QSE Ecosystem</a></p>
-    </div>
-  </footer>
-
-  <script src="app.js"></script>
+  <footer class="footer"><div class="container"><p>&copy; 2026 SculptifyLTD — <strong>Powered by Stubbs AI</strong></p></div></footer>
+  <script src="/sculptify/app.js"></script>
 </body>
 </html>
