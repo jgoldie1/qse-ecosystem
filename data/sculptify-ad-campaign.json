@@ -1,0 +1,133 @@
+{
+  "name": "Sculptify San Diego Growth Engine",
+  "brandLine": "HoloGPT — Powered by Stubbs AI",
+  "market": "Serra Mesa / San Diego, California",
+  "monthlyTestBudgetUSD": 600,
+  "guardrails": [
+    "Use public market data only; do not scrape private profiles or sensitive personal data.",
+    "Do not target people based on inferred medical conditions or other sensitive traits.",
+    "Keep employment/staffing advertising in a separate campaign with employment-ad targeting restrictions.",
+    "Optimize to booked appointments, paid deposits, course leads and purchases—not clicks alone."
+  ],
+  "campaigns": [
+    {
+      "id": "google-search-wellness",
+      "platform": "Google Ads",
+      "objective": "Booked wellness appointments",
+      "monthlyBudgetUSD": 300,
+      "geography": [
+        "Serra Mesa 92123",
+        "Kearny Mesa",
+        "Mission Valley",
+        "Tierrasanta",
+        "Clairemont",
+        "Hillcrest"
+      ],
+      "keywords": [
+        "body sculpting near me",
+        "body sculpting san diego",
+        "lymphatic massage san diego",
+        "hot stone massage san diego",
+        "reiki san diego",
+        "body contouring san diego"
+      ],
+      "negatives": [
+        "free",
+        "jobs",
+        "salary",
+        "DIY",
+        "machine for sale",
+        "medical emergency"
+      ],
+      "headlines": [
+        "SculptifyLTD San Diego",
+        "Book Body Sculpting Near You",
+        "Massage • Reiki • Body Wellness",
+        "Book Online With Sculptify"
+      ],
+      "landingPath": "/sculptify/?utm_source=google&utm_medium=cpc&utm_campaign=sd_wellness_search"
+    },
+    {
+      "id": "meta-local-wellness",
+      "platform": "Meta Ads (Instagram + Facebook)",
+      "objective": "Bookings and retargeting",
+      "monthlyBudgetUSD": 180,
+      "geography": [
+        "Serra Mesa + nearby San Diego service radius"
+      ],
+      "audiences": [
+        "Broad local adults",
+        "Website visitors",
+        "Instagram/Facebook engagers",
+        "Existing customer lookalike only when platform policy permits"
+      ],
+      "creativeAngles": [
+        "Treatment-room experience",
+        "Body sculpting demo",
+        "Hot-stone relaxation",
+        "Provider bio + trust",
+        "Limited intro consultation"
+      ],
+      "landingPath": "/sculptify/?utm_source=meta&utm_medium=paid_social&utm_campaign=sd_wellness"
+    },
+    {
+      "id": "tiktok-local-wellness",
+      "platform": "TikTok Ads",
+      "objective": "Video discovery to booking",
+      "monthlyBudgetUSD": 120,
+      "geography": [
+        "San Diego local service area"
+      ],
+      "audiences": [
+        "Broad local adults interested in beauty/wellness content without health-condition targeting"
+      ],
+      "creativeAngles": [
+        "15-second treatment reveal",
+        "Before-session → treatment → booking CTA",
+        "Day-in-the-studio",
+        "HoloGPT answers a booking FAQ"
+      ],
+      "landingPath": "/sculptify/?utm_source=tiktok&utm_medium=paid_social&utm_campaign=sd_wellness_video"
+    },
+    {
+      "id": "academy-leads",
+      "platform": "Google + Meta",
+      "objective": "Body sculpting certification leads",
+      "monthlyBudgetUSD": 0,
+      "startRule": "Fund after wellness campaign proves booking economics or add separate budget",
+      "keywords": [
+        "body sculpting certification san diego",
+        "body sculpting training san diego",
+        "cavitation training san diego"
+      ],
+      "landingPath": "/sculptify/#training"
+    },
+    {
+      "id": "staffing-employment",
+      "platform": "Google/Meta/TikTok employment-compliant campaigns",
+      "objective": "Graduate/job applicants and employers",
+      "monthlyBudgetUSD": 0,
+      "targetingRule": "Do not reuse consumer income, age, gender, or sensitive targeting; follow each platform's employment-ad restrictions.",
+      "landingPath": "/sculptify/#provider-apply"
+    }
+  ],
+  "events": [
+    "service_view",
+    "booking_start",
+    "booking_submit",
+    "deposit_paid",
+    "course_lead",
+    "course_purchase",
+    "store_purchase",
+    "provider_apply"
+  ],
+  "optimization": {
+    "primaryKpis": [
+      "cost_per_booking",
+      "booking_to_paid_rate",
+      "revenue_per_ad_dollar"
+    ],
+    "weeklyRule": "Pause or reduce creatives/keywords that spend without qualified booking actions; reallocate to proven campaigns.",
+    "reservePercent": 10
+  }
+}
