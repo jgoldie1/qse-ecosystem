@@ -78,11 +78,11 @@ async function sendCoachMessage() {
     const data = await fetchJSON(API_BASE + '/ai/coach', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({message: message, context: 'sculptify-stubbs-ai'})
+      body: JSON.stringify({message: message, context: 'sculptify-hologpt'})
     });
     appendMessage('coach', data.reply);
   } catch (e) {
-    appendMessage('coach', 'Stubbs AI is in preview mode. Start the local QSE server to connect the wellness guide.');
+    appendMessage('coach', 'HoloGPT is in preview mode. Start the Sculptify server to connect the Stubbs AI provider router.');
   }
 }
 
@@ -175,6 +175,13 @@ document.getElementById('install-app').addEventListener('click', async function 
     : 'Open your browser menu and choose Install app or Add to Home screen.';
 });
 
-appendMessage('coach', 'Welcome to SculptifyLTD. I am the Stubbs AI Wellness Guide. Ask me about services, booking or training.');
+appendMessage('coach', 'Welcome to SculptifyLTD. I am HoloGPT, powered by Stubbs AI. Ask me about services, booking, certification, staffing or the store.');
 loadProviders();
 loadCourses();
+
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('/sculptify/service-worker.js', { scope: '/sculptify/' }).catch(function () {});
+  });
+}
