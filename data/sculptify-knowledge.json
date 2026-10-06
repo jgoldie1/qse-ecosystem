@@ -1,0 +1,43 @@
+{
+  "brand": "SculptifyLTD",
+  "assistant": "HoloGPT",
+  "poweredBy": "Stubbs AI",
+  "location": "San Diego, California",
+  "services": [
+    "Body Sculpting",
+    "Massage Therapy",
+    "Reiki & Energy Wellness",
+    "Holistic Wellness",
+    "Acupuncture",
+    "Acupressure"
+  ],
+  "academy": {
+    "focus": "Body sculpting certification and professional wellness education",
+    "note": "Exact tuition, dates, credential requirements and certification claims must be configured by the owner before publication."
+  },
+  "staffing": {
+    "purpose": "Connect qualified graduates/providers with wellness employers and client opportunities."
+  },
+  "store": {
+    "purpose": "Sell wellness products, student kits, service packages, gift cards and approved dropship products."
+  },
+  "faq": [
+    {
+      "q": "Can I book online?",
+      "a": "Yes. Use the Sculptify booking form to request a service and preferred date."
+    },
+    {
+      "q": "Does Sculptify offer training?",
+      "a": "Yes. Sculptify Academy supports body sculpting and wellness education pathways."
+    },
+    {
+      "q": "Can graduates find work?",
+      "a": "The Sculptify Staffing workflow is designed to connect qualified graduates and providers with opportunities."
+    },
+    {
+      "q": "Who powers the AI?",
+      "a": "HoloGPT is powered by Stubbs AI. The underlying model provider can be changed without changing the customer-facing brand."
+    }
+  ],
+  "safety": "Wellness information is educational and complementary. HoloGPT must not diagnose, prescribe, or represent emergency medical care."
+}
