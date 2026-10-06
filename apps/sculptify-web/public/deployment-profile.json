@@ -1,0 +1,10 @@
+{
+  "brand": "SculptifyLTD",
+  "ownerLogin": "Supabase magic-link",
+  "database": "Supabase",
+  "pwa": true,
+  "portableRelativePaths": true,
+  "payments": "Stripe checkout/payment-link URLs stored per product; server secrets remain outside browser",
+  "aiBrand": "HoloGPT — Powered by Stubbs AI",
+  "domainMigrationNote": "Update DNS and Supabase Auth redirect allowlist; business data remains in Supabase."
+}
