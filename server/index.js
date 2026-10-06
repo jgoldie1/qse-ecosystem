@@ -17,6 +17,7 @@ app.use('/api/ai', require('../routes/ai'));
 app.use('/api/training', require('../routes/training'));
 app.use('/api/tasks', require('../routes/tasks'));
 app.use('/api/wallets', require('../routes/wallets'));
+app.use('/api/ads', require('../routes/ads'));
 
 // Current service APIs.
 app.use('/api/sculptify', require('./routes/sculptify'));
